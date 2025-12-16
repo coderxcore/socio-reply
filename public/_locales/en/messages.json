@@ -1,0 +1,8 @@
+{
+  "name": {
+	"message": "Social Reply Assistant"
+  },
+  "description": {
+	"message": "When browsing social platforms, it automatically provides reply suggestions and completions based on the current context, your input, and past replies!"
+  }
+}

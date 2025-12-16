@@ -1,0 +1,29 @@
+{
+	"name": "socio-reply",
+	"description": "一个插件",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "wxt",
+		"build": "wxt build",
+		"zip": "wxt zip",
+		"postinstall": "wxt prepare"
+	},
+	"devDependencies": {
+		"@types/chrome": "^0.1.32",
+		"@vitejs/plugin-vue": "^6.0.2",
+		"sass": "^1.95.1",
+		"typescript": "^5.9.3",
+		"vue-tsc": "^3.1.8",
+		"wxt": "^0.20.11"
+	},
+	"dependencies": {
+		"gs-address": "^0.1.0",
+		"gs-base": "*",
+		"gs-dom": "^0.1.3",
+		"pinia": "^3.0.4",
+		"vue": "^3.5.25",
+		"vue-router": "^4.6.3"
+	}
+}
