@@ -1,12 +1,16 @@
 import {defineStore} from "pinia";
 import {LocaleObject, LocaleRecord} from "/src-com";
-import {Api} from "../Api";
+import {Api} from "../api";
 
 export interface ILocaleState extends LocaleRecord {
 }
 
 export interface ILocaleStore extends ILocaleState {
-	loadMessages(): Promise<void>;
+	loadMessages(setTitle?: boolean): Promise<void>;
+
+	reLoadMessages(setTitle?: boolean): Promise<void>;
+
+	setPageTitle(): void;
 }
 
 export const useLocaleStore: () => ILocaleStore = defineStore('locale', {
@@ -14,8 +18,16 @@ export const useLocaleStore: () => ILocaleStore = defineStore('locale', {
 		return {...LocaleObject};
 	},
 	actions: {
-		async loadMessages() {
+		async loadMessages(setTitle?: boolean) {
 			this.$patch(await Api.locale.getMessages());
+			setTitle && this.setPageTitle();
+		},
+		async reLoadMessages(setTitle?: boolean) {
+			await Api.locale.clearMessageCache();
+			await this.loadMessages(setTitle);
+		},
+		setPageTitle() {
+			document.title = this.title
 		}
 	}
 }) as any;

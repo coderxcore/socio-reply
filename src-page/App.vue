@@ -3,11 +3,15 @@
 </template>
 
 <script lang="ts" setup>
-import {Store} from "../../src-page";
 import {onMounted} from "vue";
+import {Store} from "./store";
 
 onMounted(async () => {
-  await Store.locale.loadMessages();
+  await Store.settings.loadSettings();
+  await Store.locale.loadMessages(true);
 })
+
+
 </script>
+
 

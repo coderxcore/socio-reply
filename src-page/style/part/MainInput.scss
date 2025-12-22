@@ -1,0 +1,63 @@
+.MainInput {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  position: relative;
+  transition: background-color 0.3s, border-color 0.3s;
+  display: flex;
+  flex-flow: column nowrap;
+
+  > section {
+	padding: 1em;
+
+	> textarea {
+	  width: 100%;
+	  border: none;
+	  resize: none;
+	  font-size: 1rem;
+	  color: var(--color-text-main);
+	  border-radius: var(--radius-lg);
+	  background: transparent;
+	}
+  }
+
+  > footer {
+	display: flex;
+	flex-flow: nowrap row;
+	gap: 1vw;
+	padding: .5em 1em;
+	border-top: 1px solid var(--color-border);
+
+	> button {
+	  background: transparent;
+	  border: none;
+	  display: flex;
+	  align-items: center;
+	  gap: 0.4rem;
+	  color: var(--color-text-secondary);
+	  border-radius: 6px;
+	  cursor: pointer;
+	  transition: all 0.2s;
+	  font-size: 12px;
+	  padding: 4px 8px;
+
+	  &.btn-lg {
+		> svg {
+		  width: 16px;
+		}
+	  }
+
+	  &:not(.btn-lg) {
+		> svg {
+		  width: 12px;
+		}
+	  }
+
+	  &:hover, &.active {
+		background: var(--color-bg);
+		color: var(--color-primary);
+	  }
+	}
+  }
+}

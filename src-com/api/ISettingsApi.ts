@@ -1,9 +1,19 @@
 import {MsgMethods, RemoteMethods} from "gs-br-ext";
 import {Locale} from "../db";
 
+export const themes = ['auto', 'light', 'dark'] as const;
+
+export type Theme = typeof themes[number];
+
 export interface ISettings {
-	language: Locale
+	language?: Locale
+	theme?: Theme
 }
+
+export const defaultSettings: Readonly<ISettings> = Object.freeze({
+	language: 'zh-CN',
+	theme: 'auto'
+})
 
 interface ISettingsBase {
 

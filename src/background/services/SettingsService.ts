@@ -1,5 +1,5 @@
 import {setMsgMethod, StorageSync} from "gs-br-ext";
-import {ISettings, ISettingsService, Locale} from "/src-com";
+import {defaultSettings, ISettings, ISettingsService, Locale} from "/src-com";
 
 const SettingsKey = 'settings';
 let cache: ISettings | undefined;
@@ -8,9 +8,8 @@ export const SettingsService: ISettingsService = Object.freeze({
 
 	async getSettings(): Promise<ISettings> {
 		return cache || (cache = {
-			...{
-				language: chrome.i18n.getUILanguage()
-			}, ...await StorageSync.getValue(SettingsKey) as any
+			...defaultSettings,
+			...await StorageSync.getValue(SettingsKey) as any
 		});
 	},
 

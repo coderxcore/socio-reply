@@ -1,9 +1,9 @@
-html {
-  &, body, #app, #app>.ReadChapter {
+:root, :host {
+  &, body, #app, #app > div {
 	height: 100%;
   }
 
-  &, body, #app {
+  &, body {
 	margin: 0;
 	padding: 0;
   }

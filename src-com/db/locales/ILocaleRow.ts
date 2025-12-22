@@ -1,6 +1,17 @@
-export const Locales = ['zh-CN', 'en', 'zh-TW', 'ja'] as const;
+import {themes} from "../../api/ISettingsApi";
 
-export const LocaleKeys = ['title', 'settings'] as const;
+const settingsPageKeys = [
+	'language', 'languageDesc', 'theme', 'themeDesc', 'pref',
+	'dataMgr', 'exportData', 'exportDataDesc', 'importData','importDataDesc'
+] as const;
+
+export const Locales = ['zh-CN', 'zh-TW', 'en', 'ja'] as const;
+
+export const LocaleKeys = [
+	'title', 'settings', 'home', 'draft', 'trash', 'history', 'references',
+	...settingsPageKeys,
+	...themes
+] as const;
 
 export type Locale = typeof Locales[number];
 

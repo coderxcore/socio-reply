@@ -4,8 +4,10 @@ import './services/LocalService'
 export default defineBackground({
 	main() {
 		chrome.sidePanel.setPanelBehavior({openPanelOnActionClick: true}).catch(console.log)
-		chrome.commands.onCommand.addListener(function(command) {
-			console.log(command)
-		});
+		// chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+		// 	if (tab.url?.includes('options.html')) {
+		// 		(chrome.sidePanel as any).close({ tabId });
+		// 	}
+		// });
 	}
 })

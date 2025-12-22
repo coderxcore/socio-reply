@@ -1,0 +1,31 @@
+body {
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s, color 0.3s;
+
+  #app {
+	a {
+	  display: inline-block;
+	  text-decoration: none;
+	  color: var(--color-text-main);
+	  border: solid 1px transparent;
+
+	  &:hover, &:active, &.active {
+		background: var(--color-bg);
+	  }
+	  &.active{
+		cursor: default;
+		border-color: var(--color-border);
+	  }
+	}
+
+	.space {
+	  flex: 1;
+	  min-height: 0;
+	  min-width: 0;
+	  border: none !important;
+	  padding: 0 !important;
+	  background: transparent !important;
+	}
+  }
+}

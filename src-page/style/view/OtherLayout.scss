@@ -1,0 +1,53 @@
+.OtherLayout {
+  --nav-size: 50px;
+  $max-width: 640px;
+
+  .container{
+	margin: 0 auto;
+	width: 100%;
+	max-width: $max-width;
+	@media (max-width: $max-width) {
+	  padding: 0 5vw;
+	}
+  }
+
+  > header {
+	background: var(--color-surface);
+	border-bottom: 1px solid var(--color-border);
+	padding: 0 2rem;
+	height: var(--nav-size);
+	display: flex;
+	flex-flow: nowrap row;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	transition: background-color 0.3s, border-color 0.3s;
+
+	> nav {
+	  display: flex;
+	  flex-flow: nowrap row;
+
+	  > a {
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		gap: .5em;
+		font-size: 13px;
+		padding: .3em 18px;
+		border-top: none!important;
+		border-bottom: none!important;
+
+		> svg {
+		  width: 18px;
+		}
+		@media (max-width: $max-width) {
+		  padding: .3em 2vw;
+		  >span{
+			display: none;
+		  }
+		}
+	  }
+	}
+  }
+}

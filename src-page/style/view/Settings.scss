@@ -1,0 +1,53 @@
+.Settings {
+  .Settings-Group {
+	> h3 {
+	  font-size: 13spx;
+	  color: var(--color-text-secondary);
+	  margin: 30px 0 10px;
+	  font-weight: normal;
+	}
+
+	> ul {
+	  background: var(--color-surface);
+	  border-radius: 8px;
+	  border: 1px solid var(--color-border);
+	  padding: 20px;
+	  display: flex;
+	  flex-direction: column;
+	  gap: 5px;
+
+	  > li {
+		$padding: 16px;
+		display: flex;
+		flex-flow: nowrap row;
+
+		&:not(:last-child) {
+		  border-bottom: 1px solid var(--color-border);
+		  padding-bottom: $padding;
+		}
+
+		&:not(:first-child) {
+		  padding-top: $padding - 3;
+		}
+
+		> header {
+		  display: flex;
+		  flex-direction: column;
+		  gap: 4px;
+
+		  > h4 {
+			font-size: 14px;
+			font-weight: 500;
+			color: var(--color-text-main);
+		  }
+
+		  > div {
+			font-size: 12px;
+			color: var(--color-text-secondary);
+		  }
+		}
+	  }
+	}
+
+  }
+}

@@ -1,0 +1,25 @@
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+:host, :root, textarea, input, select {
+  font-family: STHeiti, "Microsoft YaHei", PingFang SC, 宋体, Roboto, sans-serif;
+  color: var(--color-text-main);
+}
+
+textarea, input, select {
+  outline: none;
+  &::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.7;
+  }
+}
