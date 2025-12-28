@@ -5,9 +5,9 @@
 @use "base/select";
 
 @use "part/IconBtn";
-@use "part/MainInput";
 @use "part/SwitchInput";
 
-@use "view/Home";
+@use "view/Home/Home";
+@use "view/Home/HomeInput";
 @use "view/OtherLayout";
 @use "view/Settings";

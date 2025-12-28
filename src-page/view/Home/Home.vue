@@ -19,14 +19,14 @@
           <settings/>
         </router-link>
       </nav>
-      <main-input/>
+      <home-input />
     </header>
   </div>
 </template>
 
 <script lang="ts" setup>
-import MainInput from "../part/MainInput.vue";
 import {Settings, FileText, History,BookOpen, Trash} from 'lucide-vue-next';
-import {Store} from '../store'
+import {Store} from '../../store'
+import HomeInput from "./HomeInput.vue";
 const {locale} = Store;
 </script>
