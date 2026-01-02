@@ -8,10 +8,11 @@ export const enum ReplyType {
 
 export interface IReply extends IDocumentBase {
 	id?: number
+	hash?:number
 	text: string
+	scenes: number[]
 	type?: ReplyType
 	url?: string
-	scenes?: string[]
 	added_at?: number
 	updated_at?: number
 	keywords?: string[]
@@ -20,5 +21,6 @@ export interface IReply extends IDocumentBase {
 
 export interface ISearchReply extends IReply, IDocument {
 	text: string
+	scenes: number[]
 	tokens: string[]
 }
