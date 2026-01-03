@@ -47,12 +47,12 @@ export const router = createRouter({
 					path: "trash",
 					component: Trash
 				},
+				{
+					name: "importReferences",
+					path: "importReferences",
+					component: ImportReferences
+				},
 			]
-		},
-		{
-			name: "importReferences",
-			path: "/importReferences",
-			component: ImportReferences
 		},
 	]
 });

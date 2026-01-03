@@ -38,7 +38,6 @@ import {Download, Upload} from 'lucide-vue-next';
 import SettingsGroup from "./SettingsGroup.vue";
 import SettingsRow from "./SettingsRow.vue";
 import IconBtn from "../../part/IconBtn.vue";
-import {Locales, themes} from "/src-type";
 import {Store} from "../../store";
 import {openFileHandler} from "grain-sand-web-fs";
 

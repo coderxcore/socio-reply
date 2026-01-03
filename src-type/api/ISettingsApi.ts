@@ -1,5 +1,5 @@
 import {MsgMethods, RemoteMethods} from "gs-br-ext";
-import {Locale} from "../db";
+import {Locale} from "../db/ILocaleRow";
 
 export const themes = ['auto', 'light', 'dark'] as const;
 
