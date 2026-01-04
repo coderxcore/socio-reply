@@ -3,7 +3,7 @@ import {detectEncoding} from "./detectEncoding";
 
 export interface ISplitOption {
 	delimiter?: RegExp
-	onProgress?: (loaded: number, total: number) => void
+	onProgress?: (loaded: number, total: number) => void | Promise<void>
 }
 
 export async function* splitFile(file: File, options?: ISplitOption): AsyncGenerator<string> {
@@ -31,7 +31,10 @@ export async function* splitFile(file: File, options?: ISplitOption): AsyncGener
 			if (done) break
 
 			loaded += value.byteLength
-			onProgress?.(loaded, total)
+			try{
+				await onProgress?.(loaded, total)
+			} catch (e:any) {
+			}
 
 			carry += decoder.decode(value, {stream: true})
 
@@ -46,7 +49,6 @@ export async function* splitFile(file: File, options?: ISplitOption): AsyncGener
 
 			carry = carry.slice(lastEnd)
 		}
-
 		if (carry) yield carry
 	} finally {
 		try {

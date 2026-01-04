@@ -30,6 +30,10 @@
 	gap: 18px;
 	padding-bottom: 30vh;
 
+	::-webkit-scrollbar {
+	  height: 8px;
+	}
+
 	> li, > pre {
 	  background: var(--color-surface);
 	  border-radius: var(--radius-md);
@@ -38,8 +42,8 @@
 	  border: 1px solid transparent;
 	  transition: all 0.2s ease;
 	  word-wrap: break-word;
-	}
-	>pre{
+	  word-break: break-word;
+	  overflow: auto;
 	  font-size: 12px;
 	  line-height: 20px;
 	}

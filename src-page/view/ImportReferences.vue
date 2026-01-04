@@ -6,22 +6,22 @@
         <select @change="selectChange">
           <option v-for="item in importModes" :key="item" :value="item">{{ locale[item] }}</option>
         </select>
-        <input v-model="ir.delimiter" type="text" :readonly="readonly">
+        <input v-model="ir.pattern" type="text" :readonly="readonly">
       </label>
       <icon-btn @click="ir.selectFile()">
         <file-down :size="14"/>
         {{ locale.importReferences }}
       </icon-btn>
     </header>
-    <card body="div" :header-sticky="true">
+    <card :header-sticky="true">
       <template #header>
         <h2>{{ locale.preview }}</h2>
-        <icon-btn @click="">
+        <icon-btn @click="confirmImport">
           <check-line :size="14"/>
           {{ locale.confirmImport }}
         </icon-btn>
       </template>
-      <pre v-for="(row,i) in ir.preview" :key="i">{{ row }}</pre>
+      <li v-for="(row,i) in ir.preview" :key="i" v-html="row"></li>
     </card>
   </div>
 </template>
@@ -46,14 +46,20 @@ const readonly = ref(true);
 function selectChange(e) {
   const mode = e.target.value as ImportMode;
   if (mode in RegexRecord) {
-    ir.delimiter = RegexRecord[mode];
+    ir.pattern = RegexRecord[mode];
     readonly.value = true;
   } else {
     readonly.value = false;
   }
 }
 
-watch(() => ir.delimiter, async () => {
+async function confirmImport() {
+  await ir.confirmImport((loaded: number, total: number) => {
+    console.log(loaded, total);
+  });
+}
+
+watch(() => ir.pattern, async () => {
   await ir.updatePreview();
 })
 

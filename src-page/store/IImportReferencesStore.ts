@@ -1,22 +1,30 @@
 import {defineStore} from "pinia";
 import {openFileHandler} from "grain-sand-web-fs";
 import {router} from "../view";
-import {splitFile} from "/src-com";
+import {ISplitOption, splitFile} from "/src-com";
 import {Timer} from "gs-base";
+import {Api} from "../api";
 
 export interface IImportReferencesState {
 	file?: File
-	delimiter: string
+	pattern: string
 	preview: string[]
 }
 
-export interface IImportReferencesStore extends IImportReferencesState {
+export interface IImportReferencesGetter {
+	readonly delimiter: RegExp
+}
+
+export interface IImportReferencesStore extends IImportReferencesState, IImportReferencesGetter {
 	selectFile(): Promise<void>
 
 	updatePreview(): Promise<void>
 
-	clearPreview(): void
+	confirmImport(onProgress?: ISplitOption['onProgress']): Promise<void>
 }
+
+const previewCount = 1000;
+const taskItemCount = 30;
 
 const timer = new Timer(500);
 
@@ -24,9 +32,14 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 	state: (): IImportReferencesState => {
 		return {
 			file: undefined,
-			delimiter: '(\\s*\\n+\\s*){2,}',
+			pattern: '(\\s*\\n+\\s*){2,}',
 			preview: []
 		};
+	},
+	getters: {
+		delimiter() {
+			return new RegExp(this.pattern, 'g');
+		}
 	},
 	actions: {
 		async selectFile() {
@@ -45,21 +58,31 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 		},
 		async updatePreview() {
 			await timer.reWait();
-			let {file, delimiter} = this;
-			delimiter = new RegExp(delimiter,'g');
+			const {file, delimiter} = this;
 			this.preview.length = 0;
 			const tmp = [];
 			let n = 1;
 			for await (const part of splitFile(file, {delimiter})) {
-				tmp.push(part);
-				if (n++ >= 30) {
+				tmp.push(part.replace(/\n/g,'<br>'));
+				if (n++ >= previewCount) {
 					break;
 				}
 			}
 			this.preview = tmp;
 		},
-		clearPreview() {
-			this.preview.length = 0;
+		async confirmImport(onProgress?: ISplitOption['onProgress']) {
+			const {file, delimiter} = this;
+			const rows = [];
+			for await (const part of splitFile(file, {delimiter, onProgress})) {
+				rows.push(part);
+				if (rows.length >= taskItemCount) {
+					await Api.import.importReferences(rows);
+					rows.length = 0;
+				}
+			}
+			if (rows.length) {
+				await Api.import.importReferences(rows);
+			}
 		}
 	}
 }) as any;
