@@ -1,6 +1,10 @@
 <template>
   <div class="ImportReferences">
-    <header class="flex-right">
+    <header class="flex-between">
+      <label>
+        <span>{{ locale.scene }}</span>
+        <single-choice :options="scene.names" />
+      </label>
       <label>
         <span>{{ locale.mode }}</span>
         <select @change="selectChange">
@@ -48,8 +52,9 @@ import {Store} from "../store";
 import {ImportMode, importModes} from "/src-com";
 import {ref, watch} from "vue";
 import Card from "../part/ListPanel.vue";
+import SingleChoice from "../part/SingleChoice.vue";
 
-const {importReferences: ir, locale, front} = Store;
+const {importReferences: ir, locale, front,scene} = Store;
 
 const RegexRecord = {
   eachLine: '\\s*\\n+\\s*',

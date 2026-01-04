@@ -33,4 +33,5 @@ export const zh_CN = <LocaleRecord>{
 	importing:'导入中，请稍后...',
 	imported:'已导入',
 	importError:'导入失败',
+	scene:'场景',
 };

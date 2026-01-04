@@ -1,1 +1,91 @@
-.SingleChoice{}
+.SingleChoice{
+  position: relative;
+  width: 100%;
+  font-size: 14px;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-main);
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--color-primary);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    &:active {
+      background-color: var(--color-card-hover);
+    }
+  }
+
+  &__selected {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__arrow {
+    margin-left: 8px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    transition: transform 0.2s ease;
+
+    .SingleChoice__trigger[aria-expanded="true"] & {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100%; /* 最小宽度为容器宽度 */
+    margin-top: 4px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 999;
+    white-space: nowrap; /* 防止选项文本换行 */
+  }
+
+  &__option {
+    padding: 8px 12px;
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    user-select: none;
+    outline: none;
+
+    &:hover {
+      background-color: var(--color-card-hover);
+    }
+
+    &--selected {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: var(--color-primary);
+    }
+
+    &--focused {
+      background-color: var(--color-card-hover);
+    }
+  }
+}

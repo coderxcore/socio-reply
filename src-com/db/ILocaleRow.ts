@@ -3,7 +3,8 @@ import {themes} from "../api/ISettingsApi";
 const settingsPageKeys = [
 	'language', 'languageDesc', 'theme', 'themeDesc', 'pref',
 	'dataMgr', 'exportData', 'exportDataDesc', 'importData', 'importDataDesc',
-	'importReferences', 'mode', 'preview','confirmImport','emptyContent','loading','importing','imported','importError'
+	'importReferences', 'mode', 'preview','confirmImport','emptyContent','loading','importing','imported','importError',
+	'scene'
 ] as const;
 
 export const importModes = ['blankLine', 'eachLine', 'custom'] as const;
