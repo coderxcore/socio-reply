@@ -7,7 +7,7 @@ import {ISceneStore, useSceneStore} from "./ISceneStore";
 
 export class Store {
 
-	static #replyStore?: IMessageStore
+	static #messageStore?: IMessageStore
 	static #localeStore?: ILocaleStore
 	static #settingsStore?: ISettingsStore
 	static #importReferencesStore?: IImportReferencesStore
@@ -23,7 +23,7 @@ export class Store {
 	}
 
 	static get message(): IMessageStore {
-		return this.#replyStore || (this.#replyStore = useMessageStore());
+		return this.#messageStore || (this.#messageStore = useMessageStore());
 	}
 
 	static get locale(): ILocaleStore {

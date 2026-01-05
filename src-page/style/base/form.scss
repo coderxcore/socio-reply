@@ -8,4 +8,12 @@ select, input {
   &[readonly] {
 	color: var(--color-text-secondary);
   }
+
+  &:hover {
+	border-color: var(--color-primary);
+  }
+}
+
+select {
+  cursor: pointer;
 }

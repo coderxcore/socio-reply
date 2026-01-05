@@ -58,17 +58,19 @@
 	  }
 	}
 
-	> header, > header > label {
-	  display: flex;
-	  flex-flow: nowrap row;
-	  align-items: center;
+	> header {
+	  &, > label, > div {
+		display: flex;
+		flex-flow: nowrap row;
+		align-items: center;
 
-	  &.flex-right {
-		justify-content: flex-end;
-	  }
+		&.flex-right {
+		  justify-content: flex-end;
+		}
 
-	  &.flex-between {
-		justify-content: space-between;
+		&.flex-between {
+		  justify-content: space-between;
+		}
 	  }
 	}
 
@@ -80,7 +82,7 @@
 	  height: 10vh;
 	  gap: 16px;
 
-	  > label {
+	  > label, > div {
 		gap: 6px;
 	  }
 	}

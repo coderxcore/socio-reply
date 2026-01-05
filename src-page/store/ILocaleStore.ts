@@ -13,7 +13,7 @@ export interface ILocaleStore extends ILocaleState {
 	setPageTitle(): void;
 }
 
-export const useLocaleStore: () => ILocaleStore = defineStore('locale', {
+export const useLocaleStore: () => ILocaleStore = () => new Proxy(defineStore('locale', {
 	state: (): ILocaleState => {
 		return {...LocaleObject};
 	},
@@ -29,5 +29,12 @@ export const useLocaleStore: () => ILocaleStore = defineStore('locale', {
 		setPageTitle() {
 			document.title = this.title
 		}
+	}
+})(), {
+	get(target, p, obj) {
+		if(p in obj||p==='__v_isRef') {
+			return Reflect.get(target, p, obj);
+		}
+		return p;
 	}
 }) as any;

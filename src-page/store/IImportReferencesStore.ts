@@ -10,6 +10,7 @@ export interface IImportReferencesState {
 	pattern: string
 	preview: string[]
 	loading: false
+	sceneId: number
 }
 
 export interface IImportReferencesGetter {
@@ -35,7 +36,8 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 			file: undefined,
 			pattern: '(\\s*\\n+\\s*){2,}',
 			preview: [],
-			loading: false
+			loading: false,
+			sceneId: -1
 		};
 	},
 	getters: {
@@ -64,13 +66,13 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 		async updatePreview() {
 			await timer.reWait();
 			this.loading = true;
-			try{
+			try {
 				const {file, delimiter} = this;
 				this.preview.length = 0;
 				const tmp = [];
 				let n = 1;
 				for await (const part of splitFile(file, {delimiter})) {
-					tmp.push(part.replace(/\n/g,'<br>'));
+					tmp.push(part.replace(/\n/g, '<br>'));
 					if (n++ >= previewCount) {
 						break;
 					}
@@ -82,7 +84,7 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 		},
 		async confirmImport(onProgress?: ISplitOption['onProgress']) {
 			const {file, delimiter} = this;
-			try{
+			try {
 				let started = false;
 				const rows = [];
 				for await (const part of splitFile(file, {delimiter, onProgress})) {

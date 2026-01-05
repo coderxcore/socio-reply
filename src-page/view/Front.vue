@@ -7,12 +7,12 @@
           {{ front.message }}
         </div>
         <div class="Front__confirm-buttons">
-          <button class="Front__confirm-button Front__confirm-button--cancel" @click="handleConfirm(false)">
-            取消
-          </button>
-          <button class="Front__confirm-button Front__confirm-button--confirm" @click="handleConfirm(true)">
-            确定
-          </button>
+          <icon-btn class="Front__confirm-button Front__confirm-button--cancel" @click="handleConfirm(false)">
+            {{locale.cancel}}
+          </icon-btn>
+          <icon-btn class="Front__confirm-button Front__confirm-button--confirm" @click="handleConfirm(true)">
+            {{locale.ok}}
+          </icon-btn>
         </div>
       </div>
 
@@ -40,8 +40,9 @@
 
 <script lang="ts" setup>
 import {Store} from '../store'
+import IconBtn from "../part/IconBtn.vue";
 
-const {front} = Store
+const {front,locale} = Store
 
 // 点击隐藏功能，仅当showProgress为false且没有confirm时生效
 const handleClick = () => {

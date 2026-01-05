@@ -2,17 +2,14 @@
   <div class="SingleChoice" ref="containerRef" :style="{ width: containerWidth }">
     <!-- 选择触发器 -->
     <button
-      ref="triggerRef"
-      class="SingleChoice__trigger"
-      @click="toggleDropdown"
-      @keydown.down.prevent="openDropdown"
-      @keydown.up.prevent="openDropdown"
-      @keydown.enter.prevent="toggleDropdown"
-      @keydown.space.prevent="toggleDropdown"
-      @keydown.escape.prevent="closeDropdown"
-      :aria-expanded="isOpen"
-      :aria-haspopup="'listbox'"
-      :aria-labelledby="labelId"
+        ref="triggerRef"
+        class="SingleChoice__trigger"
+        @click="toggleDropdown"
+        @keydown.down.prevent="openDropdown"
+        @keydown.up.prevent="openDropdown"
+        @keydown.enter.prevent="toggleDropdown"
+        @keydown.space.prevent="toggleDropdown"
+        @keydown.escape.prevent="closeDropdown"
     >
       <span class="SingleChoice__selected">{{ selectedOptionText }}</span>
       <span class="SingleChoice__arrow">▼</span>
@@ -20,29 +17,25 @@
 
     <!-- 下拉菜单 -->
     <div
-      v-if="isOpen"
-      ref="dropdownRef"
-      class="SingleChoice__dropdown"
-      role="listbox"
-      :aria-labelledby="labelId"
-      @keydown.down.prevent="focusNextOption"
-      @keydown.up.prevent="focusPreviousOption"
-      @keydown.enter.prevent="selectFocusedOption"
-      @keydown.escape.prevent="closeDropdown"
-      :style="{ opacity: isMeasuring ? 0 : 1, visibility: isMeasuring ? 'hidden' : 'visible' }"
+        v-show="isOpen"
+        ref="dropdownRef"
+        class="SingleChoice__dropdown"
+        @keydown.down.prevent="focusNextOption"
+        @keydown.up.prevent="focusPreviousOption"
+        @keydown.enter.prevent="selectFocusedOption"
+        @keydown.escape.prevent="closeDropdown"
+        :style="{ opacity: isMeasuring ? 0 : 1, visibility: isMeasuring ? 'hidden' : 'visible' }"
     >
       <div
-        v-for="(option, index) in options"
-        :key="getOptionKey(option, index)"
-        class="SingleChoice__option"
-        :class="{
+          v-for="(option, index) in options"
+          :key="getOptionKey(option, index)"
+          class="SingleChoice__option"
+          :class="{
           'SingleChoice__option--selected': isOptionSelected(option),
           'SingleChoice__option--focused': focusedIndex === index
         }"
-        role="option"
-        :aria-selected="isOptionSelected(option)"
-        @click="selectOption(option)"
-        @mouseenter="focusedIndex = index"
+          @click.stop="selectOption(option)"
+          @mouseenter="focusedIndex = index"
       >
         {{ getOptionText(option) }}
       </div>
@@ -51,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import {ref, computed, onMounted, onUnmounted, watch} from 'vue';
 import {wait} from "gs-base";
 
 // Props
@@ -161,9 +154,6 @@ const adjustContainerWidth = () => {
   containerWidth.value = `${newWidth}px`;
 };
 
-const resetContainerWidth = () => {
-  // 不再重置宽度，保持计算后的宽度不变
-};
 
 // 重新计算宽度的方法 - 使用透明展开方案
 const recalculateWidth = async () => {
@@ -205,12 +195,11 @@ const toggleDropdown = () => {
       focusedIndex.value = 0;
     }
     setTimeout(() => {
-      const focusedOption:any = containerRef.value?.querySelector('.SingleChoice__option--focused');
+      const focusedOption: any = containerRef.value?.querySelector('.SingleChoice__option--focused');
       focusedOption?.focus();
       adjustContainerWidth();
     }, 10);
   } else {
-    resetContainerWidth();
   }
 };
 
@@ -229,14 +218,27 @@ const openDropdown = () => {
 };
 
 const closeDropdown = () => {
+  // 关闭下拉菜单
   isOpen.value = false;
+  // 重置测量状态，避免影响下次打开
+  isMeasuring.value = false;
+  // 恢复焦点到触发器按钮
   triggerRef.value?.focus();
-  resetContainerWidth();
 };
 
 const selectOption = (option: any) => {
+  // 发出值更新事件
   emit('update:modelValue', getOptionValue(option));
-  closeDropdown();
+
+  // 使用setTimeout延迟关闭下拉菜单，确保事件处理完成
+  setTimeout(() => {
+    // 关闭下拉菜单
+    isOpen.value = false;
+    // 重置测量状态
+    isMeasuring.value = false;
+    // 恢复焦点到触发器按钮
+    triggerRef.value?.focus();
+  }, 0);
 };
 
 const focusNextOption = () => {
@@ -284,36 +286,34 @@ const handleClickOutside = (event: MouseEvent) => {
 
 // Watchers
 watch(
-  () => props.modelValue,
-  () => {
-    focusedIndex.value = props.options.findIndex(option => isOptionSelected(option));
-  }
+    () => props.modelValue,
+    () => {
+      focusedIndex.value = props.options.findIndex(option => isOptionSelected(option));
+    }
 );
 
 // 监听options变化，重新计算宽度
 watch(
-  () => props.options,
-  (newOptions, oldOptions) => {
-    if (JSON.stringify(newOptions) !== JSON.stringify(oldOptions)) {
+    () => props.options,
+    (newOptions, oldOptions) => {
       recalculateWidth();
-    }
-  },
-  { deep: true, immediate: true }
+    },
+    {deep: true, immediate: true}
 );
 
 // 监听autoAdjustWidth变化
 watch(
-  () => props.autoAdjustWidth,
-  (newValue) => {
-    if (!newValue) {
-      // 如果关闭自动调整宽度，重置宽度
-      containerWidth.value = null;
-      isWidthCalculated.value = false;
-    } else {
-      // 如果开启自动调整宽度，重新计算
-      recalculateWidth();
+    () => props.autoAdjustWidth,
+    (newValue) => {
+      if (!newValue) {
+        // 如果关闭自动调整宽度，重置宽度
+        containerWidth.value = null;
+        isWidthCalculated.value = false;
+      } else {
+        // 如果开启自动调整宽度，重新计算
+        recalculateWidth();
+      }
     }
-  }
 );
 
 // Lifecycle

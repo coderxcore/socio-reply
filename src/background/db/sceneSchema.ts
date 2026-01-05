@@ -16,7 +16,7 @@ export const sceneSchema: IStoreSchema = {
 		{
 			id: -1,
 			name: 'genericScene',
-			description: 'allSceneDesc',
+			description: 'genericSceneDesc',
 			isBuiltIn: true,
 			sites: []
 		},

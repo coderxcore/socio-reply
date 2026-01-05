@@ -15,11 +15,6 @@ export const messageSchema: IStoreSchema = {
 	softDeletedField: 'deleted',
 	indexSchemas: [
 		'kind',
-		'stage',
-		{
-			name: 'stage_deleted',
-			keyPath: ['stage', 'deleted'],
-		},
 		{
 			name: 'kind_deleted',
 			keyPath: ['kind', 'deleted'],

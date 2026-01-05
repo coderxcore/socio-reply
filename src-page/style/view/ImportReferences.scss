@@ -1,5 +1,12 @@
 .ImportReferences {
+  > header {
+	input {
+	  min-width: 120px;
+	  flex: 0 1;
+	}
+  }
   .ListPanel {
+
 	> ul, > div {
 	  padding-bottom: 30vh;
 	}

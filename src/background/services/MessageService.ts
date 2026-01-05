@@ -14,11 +14,11 @@ setMsgMethod<IMessageService>({
 		if (statusCache) {
 			return statusCache;
 		}
-		return statusCache = await Db.message.batchRead(async s => ({
-			draftCount: await s.index('stage_deleted').count(['draft', Bool.False]),
-			historyCount: await s.index('stage_deleted').count(['history', Bool.False]),
-			trashCount: await s.index('deleted').count(Bool.True),
-			referencesCount: await s.index('kind_deleted').count(['reference', Bool.False])
+		return statusCache = await Db.mesAndDraft.read(async (mes, draft) => ({
+			draftCount: await draft.count(),
+			historyCount: await mes.index('kind_deleted').count(['content', Bool.False]),
+			trashCount: await mes.index('deleted').count(Bool.True),
+			referencesCount: await mes.index('kind_deleted').count(['reference', Bool.False])
 		}))
 	}, queryReply(text: ISearchReply): Promise<IMessage[]> {
 		return Promise.resolve([]);

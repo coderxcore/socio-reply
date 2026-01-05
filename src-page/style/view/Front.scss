@@ -67,27 +67,11 @@
   }
 
   &__confirm-button {
-    padding: 8px 24px;
-    border-radius: var(--radius-md);
+    padding: 8px 20px;
     font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.2s ease;
-
-    &--cancel {
-      background-color: var(--color-border);
-      color: var(--color-text-main);
-
-      &:hover {
-        background-color: var(--color-card-hover);
-      }
-    }
-
     &--confirm {
       background-color: var(--color-primary);
       color: white;
-
       &:hover {
         background-color: color-mix(in srgb, var(--color-primary), black 10%);
       }

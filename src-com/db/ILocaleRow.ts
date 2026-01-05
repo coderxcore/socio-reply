@@ -2,9 +2,10 @@ import {themes} from "../api/ISettingsApi";
 
 const settingsPageKeys = [
 	'language', 'languageDesc', 'theme', 'themeDesc', 'pref',
+	'ok','cancel',
 	'dataMgr', 'exportData', 'exportDataDesc', 'importData', 'importDataDesc',
 	'importReferences', 'mode', 'preview','confirmImport','emptyContent','loading','importing','imported','importError',
-	'scene'
+	'scene','importAs','genericScene','genericSceneDesc','aiScene','aiSceneDesc','socioScene','socioSceneDesc','videoScene','videoSceneDesc'
 ] as const;
 
 export const importModes = ['blankLine', 'eachLine', 'custom'] as const;

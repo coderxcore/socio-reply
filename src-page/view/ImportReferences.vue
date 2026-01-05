@@ -2,16 +2,21 @@
   <div class="ImportReferences">
     <header class="flex-between">
       <label>
-        <span>{{ locale.scene }}</span>
-        <single-choice :options="scene.names" />
+        <span>{{ locale.importAs }}</span>
+        <single-choice
+            :options="scene.scenes"
+            v-model="ir.sceneId"
+            :text-field="(item) => locale[item.name]"
+            value-field="id"
+        />
       </label>
-      <label>
+      <div>
         <span>{{ locale.mode }}</span>
         <select @change="selectChange">
           <option v-for="item in importModes" :key="item" :value="item">{{ locale[item] }}</option>
         </select>
         <input v-model="ir.pattern" type="text" :readonly="readonly">
-      </label>
+      </div>
       <icon-btn @click="ir.selectFile()">
         <file-down :size="14"/>
         {{ locale.importReferences }}
