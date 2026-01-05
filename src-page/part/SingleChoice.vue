@@ -295,7 +295,7 @@ watch(
 // 监听options变化，重新计算宽度
 watch(
     () => props.options,
-    (newOptions, oldOptions) => {
+    () => {
       recalculateWidth();
     },
     {deep: true, immediate: true}
