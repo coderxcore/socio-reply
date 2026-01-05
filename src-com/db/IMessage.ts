@@ -5,7 +5,7 @@ export interface IMessage extends IDocumentBase {
 	id?: number
 	hash?: number
 	text: string
-	scenes: number[],
+	sceneIds: number[],
 	kind?: 'reference' | 'content'
 	stage?: 'history' | 'draft'
 	scope?: 'body' | 'reply'
@@ -15,10 +15,11 @@ export interface IMessage extends IDocumentBase {
 	keywords?: string[]
 	keywords_only?: boolean
 	deleted?: Bool
+	tokens?: string[]
 }
 
 export interface ISearchReply extends IMessage, IDocument {
 	text: string
-	scenes: number[]
+	sceneIds: number[]
 	tokens: string[]
 }

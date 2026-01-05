@@ -1,6 +1,7 @@
 import {setMsgMethod} from "gs-br-ext";
-import {IImportService} from "/src-com";
+import {IImportService, IMessage} from "/src-com";
 import {Status} from "../Status";
+import {preprocessMessages} from "../lib/preprocessMessage";
 
 setMsgMethod<IImportService>({
 	async startImport(text: string): Promise<void> {
@@ -9,11 +10,10 @@ setMsgMethod<IImportService>({
 	async endImport(): Promise<void> {
 		await Status.clearImportStart();
 	},
-	async importReferences(references: string[]): Promise<void> {
-		// const data:IMessage[] = references.map(text=>({
-		//
-		// 	text
-		// }))
+	async importReferences(references: IMessage[]): Promise<void> {
+		const time = Date.now();
+		references = await preprocessMessages(references);
+		console.log(Date.now() - time, references)
 	},
 })
 

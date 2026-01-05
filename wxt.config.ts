@@ -12,7 +12,10 @@ export default defineConfig({
 	vite: () => ({
 		plugins: [
 			vue(),
-		]
+		],
+		// build: {
+		// 	minify: null
+		// }
 	}),
 	outDir: 'dist',
 	entrypointsDir: 'src',

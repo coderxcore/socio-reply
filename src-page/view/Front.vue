@@ -1,37 +1,37 @@
 <template>
   <div class="Front" v-if="front.show" @click="handleClick">
-    <div class="Front__content" @click.stop>
+    <div class="content" @click.stop>
       <!-- 确认对话框 - 优先级最高 -->
-      <div v-if="front.confirm" class="Front__confirm">
-        <div v-if="front.message" class="Front__message">
+      <div v-if="front.confirm" class="confirm">
+        <div v-if="front.message" class="message">
           {{ front.message }}
         </div>
-        <div class="Front__confirm-buttons">
-          <icon-btn class="Front__confirm-button Front__confirm-button--cancel" @click="handleConfirm(false)">
+        <div class="buttons">
+          <icon-btn @click="handleConfirm(false)">
             {{locale.cancel}}
           </icon-btn>
-          <icon-btn class="Front__confirm-button Front__confirm-button--confirm" @click="handleConfirm(true)">
+          <icon-btn class="confirm" @click="handleConfirm(true)">
             {{locale.ok}}
           </icon-btn>
         </div>
       </div>
 
       <!-- 进度条 - 优先级次之 -->
-      <div v-else-if="front.showProgress" class="Front__progress-container">
-        <div class="Front__progress-bar">
-          <div class="Front__progress-fill" :style="{ width: `${front.progress}%` }"></div>
+      <div v-else-if="front.showProgress" class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" :style="{ width: `${front.progress}%` }"></div>
         </div>
-        <div class="Front__progress-text">
+        <div class="progress-text">
           {{ front.progress }}%
         </div>
         <!-- 进度条模式下也可以显示消息 -->
-        <div v-if="front.message" class="Front__message">
+        <div v-if="front.message" class="message">
           {{ front.message }}
         </div>
       </div>
 
       <!-- 仅消息显示 - 优先级最低 -->
-      <div v-else-if="front.message" class="Front__message">
+      <div v-else-if="front.message" class="message">
         {{ front.message }}
       </div>
     </div>

@@ -8,6 +8,7 @@
 		"dev": "wxt",
 		"build": "wxt build",
 		"zip": "wxt zip",
+		"deduplicate-data-txt": "tsx tool/deduplicate-data-txt",
 		"postinstall": "wxt prepare"
 	},
 	"devDependencies": {
@@ -26,7 +27,7 @@
 		"gs-idb-basic": "^0.1.6",
 		"gs-idb-pro": "^0.1.1",
 		"gs-search": "^0.1.3",
-		"gs-tokenizer": "^0.1.5",
+		"gs-tokenizer": "^0.1.7",
 		"jschardet": "^3.1.4",
 		"lucide-vue-next": "^0.561.0",
 		"pinia": "^3.0.4",

@@ -11,70 +11,75 @@
   padding-top: calc(100vh / 5); /* 上方预留1/3高度，内容居中显示在下方2/3区域 */
   z-index: 9999;
 
-  &__content {
-    background-color: var(--color-surface);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    min-width: 300px;
-    max-width: 90%;
-    box-shadow: var(--shadow-md);
-  }
+  > .content {
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+	padding: 24px;
+	min-width: 300px;
+	max-width: 90%;
+	box-shadow: var(--shadow-md);
 
-  &__progress-container {
-    margin-bottom: 16px;
-  }
+	&, > div {
+	  > .message {
+		text-align: center;
+		color: var(--color-text-main);
+		font-size: 16px;
+		line-height: 1.5;
+		margin-bottom: 16px;
+	  }
+	}
 
-  &__progress-bar {
-    width: 100%;
-    height: 8px;
-    background-color: var(--color-border);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 8px;
-  }
 
-  &__progress-fill {
-    height: 100%;
-    background-color: var(--color-primary);
-    border-radius: 4px;
-    transition: width 0.3s ease;
-  }
+	> .progress-container {
+	  margin-bottom: 16px;
 
-  &__progress-text {
-    text-align: center;
-    color: var(--color-text-main);
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
+	  .progress-bar {
+		width: 100%;
+		height: 8px;
+		background-color: var(--color-border);
+		border-radius: 4px;
+		overflow: hidden;
+		margin-bottom: 8px;
+	  }
 
-  &__message {
-    text-align: center;
-    color: var(--color-text-main);
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 16px;
-  }
+	  .progress-fill {
+		height: 100%;
+		background-color: var(--color-primary);
+		border-radius: 4px;
+		transition: width 0.3s ease;
+	  }
 
-  &__confirm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+	  .progress-text {
+		text-align: center;
+		color: var(--color-text-main);
+		font-size: 14px;
+		margin-bottom: 8px;
+	  }
+	}
 
-  &__confirm-buttons {
-    display: flex;
-    gap: 12px;
-  }
+	> .confirm {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
 
-  &__confirm-button {
-    padding: 8px 20px;
-    font-size: 14px;
-    &--confirm {
-      background-color: var(--color-primary);
-      color: white;
-      &:hover {
-        background-color: color-mix(in srgb, var(--color-primary), black 10%);
-      }
-    }
+	  > .buttons {
+		display: flex;
+		gap: 12px;
+
+		> .IconBtn {
+		  padding: 8px 20px;
+		  font-size: 14px;
+
+		  &.confirm {
+			background-color: var(--color-primary);
+			color: white;
+
+			&:hover {
+			  background-color: color-mix(in srgb, var(--color-primary), black 10%);
+			}
+		  }
+		}
+	  }
+	}
   }
 }

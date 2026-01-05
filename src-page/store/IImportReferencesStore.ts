@@ -26,7 +26,7 @@ export interface IImportReferencesStore extends IImportReferencesState, IImportR
 }
 
 const previewCount = 1000;
-const taskItemCount = 30;
+const taskItemCount = 100;
 
 const timer = new Timer(500);
 
@@ -83,7 +83,7 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 			}
 		},
 		async confirmImport(onProgress?: ISplitOption['onProgress']) {
-			const {file, delimiter} = this;
+			const {file, delimiter, sceneId} = this;
 			try {
 				let started = false;
 				const rows = [];
@@ -94,15 +94,19 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 						started = true;
 					}
 					if (rows.length >= taskItemCount) {
-						await Api.import.importReferences(rows);
+						await Api.import.importReferences(rows.map(text => ({text, sceneIds: [sceneId]})));
 						rows.length = 0;
 					}
 				}
 				if (rows.length) {
-					await Api.import.importReferences(rows);
+					await Api.import.importReferences(rows.map(text => ({text, sceneIds: [sceneId]})));
 				}
 			} finally {
-				await Api.import.endImport();
+				try{
+					this.file = undefined;
+				} finally {
+					await Api.import.endImport();
+				}
 			}
 		}
 	}
