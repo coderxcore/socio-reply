@@ -1,16 +1,17 @@
 import {setMsgMethod} from "gs-br-ext";
 import {IImportService, IMessage} from "/src-com";
 import {preprocessMessages} from "../pre/preprocessMessage";
+import {saveMessagePack} from "../repo/saveMessagePack";
 
 setMsgMethod<IImportService>({
 	async importReferences(references: IMessage[]): Promise<void> {
 		const time = Date.now();
 		try {
 			const packs = await preprocessMessages(references);
-			console.log(packs)
-			console.log(Date.now() - time)
+			await saveMessagePack(packs);
 		} catch (e) {
 			console.error(e)
+			throw e;
 		}
 	},
 })

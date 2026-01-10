@@ -1,7 +1,5 @@
 import { ITerm } from "/src-com"
-import { hash } from "gs-search"
-
-/* ======================= Options ======================= */
+import { hash } from "gs-search/core"
 
 export interface TokenizeOptions {
 	maxPrefix?: number
@@ -44,8 +42,6 @@ function isCJKWord(w: string) {
 	return [...w].every(ch => RE_CJK.test(ch))
 }
 
-/* ======================= Prefix ======================= */
-
 function buildPrefix(word: string, maxPrefix: number): string[] {
 	const res: string[] = []
 	const limit = Math.min(word.length - 1, maxPrefix)
@@ -53,31 +49,23 @@ function buildPrefix(word: string, maxPrefix: number): string[] {
 	return res
 }
 
-/* ======================= Fuzzy ======================= */
-
 function buildFuzzy(
 	word: string,
 	options: Required<TokenizeOptions>
 ): string[] {
 	const res = new Set<string>()
 	const isCJK = isCJKWord(word)
-
-	// ✅ 所有有意义词都做 2-gram（英文 + 中文）
 	if (word.length >= 2 && !isGibberish(word)) {
 		for (let i = 0; i < word.length - 1; i++) {
 			res.add(word.slice(i, i + 2))
 		}
 	}
-
-	// 单字模糊（可选）
 	if (
 		options.fuzzyCharMode === "all" ||
 		(options.fuzzyCharMode === "cjk" && isCJK)
 	) {
 		for (const ch of word) res.add(ch)
 	}
-
-	// 只保留单字
 	if (!options.fuzzyKeepMultiWhenChar) {
 		for (const v of [...res]) {
 			if (v.length > 1) res.delete(v)
@@ -86,8 +74,6 @@ function buildFuzzy(
 
 	return [...res]
 }
-
-/* ======================= Structured Split ======================= */
 
 function splitStructuredWords(
 	text: string,
@@ -113,16 +99,12 @@ function splitStructuredWords(
 	return [...new Set(out)]
 }
 
-/* ======================= Chinese Sentence ======================= */
-
 function splitChineseSentence(text: string): string[] {
 	return text
 		.split(RE_SENTENCE)
 		.map(s => s.trim())
 		.filter(s => s.length > 1)
 }
-
-/* ======================= Main ======================= */
 
 export function tokenizeMultiLang(
 	input: string,

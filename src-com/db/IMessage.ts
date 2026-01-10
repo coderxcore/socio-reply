@@ -1,4 +1,4 @@
-import {IDocument, IDocumentBase} from "gs-search";
+import {IDocument, IDocumentBase} from "gs-search/type";
 import {Bool} from "gs-idb-basic";
 
 export interface IMessage extends IDocumentBase {

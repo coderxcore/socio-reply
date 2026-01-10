@@ -1,13 +1,10 @@
 import {IMessage, ITerm} from "/src-com";
-import {hash} from "gs-search";
+import {hash} from "gs-search/core";
 import {messageTokens} from "./messageTokens";
 import {asyncMap} from "gs-base";
 import {tokenizeMultiLang} from "./multiLangTokenizer";
+import {IMessagePack} from "../type";
 
-export interface IMessagePack {
-	messages: IMessage[];
-	terms: ITerm[]
-}
 
 export async function preprocessMessages(messages: IMessage[]): Promise<IMessagePack> {
 	messages = await asyncMap(messages, preprocessMessage);

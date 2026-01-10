@@ -1,4 +1,4 @@
-import {IDocument} from "gs-search";
+import {IDocument} from "gs-search/type";
 
 export interface ITerm extends IDocument {
 	id?: number
