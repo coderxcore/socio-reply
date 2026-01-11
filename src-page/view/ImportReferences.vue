@@ -108,7 +108,7 @@ async function confirmImport() {
       } finally {
         front.progress = -1;
         await wait(1000);
-        front.message = '';
+        front.hide();
         await message.loadStatus();
       }
     })

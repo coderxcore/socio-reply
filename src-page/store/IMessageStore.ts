@@ -28,8 +28,6 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 	actions: {
 		async queryReply() {
 			const {input} = this;
-			const replies = await Api.message.queryReply(input);
-			console.log(replies)
 		},
 		async loadStatus() {
 			this.status = await Api.message.messageStatus();

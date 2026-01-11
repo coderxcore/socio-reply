@@ -4,11 +4,16 @@ import {preprocessMessages} from "../pre/preprocessMessage";
 import {saveMessagePack} from "../repo/saveMessagePack";
 
 setMsgMethod<IImportService>({
-	async importReferences(references: IMessage[]): Promise<void> {
+	async importReferences(references: IMessage[]): Promise<any> {
 		try {
 			const packs = await preprocessMessages(references);
-			const result = await saveMessagePack(packs);
-			console.log(result)
+			return {
+				preResult: {
+					msgs: packs.messages.length,
+					terms: packs.terms.length,
+				},
+				saveResult:await saveMessagePack(packs),
+			};
 		} catch (e) {
 			console.error(e)
 			throw e;

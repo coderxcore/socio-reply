@@ -4,6 +4,7 @@ import './services/MessageService'
 import './services/ImportService'
 import './services/SceneService'
 import './services/IndexService'
+import './services/SearchService'
 
 export default defineBackground({
 	main() {

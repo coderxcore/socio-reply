@@ -10,10 +10,6 @@ export interface IMessageStatus {
 
 interface IMessageBase {
 
-	queryWord(text: string): Promise<string[]>;
-
-	queryReply(text: ISearchReply): Promise<IMessage[]>;
-
 	clearMessageStatusCache(): void | Promise<void>;
 
 	messageStatus(): Promise<IMessageStatus>;

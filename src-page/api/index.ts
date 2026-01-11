@@ -1,4 +1,4 @@
-import {IImportApi, IIndexApi, ILocaleApi, IMessageApi, ISceneApi, ISettingsApi} from "/src-com";
+import {IImportApi, IIndexApi, ILocaleApi, IMessageApi, ISceneApi, ISearchApi, ISettingsApi} from "/src-com";
 import {createMsgMethodProxy} from "gs-br-ext";
 
 
@@ -25,7 +25,12 @@ export class Api {
 	static get locale(): ILocaleApi {
 		return this.#api
 	}
+
 	static get index(): IIndexApi {
+		return this.#api
+	}
+
+	static get search(): ISearchApi {
 		return this.#api
 	}
 

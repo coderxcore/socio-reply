@@ -13,7 +13,6 @@ onMounted(async () => {
   await Store.locale.loadMessages(true);
   await Store.message.loadStatus();
   await Store.scene.loadScenes();
-  console.log({...Store.message.status})
 })
 
 

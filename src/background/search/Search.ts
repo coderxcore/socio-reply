@@ -1,4 +1,4 @@
-import {IDocumentBase, ISearchEngine} from "gs-search/type";
+import {IDocumentBase, ISearchEngine, ISearchEngineOption} from "gs-search/type";
 import {SearchEngine} from "gs-search/core";
 import {BrowserStorage} from "gs-search/browser";
 import {IMessage, ITerm, safeSlice} from "/src-com";
@@ -34,6 +34,11 @@ export class Search {
 		return this.#termPrefix || (this.#termPrefix = new SearchEngine({
 			storage: new BrowserStorage('term-prefix'),
 			indexingTokenizer: doc => arrayToLower((doc as ITerm).prefix || [])
+			// indexingTokenizer: doc => {
+			// 	const r = arrayToLower((doc as ITerm).prefix || []);
+			// 	console.log(doc, r)
+			// 	return r;
+			// }
 		}));
 	}
 
@@ -41,6 +46,11 @@ export class Search {
 		return this.#termFuzzy || (this.#termFuzzy = new SearchEngine({
 			storage: new BrowserStorage('term-fuzzy'),
 			indexingTokenizer: doc => arrayToLower((doc as ITerm).fuzzy || [])
+			// indexingTokenizer: doc => {
+			// 	const r = arrayToLower((doc as ITerm).fuzzy || []);
+			// 	console.log(doc, r)
+			// 	return r;
+			// }
 		}));
 	}
 
@@ -48,7 +58,7 @@ export class Search {
 		const suffix = safeSlice(text, -2);
 		const term = {
 			text: suffix,
-			prefix: buildPrefix(suffix, 2),
+			prefix: [suffix, ...buildPrefix(suffix, 2)]
 		}
 		const result = await this.termPrefix.search(term as any);
 		if (result?.length > 0) {
@@ -56,7 +66,7 @@ export class Search {
 		}
 		const term2 = {
 			text,
-			fuzzy: buildFuzzy(text, {} as any),
+			fuzzy: [suffix, ...buildFuzzy(suffix, {} as any)],
 		}
 		return await this.termFuzzy.search(term2 as any);
 	}
@@ -66,7 +76,6 @@ export class Search {
 			text,
 			tokens: await messageTokens(text),
 		} as IDocumentBase;
-		console.log('准备搜索',doc)
-		return this.message.search(doc as any);
+		return await this.message.search(doc as any);
 	}
 }

@@ -6,5 +6,5 @@ function getSeg(): Intl.Segmenter {
 
 export function safeSlice(text: string, start: number, end?: number) {
 	const seg = getSeg();
-	return [...seg.segment(text)].slice(start, end).join('');
+	return [...seg.segment(text)].slice(start, end).map(s=>s.segment).join('');
 }

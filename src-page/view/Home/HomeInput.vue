@@ -4,7 +4,7 @@
       <smart-input v-model="message.input" @cursor:change="onCursorChange"/>
     </section>
     <footer>
-      <button class="btn-lg">
+      <button class="btn-lg" @click="onSend">
         <smile/>
       </button>
       <div class="space"></div>
@@ -33,8 +33,11 @@ const timer = new Timer();
 async function onCursorChange() {
   await timer.wait(300)
   await timer.wait(200)
-  await Api.message.queryReply(message.input)
 }
+async function onSend() {
+  console.log(await Api.search.searchTerm('lo'))
+}
+
 
 
 </script>

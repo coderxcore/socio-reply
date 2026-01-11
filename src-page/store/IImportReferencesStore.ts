@@ -92,7 +92,7 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 		async confirmImport(option?: IImportOption) {
 			const {onFileRead, onDbSave, onIndexing} = option || {} as IImportOption;
 			const {file, delimiter, sceneId} = this;
-			let bytes = 0,onProgress: ISplitOption['onProgress'] = (loaded, total)=>{
+			let bytes = 0, onProgress: ISplitOption['onProgress'] = (loaded, total) => {
 				bytes = total;
 				onFileRead?.(loaded, total);
 			};
@@ -129,7 +129,8 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 					this.file = undefined;
 				} finally {
 					onIndexing?.(0, 1);
-					// await Api.import.endImport();
+					const result = await Api.index.updateIndex();
+					console.log(result)
 					onIndexing?.(1, 1);
 				}
 			}

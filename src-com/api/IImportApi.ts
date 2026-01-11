@@ -4,7 +4,7 @@ import {IMessage} from "../db/IMessage";
 interface IImportBase {
 
 
-	importReferences(references: IMessage[]): Promise<void>;
+	importReferences(references: IMessage[]): Promise<any>;
 
 }
 

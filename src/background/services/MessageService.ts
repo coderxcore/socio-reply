@@ -5,9 +5,4 @@ import {clearMessageStatusCache, messageStatus} from "../repo/messageStatus";
 setMsgMethod<IMessageService>({
 	clearMessageStatusCache,
 	messageStatus
-	, queryReply(text: ISearchReply): Promise<IMessage[]> {
-		return Promise.resolve([]);
-	}, queryWord(text: string): Promise<string[]> {
-		return Promise.resolve([]);
-	}
 })
