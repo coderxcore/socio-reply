@@ -2,7 +2,7 @@ import {detect} from 'jschardet'
 
 const SAMPLE_SIZE = 1024 // 32KB
 
-export async function detectEncoding(file: File, fallback = 'gbk'): Promise<string> {
+export async function detectEncoding(file: Blob, fallback = 'gbk'): Promise<string> {
 	// 1️⃣ 只读文件头
 	const buffer = await file.slice(0, SAMPLE_SIZE).arrayBuffer()
 	const bytes = new Uint8Array(buffer)

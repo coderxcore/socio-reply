@@ -27,7 +27,7 @@
 		"gs-idb-basic": "^0.1.6",
 		"gs-idb-pro": "^0.1.2",
 		"gs-search": "^0.1.7",
-		"gs-tokenizer": "^0.1.19",
+		"gs-tokenizer": "^0.1.20",
 		"jschardet": "^3.1.4",
 		"lucide-vue-next": "^0.561.0",
 		"pinia": "^3.0.4",
