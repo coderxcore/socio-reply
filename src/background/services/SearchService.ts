@@ -1,15 +1,16 @@
 import {setMsgMethod} from "gs-br-ext";
-import {IMessage, ISearchedMessage, ISearchService, ISearchTerm, ITerm} from "/src-com";
-import {Search} from "../search/Search";
+import {ISearchedMessage, ISearchService, ISearchTerm} from "/src-com";
 import {queryTermBySearch} from "../repo/queryTermBySearch";
 import {queryMessageBySearch} from "../repo/queryMessageBySearch";
+import {searchMsg} from "../search/searchMsg";
+import {searchTerm} from "../search/searchTerm";
 
 setMsgMethod<ISearchService>({
 	async searchMsg(text: string): Promise<ISearchedMessage[]> {
-		return await queryMessageBySearch(await Search.searchMsg(text));
+		return await queryMessageBySearch(await searchMsg(text));
 	},
 	async searchTerm(text: string): Promise<ISearchTerm[]> {
-		return await queryTermBySearch(await Search.searchTerm(text));
+		return await queryTermBySearch(await searchTerm(text),text);
 	}
 
 });

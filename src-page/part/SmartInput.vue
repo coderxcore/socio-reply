@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import {ref} from 'vue'
+import {ICursorChangeEvent} from "../type";
 
 const props = defineProps<{
   modelValue?: string
@@ -20,11 +21,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:modelValue', v: string): void
-  (e: 'cursor:change', payload: {
-    editText: string
-    start: number
-    end: number
-  }): void
+  (e: 'cursor:change', payload: ICursorChangeEvent): void
 }>()
 
 const el = ref<HTMLTextAreaElement>()
@@ -52,7 +49,7 @@ function onInput(e: Event) {
   lastEnd = end
 
   const editText = start === end ? target.value.slice(0, start) : target.value.slice(start, end)
-  lastEditText = editText
+  lastEditText = editText;
 
   emit('cursor:change', {
     editText,

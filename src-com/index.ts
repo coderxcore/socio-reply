@@ -13,3 +13,4 @@ export * from "./db/IScene";
 
 export * from "./lib/splitFile";
 export * from "./lib/safeSlice";
+export * from "./lib/findLongest";

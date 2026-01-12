@@ -57,12 +57,19 @@ export function buildFuzzy(
 	word: string,
 	options: Required<TokenizeOptions>
 ): string[] {
+	if (word.length < 2) {
+		return []
+	}
 	const res = new Set<string>()
 	const isCJK = isCJKWord(word)
-	if (word.length >= 2 && !isGibberish(word)) {
-		for (let i = 0; i < word.length - 1; i++) {
-			res.add(word.slice(i, i + 2))
+	if (!isGibberish(word)) {
+		if (word.length > 2) {
+			for (let i = 0; i < word.length - 1; i++) {
+				res.add(word.slice(i, i + 2))
+			}
+			res.add(word.slice(-2))
 		}
+		res.add(word.slice(-1))
 	}
 	if (
 		options.fuzzyCharMode === "all" ||
