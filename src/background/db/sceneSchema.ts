@@ -112,5 +112,53 @@ export const sceneSchema: IStoreSchema = {
 				}
 			]
 		},
+		{
+			id: 4,
+			name: 'shoppingScene',
+			description: 'shoppingSceneDesc',
+			isBuiltIn: true,
+			sites: [
+				{
+					title: 'taobao',
+					urlPrefix: 'taobao.com',
+				},
+				{
+					title: 'jd',
+					urlPrefix: 'jd.com',
+				},
+				{
+					title: 'amazon',
+					urlPrefix: 'amazon.com',
+				},
+				{
+					title: 'ebay',
+					urlPrefix: 'ebay.com',
+				},
+				{
+					title: 'aliExpress',
+					urlPrefix: 'aliexpress.com',
+				},
+				{
+					title: 'tmall',
+					urlPrefix: 'tmall.com',
+				},
+				{
+					title: 'pinduoduo',
+					urlPrefix: 'pinduoduo.com',
+				},
+				{
+					title: 'walmart',
+					urlPrefix: 'walmart.com',
+				},
+				{
+					title: 'bestbuy',
+					urlPrefix: 'bestbuy.com',
+				},
+				{
+					title: 'target',
+					urlPrefix: 'target.com',
+				}
+			]
+		},
 	]
 }
