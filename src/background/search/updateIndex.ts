@@ -17,6 +17,7 @@ export async function updateIndex() {
 		if (termFromId > 0) {
 			await updateTermIndex(termFromId);
 		}
+		await IndexUpdatePayload.clear();
 	} catch (e) {
 		console.error(e)
 		throw new Error(await toJson({history, new: await IndexUpdatePayload.get(), error: e.message}));
@@ -53,7 +54,6 @@ async function updateTermIndex(termFromId: number) {
 			await IndexUpdatePayload.replace({msgFromId: undefined, termFromId});
 			result = await Db.term.all(keyGt(termFromId) as any, 100)
 		}
-		await IndexUpdatePayload.clear();
 	} finally {
 		try {
 			await Search.termPrefix.endBatch();

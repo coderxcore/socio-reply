@@ -4,6 +4,7 @@ import {IMessageStore, useMessageStore} from "./IMessageStore";
 import {IImportReferencesStore, useImportReferencesStore} from "./IImportReferencesStore";
 import {IFrontStore, useFrontStore} from "./IFrontStore";
 import {ISceneStore, useSceneStore} from "./ISceneStore";
+import {IInitStore, useInitStore} from "./IInitStore";
 
 export class Store {
 
@@ -13,6 +14,11 @@ export class Store {
 	static #importReferencesStore?: IImportReferencesStore
 	static #frontStore?: IFrontStore
 	static #sceneStore?: ISceneStore;
+	static #initStore: IInitStore;
+
+	static get init(): IInitStore {
+		return this.#initStore || (this.#initStore = useInitStore());
+	}
 
 	static get scene(): ISceneStore {
 		return this.#sceneStore || (this.#sceneStore = useSceneStore());

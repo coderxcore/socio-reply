@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+import {wait} from "gs-base";
 
 export interface IUpdateProgress {
 
@@ -52,6 +53,8 @@ export interface IFrontStore extends IFrontState, IFrontGetters {
 	updateProgress(progress: IUpdateProgress): void;
 
 	hide(): void;
+
+	showMessage(msg: string, time?: number): Promise<void>;
 }
 
 export const useFrontStore: () => IFrontStore = defineStore('front', {
@@ -70,7 +73,7 @@ export const useFrontStore: () => IFrontStore = defineStore('front', {
 			return progress >= 0;
 		},
 	},
-	actions: {
+	actions: <IFrontStore>{
 		updateProgress({progress, total, base = 0, max = 100, msg}: IUpdateProgress) {
 			let calculatedProgress = 0;
 			total < 1 && (total = 1)
@@ -91,6 +94,12 @@ export const useFrontStore: () => IFrontStore = defineStore('front', {
 			this.progress = -1;
 			this.message = '';
 			this.confirm = undefined;
+		},
+		async showMessage(msg: string, time: number = 3): Promise<void> {
+			this.hide();
+			this.message = msg;
+			await wait(time * 1000);
+			this.hide();
 		}
 	}
 }) as any;

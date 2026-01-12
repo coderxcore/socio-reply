@@ -1,7 +1,7 @@
 <template>
   <router-view/>
   <front/>
-  <init />
+  <init v-if="Store.init.showInit"/>
 </template>
 
 <script lang="ts" setup>
@@ -11,10 +11,12 @@ import Front from "./view/Front.vue";
 import Init from "./view/Init.vue";
 
 onMounted(async () => {
+  await Store.init.loadInitData();
   await Store.settings.loadSettings();
   await Store.locale.loadMessages(true);
   await Store.message.loadStatus();
   await Store.scene.loadScenes();
+  // console.log({...Store.message.status})
 })
 
 

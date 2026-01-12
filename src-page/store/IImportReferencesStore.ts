@@ -25,7 +25,7 @@ export interface IImportReferencesGetter {
 }
 
 export interface IImportReferencesStore extends IImportReferencesState, IImportReferencesGetter {
-	selectFile(): Promise<void>
+	selectFile(): Promise<boolean>
 
 	updatePreview(): Promise<void>
 
@@ -57,7 +57,7 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 			try {
 				const handle = await openFileHandler({accept: '.txt'});
 				if (!handle) {
-					return;
+					return false;
 				}
 				this.loading = true;
 				this.file = await handle.getFile();
@@ -65,6 +65,7 @@ export const useImportReferencesStore: () => IImportReferencesStore = defineStor
 					await router.push({name: 'import-references'});
 				}
 				await this.updatePreview();
+				return true;
 			} catch (e) {
 			} finally {
 				this.loading = false;

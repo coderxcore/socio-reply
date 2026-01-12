@@ -6,12 +6,13 @@ export const messageSchema: IStoreSchema = {
 	name: MessageStoreName,
 	addedTimeField: {
 		name: 'added_at',
-		isIndexed:false
+		isIndexed: false
 	},
 	updatedTimeField: {
 		name: 'updated_at',
-		isIndexed:false
+		isIndexed: false
 	},
+	updatedCountField: true,
 	softDeletedField: 'deleted',
 	indexSchemas: [
 		'hash',

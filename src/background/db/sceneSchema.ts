@@ -1,5 +1,5 @@
 import {IStoreSchema} from "gs-idb-pro";
-import {IScene} from "/src-com";
+import {builtInSceneIds, IScene} from "/src-com";
 
 export const SceneStoreName = 'scene'
 
@@ -8,20 +8,20 @@ export const sceneSchema: IStoreSchema = {
 	name: SceneStoreName,
 	indexSchemas: [
 		{
-			name: SceneStoreName,
+			name: 'name',
 			unique: true
 		}
 	],
 	defaultData: <IScene[]>[
 		{
-			id: -1,
+			id: builtInSceneIds.genericScene,
 			name: 'genericScene',
 			description: 'genericSceneDesc',
 			isBuiltIn: true,
 			sites: []
 		},
 		{
-			id: 1,
+			id: builtInSceneIds.aiScene,
 			name: 'aiScene',
 			description: 'aiSceneDesc',
 			isBuiltIn: true,
@@ -53,7 +53,7 @@ export const sceneSchema: IStoreSchema = {
 			]
 		},
 		{
-			id: 2,
+			id: builtInSceneIds.socioScene,
 			name: 'socioScene',
 			description: 'socioSceneDesc',
 			isBuiltIn: true,
@@ -85,7 +85,7 @@ export const sceneSchema: IStoreSchema = {
 			]
 		},
 		{
-			id: 3,
+			id: builtInSceneIds.videoScene,
 			name: 'videoScene',
 			description: 'videoSceneDesc',
 			isBuiltIn: true,
@@ -113,9 +113,9 @@ export const sceneSchema: IStoreSchema = {
 			]
 		},
 		{
-			id: 4,
-			name: 'shoppingScene',
-			description: 'shoppingSceneDesc',
+			id: builtInSceneIds.ecommerceScene,
+			name: 'ecommerceScene',
+			description: 'ecommerceSceneDesc',
 			isBuiltIn: true,
 			sites: [
 				{

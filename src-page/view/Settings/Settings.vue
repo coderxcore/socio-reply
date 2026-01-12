@@ -18,6 +18,10 @@
     </settings-group>
     <settings-group :name="locale.dataMgr">
       <settings-row :title="locale.importData" :desc="locale.importDataDesc">
+        <icon-btn v-if="!init.isFullImported" @click="init.forceShow=true">
+          <download :size="14"/>
+          {{ locale.showImportBuiltIn }}
+        </icon-btn>
         <icon-btn @click="importData">
           <download :size="14"/>
           {{ locale.importData }}
@@ -48,7 +52,7 @@ import {Locales, themes} from "/src-com";
 import {Api} from "../../api";
 import {wait} from "gs-base";
 
-const {settings, locale, front} = Store;
+const {settings, locale, front, init} = Store;
 
 async function updateIndex() {
   front.updateProgress({progress: 0, msg: '检查更新索引中……'})
