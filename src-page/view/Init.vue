@@ -1,67 +1,65 @@
 <template>
   <div class="Init">
-    <div class="overlay">
-      <div class="container">
-        <h2>{{ locale.initTitle }}</h2>
-        <p>{{ locale.initSubtitle }}</p>
+    <div class="container">
+      <h2>{{ locale.initTitle }}</h2>
+      <p>{{ locale.initSubtitle }}</p>
 
-        <div class="content">
-          <div class="section">
-            <div class="header">
-              <label>{{ locale.selectLanguage }}</label>
-              <label class="select-all">
-                <input type="checkbox" v-model="allLanguagesSelected">
-                <span>{{ locale.selectAll }}</span>
-              </label>
-            </div>
-            <div class="checkbox-group">
-              <label v-for="lang in languages" :key="lang.value" class="checkbox-item">
-                <input
-                    type="checkbox"
-                    :value="lang.value"
-                    v-model="selectedLanguages"
-                >
-                <span class="checkbox-label">{{ lang.label }}</span>
-              </label>
-            </div>
+      <div class="content">
+        <div class="section">
+          <div class="header">
+            <label>{{ locale.selectImportLanguage }}</label>
+            <label class="select-all">
+              <input type="checkbox" v-model="allLanguagesSelected">
+              <span>{{ locale.selectAll }}</span>
+            </label>
           </div>
-
-          <div v-for="lang in selectedLanguages" :key="lang" class="section">
-            <div class="header">
-              <label>{{ getLanguageLabel(lang) }} - {{ locale.selectCategory }}</label>
-              <label class="select-all">
-                <input type="checkbox" :checked="allCategoriesSelected[lang] || false"
-                       @change="toggleSelectAllCategoriesForLanguage(lang)">
-                <span>{{ locale.selectAll }}</span>
-              </label>
-            </div>
-            <div class="checkbox-group">
-              <label v-for="category in categories" :key="`${lang}-${category.value}`" class="checkbox-item">
-                <input
-                    type="checkbox"
-                    :value="category.value"
-                    :checked="(languageCategories[lang] || []).includes(category.value)"
-                    @change="toggleCategory(lang, category.value)"
-                >
-                <span class="checkbox-label">{{ category.label }}</span>
-              </label>
-            </div>
+          <div class="checkbox-group">
+            <label v-for="lang in Locales" :key="lang" class="checkbox-item">
+              <input
+                  type="checkbox"
+                  :value="lang"
+                  v-model="selectedLanguages"
+              >
+              <span class="checkbox-label">{{ locale[lang] }}</span>
+            </label>
           </div>
-
         </div>
 
-        <div class="actions">
-          <button class="secondary import-btn" @click="onImportCustomReference">
-            {{ locale.importCustomReference }}
-          </button>
-          <div class="button-group">
-            <button class="secondary" @click="onCancel">
-              {{ locale.cancel }}
-            </button>
-            <button class="primary" @click="onConfirm">
-              {{ locale.ok }}
-            </button>
+        <div v-for="lang in selectedLanguages" :key="lang" class="section">
+          <div class="header">
+            <label>{{ locale[lang] }} - {{ locale.selectScene }}</label>
+            <label class="select-all">
+              <input type="checkbox" :checked="selectedScenes[lang] || false"
+                     @change="toggleSelectAllCategoriesForLanguage(lang)">
+              <span>{{ locale.selectAll }}</span>
+            </label>
           </div>
+          <div class="checkbox-group">
+            <label v-for="category in BuiltInSceneKeys" :key="`${lang}-${category}`" class="checkbox-item">
+              <input
+                  type="checkbox"
+                  :value="category"
+                  :checked="(languageScenes[lang] || []).includes(category)"
+                  @change="toggleCategory(lang, category)"
+              >
+              <span class="checkbox-label">{{ locale[category] }}</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button class="secondary import-btn" @click="onImportCustomReference">
+          {{ locale.importCustomReference }}
+        </button>
+        <div class="button-group">
+          <button class="secondary" @click="onCancel">
+            {{ locale.cancel }}
+          </button>
+          <button class="primary" @click="onConfirm">
+            {{ locale.ok }}
+          </button>
         </div>
       </div>
     </div>
@@ -71,56 +69,29 @@
 <script lang="ts" setup>
 import {Store} from "../store";
 import {ref, computed, watch} from "vue";
+import {BuiltInSceneKeys, Locales} from "/src-com";
 
 const {locale, settings} = Store;
 
-
-// Language options
-const languages = [
-  {value: 'zh-CN', label: locale['zh-CN']},
-  {value: 'zh-TW', label: locale['zh-TW']},
-  {value: 'en', label: locale.en},
-  {value: 'ja', label: locale.ja}
-];
-
-// Category options with formal internationalization support
-const categories = [
-  {value: 'ai_prompts', label: locale.ai_prompts},
-  {value: 'ecommerce', label: locale.ecommerce},
-  {value: 'general', label: locale.general},
-  {value: 'movie', label: locale.movie},
-  {value: 'social', label: locale.social}
-];
-
-// Selected languages
 const selectedLanguages = ref<string[]>([Store.settings.language || 'zh-CN']);
 
-// Categories per language
-const languageCategories = ref<Record<string, string[]>>({});
+const languageScenes = ref<Record<string, string[]>>({});
 
-// All categories selected state per language
-const allCategoriesSelected = ref<Record<string, boolean>>({});
+const selectedScenes = ref<Record<string, boolean>>({});
 
-// Update allCategoriesSelected state for a specific language
-const updateAllCategoriesSelectedState = (language: string) => {
-  if (!languageCategories.value[language]) {
-    languageCategories.value[language] = [];
+const updateAllSceneSelectedState = (language: string) => {
+  if (!languageScenes.value[language]) {
+    languageScenes.value[language] = [];
   }
-  const selected = languageCategories.value[language] || [];
-  allCategoriesSelected.value[language] = selected.length === categories.length && selected.length > 0;
+  const selected = languageScenes.value[language] || [];
+  selectedScenes.value[language] = selected.length === BuiltInSceneKeys.length && selected.length > 0;
 };
 
 // Initialize language categories with all categories for selected languages
 selectedLanguages.value.forEach(lang => {
-  languageCategories.value[lang] = categories.map(category => category.value);
-  updateAllCategoriesSelectedState(lang);
+  languageScenes.value[lang] = [...BuiltInSceneKeys];
+  updateAllSceneSelectedState(lang);
 });
-
-// Get language label
-const getLanguageLabel = (lang: string) => {
-  const language = languages.find(l => l.value === lang);
-  return language ? language.label : lang;
-};
 
 // Watch selectedLanguages to update allCategoriesSelected state
 watch(selectedLanguages, (newLanguages, oldLanguages) => {
@@ -128,56 +99,56 @@ watch(selectedLanguages, (newLanguages, oldLanguages) => {
   newLanguages.forEach(lang => {
     if (!oldLanguages.includes(lang)) {
       // Auto-select all categories for newly selected language
-      languageCategories.value[lang] = categories.map(category => category.value);
-      updateAllCategoriesSelectedState(lang);
+      languageScenes.value[lang] = [...BuiltInSceneKeys];
+      updateAllSceneSelectedState(lang);
     }
   });
   console.log('Language selection changed:', newLanguages);
-}, { deep: true });
+}, {deep: true});
 
 // Toggle category selection for a specific language
 const toggleCategory = (language: string, category: string) => {
-  if (!languageCategories.value[language]) {
-    languageCategories.value[language] = [];
+  if (!languageScenes.value[language]) {
+    languageScenes.value[language] = [];
   }
-  const index = languageCategories.value[language].indexOf(category);
+  const index = languageScenes.value[language].indexOf(category);
   if (index > -1) {
-    languageCategories.value[language].splice(index, 1);
+    languageScenes.value[language].splice(index, 1);
   } else {
-    languageCategories.value[language].push(category);
+    languageScenes.value[language].push(category);
   }
-  updateAllCategoriesSelectedState(language);
+  updateAllSceneSelectedState(language);
 };
 
 // Watch languageCategories to update allCategoriesSelected state
-watch(languageCategories, (newCategories, oldCategories) => {
+watch(languageScenes, (newScene, oldCategories) => {
   // Update allCategoriesSelected state for each language
-  Object.keys(newCategories).forEach(lang => {
-    updateAllCategoriesSelectedState(lang);
+  Object.keys(newScene).forEach(lang => {
+    updateAllSceneSelectedState(lang);
   });
 }, {deep: true});
 
 // Computed property for select all languages checkbox
 const allLanguagesSelected = computed({
-  get: () => selectedLanguages.value.length === languages.length && selectedLanguages.value.length > 0,
+  get: () => selectedLanguages.value.length === Locales.length && selectedLanguages.value.length > 0,
   set: (value) => toggleSelectAllLanguages(value)
 });
 
 // Toggle select all languages
 const toggleSelectAllLanguages = (value?: boolean) => {
-  const newValue = value ?? (selectedLanguages.value.length < languages.length);
-  selectedLanguages.value = newValue ? languages.map(lang => lang.value) : [];
+  const newValue = value ?? (selectedLanguages.value.length < Locales.length);
+  selectedLanguages.value = newValue ? [...Locales] : [];
 };
 
 // Toggle select all categories for a specific language
 const toggleSelectAllCategoriesForLanguage = (language: string) => {
-  if (!languageCategories.value[language]) {
-    languageCategories.value[language] = [];
+  if (!languageScenes.value[language]) {
+    languageScenes.value[language] = [];
   }
-  const currentState = allCategoriesSelected.value[language] || false;
+  const currentState = selectedScenes.value[language] || false;
   const newValue = !currentState;
-  languageCategories.value[language] = newValue ? categories.map(category => category.value) : [];
-  allCategoriesSelected.value[language] = newValue;
+  languageScenes.value[language] = newValue ? [...BuiltInSceneKeys] : [];
+  selectedScenes.value[language] = newValue;
 };
 
 // Import custom reference handler
@@ -191,7 +162,7 @@ const onConfirm = () => {
   // TODO: Implement confirm logic
   console.log('Confirm clicked with selections:', {
     languages: selectedLanguages.value,
-    languageCategories: languageCategories.value
+    languageCategories: languageScenes.value
   });
 };
 

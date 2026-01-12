@@ -1,3 +1,6 @@
+export const BuiltInSceneKeys = ['aiScene', 'ecommerceScene', 'genericScene', 'videoScene', 'socioScene'];
+
+
 export interface ISite {
 	title: string
 	urlPrefix: string
