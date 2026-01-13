@@ -5,6 +5,7 @@ import {IImportReferencesStore, useImportReferencesStore} from "./IImportReferen
 import {IFrontStore, useFrontStore} from "./IFrontStore";
 import {ISceneStore, useSceneStore} from "./ISceneStore";
 import {IInitStore, useInitStore} from "./IInitStore";
+import {IEmojiStore, useEmojiStore} from "./IEmojiStore";
 
 export class Store {
 
@@ -14,7 +15,12 @@ export class Store {
 	static #importReferencesStore?: IImportReferencesStore
 	static #frontStore?: IFrontStore
 	static #sceneStore?: ISceneStore;
-	static #initStore: IInitStore;
+	static #initStore?: IInitStore;
+	static #emojiStore?: IEmojiStore;
+
+	static get emoji(): IEmojiStore {
+		return this.#emojiStore || (this.#emojiStore = useEmojiStore());
+	}
 
 	static get init(): IInitStore {
 		return this.#initStore || (this.#initStore = useInitStore());

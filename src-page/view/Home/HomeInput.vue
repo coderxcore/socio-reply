@@ -4,9 +4,7 @@
       <smart-input v-model="message.input" @cursor:change="onCursorChange"/>
     </section>
     <footer>
-      <button class="btn-lg">
-        <smile/>
-      </button>
+      <emoji-selector @select="selectEmoji"/>
       <ul class="terms">
         <li v-for="term in message.terms" :key="term" @click="fullTerm(term)">{{ term.text }}</li>
       </ul>
@@ -18,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Save, Smile} from 'lucide-vue-next';
+import {Save} from 'lucide-vue-next';
 import SmartInput from "../../part/SmartInput.vue";
 import {Store} from "../../store";
 import {Timer} from "gs-base";
@@ -28,12 +26,21 @@ import {ISearchTerm} from "/src-com";
 import {detectChar} from "gs-tokenizer/core";
 import {Lang} from "gs-tokenizer/type";
 import {findLongest} from "/src-com/lib/findLongest";
+import EmojiSelector from "../../part/emoji/EmojiSelector.vue";
 
 const {message} = Store;
 
 const timer = new Timer();
 
 let lastChange: ICursorChangeEvent;
+
+async function selectEmoji(e) {
+  if(lastChange.end) {
+    message.input = message.input.slice(0, lastChange.end) + e + message.input.slice(lastChange.end);
+  } else {
+    message.input += e;
+  }
+}
 
 async function onCursorChange(e: ICursorChangeEvent) {
   await timer.wait(200)
@@ -66,6 +73,9 @@ function fullTerm(term: ISearchTerm) {
   }
   message.input = text;
   message.terms.length = 0;
+  if(term.termType==='emoji') {
+    Store.emoji.addRecentEmoji(Array.from(term.text)[0]);
+  }
   onCursorChange({start: text.length, end: text.length, editText: text})
 }
 
@@ -74,6 +84,5 @@ watch(() => message.input, async (input) => {
     message.terms.length = 0;
   }
 })
-
 
 </script>

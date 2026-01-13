@@ -5,6 +5,7 @@ export * from './api/IImportApi';
 export * from './api/ISceneApi';
 export * from './api/IIndexApi';
 export * from './api/ISearchApi';
+export * from './api/IDataApi';
 
 export * from "./db/ILocaleRow";
 export * from "./db/IMessage";

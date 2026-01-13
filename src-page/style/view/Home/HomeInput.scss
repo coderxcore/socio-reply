@@ -49,35 +49,37 @@
 	  }
 	}
 
-	> button {
-	  background: transparent;
-	  border: 1px solid transparent;
-	  display: flex;
-	  align-items: center;
-	  gap: 0.4rem;
-	  color: var(--color-text-secondary);
-	  border-radius: 6px;
-	  cursor: pointer;
-	  transition: all 0.2s;
-	  font-size: 12px;
-	  padding: 4px 8px;
+	&,>div{
+	  > button {
+		background: transparent;
+		border: 1px solid transparent;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: var(--color-text-secondary);
+		border-radius: 6px;
+		cursor: pointer;
+		transition: all 0.2s;
+		font-size: 12px;
+		padding: 4px 8px;
 
-	  &.btn-lg {
-		> svg {
-		  width: 16px;
+		&.btn-lg {
+		  > svg {
+			width: 16px;
+		  }
 		}
-	  }
 
-	  &:not(.btn-lg) {
-		> svg {
-		  width: 12px;
+		&:not(.btn-lg) {
+		  > svg {
+			width: 12px;
+		  }
 		}
-	  }
 
-	  &:hover, &.active {
-		background: var(--color-bg);
-		border-color: var(--color-border-active);
-		color: var(--color-primary);
+		&:hover, &.active {
+		  background: var(--color-bg);
+		  border-color: var(--color-border-active);
+		  color: var(--color-primary);
+		}
 	  }
 	}
   }

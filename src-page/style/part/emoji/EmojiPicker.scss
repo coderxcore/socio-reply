@@ -1,0 +1,88 @@
+.EmojiPicker {
+  width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.section-title {
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding: 8px 12px 4px 12px;
+  font-weight: 600;
+}
+
+.recent-grid, .emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 8px;
+}
+
+.emoji-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px 0;
+  border-radius: 4px;
+
+  &:hover {
+	background: var(--bg-hover);
+  }
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 5px 0;
+}
+
+.emoji-scroll-area {
+  min-height: 200px;
+  max-height: 280px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+	width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+	background: #e5e7eb;
+	border-radius: 2px;
+  }
+}
+
+.tab-bar {
+  display: flex;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-body);
+}
+
+.tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-top: 2px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+	background: var(--bg-hover);
+	color: var(--text-main);
+  }
+
+  &.active {
+	color: var(--primary-color);
+	border-top-color: var(--primary-color);
+	background: var(--bg-card);
+  }
+
+}

@@ -6,9 +6,9 @@ export class FileData {
 
 	static emojisDict = getEmoji
 	static #lexicon?: LexiconItem[];
-	static #emojiCategories?: any
+	static #emojiCategories?: Record<string, string[]>
 
-	static get emojiCategories() {
+	static get emojiCategories(): Record<string, string[]> {
 		return this.#emojiCategories || (this.#emojiCategories = getEmojiCategories());
 	}
 
