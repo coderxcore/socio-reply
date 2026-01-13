@@ -6,7 +6,7 @@ import './services/SceneService'
 import './services/IndexService'
 import './services/SearchService'
 import {updateIndex} from "./search/updateIndex";
-// import "../../tmp-test/test-emoji";
+import './search/searchEmoji'
 
 export default defineBackground({
 	main() {
