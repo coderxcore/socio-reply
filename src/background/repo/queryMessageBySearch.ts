@@ -8,7 +8,11 @@ export async function queryMessageBySearch(results: IResult[]): Promise<ISearche
 		const msgs: ISearchedMessage[] = [];
 		for (const result of results) {
 			const msg = await store.get(result.id) as Required<IMessage>;
-			if (msg && msg.deleted != Bool.True) {
+			if (
+				msg
+				&& msg.deleted != Bool.True
+				&& result.tokens.some(t=>msg.text.includes(t))
+			) {
 				delete msg.tokens
 				msgs.push({
 					...msg,

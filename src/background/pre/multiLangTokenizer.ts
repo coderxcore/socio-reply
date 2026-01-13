@@ -57,7 +57,7 @@ export function buildFuzzy(
 	word: string,
 	options: Required<TokenizeOptions>
 ): string[] {
-	if (word.length < 2) {
+	if (word.length < 3) {
 		return []
 	}
 	const res = new Set<string>()

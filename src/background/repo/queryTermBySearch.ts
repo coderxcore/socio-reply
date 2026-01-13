@@ -2,8 +2,6 @@ import {IResult} from "gs-search";
 import {Db} from "../db";
 import {findLongest, ISearchTerm} from "/src-com";
 
-const maxLength = 18;
-
 export async function queryTermBySearch(results: IResult[], text: string): Promise<ISearchTerm[]> {
 	return await Db.term.batchRead(async (store) => {
 		const terms: ISearchTerm[] = [];
@@ -22,10 +20,12 @@ export async function queryTermBySearch(results: IResult[], text: string): Promi
 					continue;
 				}
 			}
-			terms.push({
-				...result,
-				text: term.text,
-			});
+			if( result.tokens.some(t=>term.text.includes(t)) ) {
+				terms.push({
+					...result,
+					text: term.text,
+				} as any);
+			}
 			if (terms.length > 6) break;
 		}
 		return terms;

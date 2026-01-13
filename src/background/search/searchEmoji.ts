@@ -1,4 +1,4 @@
-import {ISearchTerm} from "../../../src-com";
+import {ISearchTerm} from "/src-com";
 import {FileData} from "../data";
 
 let lastCharMap: Map<number, string[]> | undefined;
@@ -14,9 +14,14 @@ export function searchEmoji(query: string): ISearchTerm[] {
 		return [];
 	}
 	const descArr = lastCharMap.get(lastCode)!;
-	const result = descArr.filter(desc => query.endsWith(desc));
-	return result.map(desc => [desc,descEmojiMap.get(desc)!])
-		.map(([desc,emojis]:[string,string[]]) => emojis.map(text => ({text,tokens: [desc], isEmoji: true}))).flat() as any;
+	const result = descArr.find(desc => query.endsWith(desc));
+	if (!result || !descEmojiMap.has(result)) {
+		return [];
+	}
+	return descEmojiMap.get(result)!.map(text => ({text,tokens: [result], isEmoji: true}));
+	// const result = descArr.filter(desc => query.endsWith(desc));
+	// return result.map(desc => [desc,descEmojiMap.get(desc)!])
+	// 	.map(([desc,emojis]:[string,string[]]) => emojis.map(text => ({text,tokens: [desc], isEmoji: true}))).flat();
 }
 
 function checkAndInitMap() {

@@ -4,6 +4,7 @@ import food from './emoji/food.txt?raw'
 import sport from './emoji/sport.txt?raw'
 import transport from './emoji/transport.txt?raw'
 import device from './emoji/device.txt?raw'
+import flag from './emoji/flag.txt?raw'
 
 // 定义 emoji 分类映射
 const emojiCategories = {
@@ -12,7 +13,8 @@ const emojiCategories = {
   food,
   sport,
   transport,
-  device
+  device,
+  flag
 } as const
 
 // 解析单行 emoji 数据
