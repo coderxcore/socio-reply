@@ -15,7 +15,8 @@ export function searchEmoji(query: string): ISearchTerm[] {
 	}
 	const descArr = lastCharMap.get(lastCode)!;
 	const result = descArr.filter(desc => query.endsWith(desc));
-	return result.map(desc => descEmojiMap.get(desc)!).map(text => ({text})) as any;
+	return result.map(desc => [desc,descEmojiMap.get(desc)!])
+		.map(([desc,emojis]:[string,string[]]) => emojis.map(text => ({text,tokens: [desc], isEmoji: true}))).flat() as any;
 }
 
 function checkAndInitMap() {

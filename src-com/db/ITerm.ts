@@ -9,6 +9,7 @@ export interface ITerm extends IDocument {
 	fuzzy: string[]
 }
 
-export interface ISearchTerm extends IResult {
+export interface ISearchTerm extends Partial<IResult> {
 	text: string
+	isEmoji: boolean
 }

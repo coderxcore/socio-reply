@@ -65,3 +65,7 @@
 🙂 微笑 愉快 礼貌 ほほえみ 礼儀正しい 穏やか 예의바르다 slightly smiling
 🙃 微笑 调皮 幽默 逆さまのほほえみ いたずら ユーモラス 変わった 장난 upside down
 🙄 翻白眼 无聊 无奈 白目 退屈 無念 イライラ 지루하다 어쩔 수 없 rolling eyes
+😠 生气 愤怒 怒 不满 怒り 不愉快 怒る 화가 나다 불만 angry
+😡 暴怒 愤怒 怒 不满 激しい怒り 怒る 화가 나다 불만 pouting
+🤬 咒骂 愤怒 生气 罵る 怒り 激しい 욕하다 화가 나다 angry face with symbols
+😤 哼 不满 愤怒 うぬぼれる 不満 怒る 불만 화가 나다 angry with horns
