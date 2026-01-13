@@ -1,1 +1,60 @@
 😊 微笑 开心 愉快 笑脸 愉悦 微笑み 嬉しい 楽しい 笑顔 満足 웃음 기분좋다 즐겁다 미소 만족 smile happy pleased cheerful delight
+😀 大笑 开心 快乐 笑脸 大笑み 嬉しい 楽しい 笑顔 明るい 웃음 기분좋다 행복 미소 happy smile大笑 grinning face
+😃 露齿笑 开心 快乐 笑脸 笑顔 嬉しい 楽しい 笑い 明るい 웃음 기분좋다 행복 미소 broad grin happy
+😄 开心笑 开心 快乐 笑脸 笑顔 嬉しい 楽しい 笑い 明るい 웃음 기분좋다 행복 미소 smiley happy grin
+😁 牙齿笑 开心 快乐 笑脸 笑顔 嬉しい 楽しい 笑い 歯が見える 웃음 기분좋다 행복 미소 grinning teeth happy
+😆 张嘴笑 开心 快乐 大笑 笑顔 嬉しい 楽しい 大笑い 明るい 웃음 기분좋다 행복 웃음症 grinning squinting happy
+😅 汗笑 尴尬 开心 笑脸 汗顔 嬉しい 恥ずかしい 笑い 汗 웃음 낯을 뜨다 기분좋다 웃음症 grinning sweat happy
+🤣 捧腹大笑 开心 快乐 大笑 爆笑 嬉しい 楽しい 大笑い 興奮 웃음 기분좋다 행복 웃음症 rolling on floor laughing
+😂 笑哭 开心 快乐 大笑 笑い泣き 嬉しい 楽しい 笑い 涙 웃음 기분좋다 행복 웃음症 face with tears of joy
+🙂 略微微笑 愉快 礼貌 笑脸 ほほえみ 嬉しい 礼儀正しい 笑い 穏やか 웃음 예의바르다 기분좋다 미소 slightly smiling face
+🙃 倒转微笑 调皮 幽默 笑脸 逆さまのほほえみ いたずら ユーモラス 笑い 変わった 웃음 장난 기분좋다 미소 upside down face
+😉 眨眼 调皮 幽默 笑脸 ウインク いたずら ユーモラス 笑い 軽快 웃음 장난 기분좋다 미소 winking face
+😇 天使 善良 快乐 笑脸 天使 優しい 嬉しい 笑い 純粋 웃음 착하다 행복 미소 smiling face with halo
+🥰 爱心眼 可爱 喜欢 笑脸 ハートの目 可愛い 好き 笑い 愛情深い 웃음 귀엽다 좋아 미소 smiling face with hearts
+😍 爱慕 喜欢 可爱 笑脸 愛情 好き 可愛い 笑い 熱烈 웃음 좋아하다 행복 미소 smiling face with heart eyes
+🤩 星星眼 崇拜 喜欢 笑脸 星の目 崇拝 好き 笑い 興奮 웃음 경외하다 좋아 미소 star struck
+😘 飞吻 爱 喜欢 笑脸 口づけ 愛 好き 笑い 優しい 웃음 사랑 좋아 미소 face blowing a kiss
+😗 亲吻 爱 喜欢 笑脸 キス 愛 好き 笑い 優しい 웃음 사랑 좋아 미소 kissing face
+😚 闭眼吻 爱 喜欢 笑脸 目を閉じたキス 愛 好き 笑い 優しい 웃음 사랑 좋아 미소 kissing face with closed eyes
+😙 眨眼吻 爱 喜欢 笑脸 ウインクキス 愛 好き 笑い 優しい 웃음 사랑 좋아 미소 kissing face with smiling eyes
+😋 美味 好吃 满足 笑脸 美味しい おいしい 満足 笑い 舌出し 웃음 맛있어 만족 미소 face savouring food
+😛 吐舌 调皮 幽默 笑脸 舌出し いたずら ユーモラス 笑い 軽快 웃음 장난 기분좋다 미소 face with tongue
+😜 眨眼吐舌 调皮 幽默 笑脸 ウインク舌出し いたずら ユーモラス 笑い 軽快 웃음 장난 기분좋다 미소 winking face with tongue
+🤪 搞怪 调皮 幽默 笑脸 おどけた いたずら ユーモラス 笑い 変わった 웃음 장난 기분좋다 미소 zany face
+😝 吐舌眯眼 调皮 幽默 笑脸 舌出し目つぶり いたずら ユーモラス 笑い 軽快 웃음 장난 기분좋다 미소 squinting face with tongue
+🤑 金钱眼 贪婪 富有 笑脸 金の目 欲張り 豊か 笑い 金銭 웃음 욕심 많다 부유 미소 money mouth face
+🤗 拥抱 友好 温暖 笑脸 抱擁 友好 暖かい 笑い 優しい 웃음 친절하다 따뜻 미소 hugging face
+🤭 捂嘴笑 害羞 开心 笑脸 手で口を隠して笑う 恥ずかしい 嬉しい 笑い 秘密 웃음 수줍다 기분좋다 미소 face with hand over mouth
+🤫 安静 保密 小声 笑脸 静か 秘密 小声 笑い 注意深い 웃음 조용히 비밀 미소 shushing face
+🤔 思考 疑惑 困惑 笑脸 思考 疑問 困惑 笑い 考え中 웃음 생각하다 의문 미소 thinking face
+🤐 闭嘴 保密 沉默 笑脸 口閉じ 秘密 沈黙 笑い 無言 웃음 입을 닫다 비밀 미소 zipper mouth face
+🤨 怀疑 疑惑 不信任 笑脸 疑い 疑惑 不信 笑い 懐疑的 웃음 의심하다 믿지 않 미소 face with raised eyebrow
+😐 面无表情 中性 平静 笑脸 無表情 中性 平静 笑い 冷静 웃음 무표정 중성 미소 neutral face
+😑 无语 无奈 平静 笑脸 無言 無念 平静 笑い 冷静 웃음 말없다 어쩔 수 없 미소 expressionless face
+😶 沉默 无语 平静 笑脸 沈黙 無言 平静 笑い 冷静 웃음 말없다 침묵 미소 face without mouth
+😏 得意 自信 傲慢 笑脸 得意 自信 傲慢 笑い 自慢 웃음 자랑스럽다 자신있 미소 smirking face
+😒 不满 无聊 无奈 笑脸 不満 退屈 無念 笑い 不機嫌 웃음 불만 있다 지루 미소 unamused face
+🙄 翻白眼 无聊 无奈 笑脸 白目 退屈 無念 笑い イライラ 웃음 지루하다 어쩔 수 없 미소 face with rolling eyes
+😬 紧张笑 尴尬 不安 笑脸 緊張した笑い 恥ずかしい 不安 笑い 緊張 웃음 긴장하다 어색 미소 grimacing face
+🤥 说谎 不诚实 欺骗 笑脸 嘘つき 不誠実 欺瞞 笑い 偽り 웃음 거짓말하다 불성실 미소 lying face
+😌 安心 放松 满足 笑脸 安心 リラックス 満足 笑い 穏やか 웃음 편안하다 만족 미소 relieved face
+😔 悲伤 难过 遗憾 笑脸 悲しい 寂しい 残念 笑い 憂鬱 웃음 슬프다 아쉽다 미소 pensive face
+😪 疲惫 困倦 劳累 笑脸 疲れた 眠たい 労働 笑い 倦怠 웃음 피곤하다 졸리다 미소 sleepy face
+🤤 流口水 饥饿 渴望 笑脸 よだれ 空腹 渇望 笑い 欲望 웃음 배고프다 갈망 미소 drooling face
+😴 睡觉 困倦 疲惫 笑脸 眠っている 眠たい 疲れた 笑い 休息 웃음 자다 피곤하다 미소 sleeping face
+😷 口罩 生病 防护 笑脸 マスク 病気 防護 笑い 健康 웃음 병원 마스크 미소 face with medical mask
+🤒 发烧 生病 不适 笑脸 熱 病気 不快 笑い 健康 웃음 열나다 병 나 미소 face with thermometer
+🤕 受伤 绷带 不适 笑脸 怪我 包帯 不快 笑い 健康 웃음 다치다 붕대 미소 face with head bandage
+🤢 恶心 想吐 不适 笑脸 吐き気 吐きそう 不快 笑い 健康 웃음 역겨워하다 토하 미소 nauseated face
+🤮 呕吐 恶心 不适 笑脸 嘔吐 吐き気 不快 笑い 健康 웃음 토하다 역겨워 미소 face vomiting
+🤧 打喷嚏 感冒 不适 笑脸 くしゃみ 風邪 不快 笑い 健康 웃음 재채기하다 감기 미소 sneezing face
+🥵 热 出汗 不适 笑脸 暑い 汗 不快 笑い 温度 웃음 덥다 땀 흘리 미소 hot face
+🥶 冷 发抖 不适 笑脸 寒い 震え 不快 笑い 温度 웃음 추워하다 떨다 미소 cold face
+🥴 头晕 困惑 不适 笑脸 めまい 困惑 不快 笑い 健康 웃음 어지럽다 혼란 미소 woozy face
+😵 眩晕 震惊 不适 笑脸 めまい 驚き 不快 笑い 健康 웃음 어지럽다 놀라 미소 dizzy face
+🤯 爆炸头 震惊 困惑 笑脸 爆発頭 驚き 困惑 笑い 興奮 웃음 놀라다 혼란 미소 exploding head
+🤠 牛仔 西部 开心 笑脸 カウボーイ 西部 嬉しい 笑い 風貌 웃음 카우보이 기분좋다 미소 cowboy hat face
+🥳 庆祝 派对 开心 笑脸 祝賀 パーティー 嬉しい 笑い 興奮 웃음 축하하다 기분좋다 미소 partying face
+😎 酷 自信 时尚 笑脸 クール 自信 ファッション 笑い スタイル 웃음 멋있다 자신있 미소 smiling face with sunglasses
+🤓 书呆子 聪明 好学 笑脸 ビッグネルド 賢い 勉強好き 笑い 知識 웃음 공부 잘하다 똑똑 미소 nerd face
