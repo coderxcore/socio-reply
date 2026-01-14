@@ -12,10 +12,12 @@ document.addEventListener("focusin", check, true);
 
 async function check() {
 	const el = document.activeElement as HTMLElement;
-	if (lastInputEl !== el && isEditable(el)) {
-		removeInputListeners();
-		lastInputEl = el;
-		addInputListeners();
+	if (isEditable(el)) {
+		if(lastInputEl !== el) {
+			removeInputListeners();
+			lastInputEl = el;
+			addInputListeners();
+		}
 		await sendStatus(el);
 	}
 }

@@ -5,9 +5,11 @@ import {queryMessageBySearch} from "../repo/queryMessageBySearch";
 import {searchMsg} from "../search/searchMsg";
 import {searchTerm} from "../search/searchTerm";
 import {searchEmoji} from "../search/searchEmoji";
+import {setTmpMessage} from "../input/InputStatus";
 
 setMsgMethod<ISearchService>({
 	async searchMsg(text: string): Promise<ISearchMessage[]> {
+		await setTmpMessage(text)
 		return await queryMessageBySearch(await searchMsg(text),text);
 	},
 	async searchTerm(text: string): Promise<ISearchTerm[]> {
