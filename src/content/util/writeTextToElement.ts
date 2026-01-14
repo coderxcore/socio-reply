@@ -34,12 +34,9 @@ function writeToInput(
 	const start = el.selectionStart ?? el.value.length;
 	const end   = el.selectionEnd   ?? el.value.length;
 
-	const newValue =
-		el.value.slice(0, start) +
+	el.value = el.value.slice(0, start) +
 		text +
 		el.value.slice(end);
-
-	el.value = newValue;
 
 	const pos = start + text.length;
 	el.setSelectionRange(pos, pos);

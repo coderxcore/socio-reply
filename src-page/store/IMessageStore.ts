@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {Api} from "../api";
 import {IMessage, IMessageQuery, IMessageStatus, ISearchMessage, ISearchTerm} from "/src-com";
-import {ICursorChangeEvent, IMessagePreview} from "../type";
+import {IMessagePreview} from "../type";
 import {toPreviewMessage} from "../lib/toPreviewMessage";
 
 export interface IMessageState {

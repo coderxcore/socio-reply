@@ -10,7 +10,6 @@ export function isEditable(el) {
 	if (el.isContentEditable) return true;
 
 	// 一些自定义输入框（常见于富文本/组件库）
-	if (el.getAttribute("role") === "textbox") return true;
+	return el.getAttribute("role") === "textbox";
 
-	return false;
 }
