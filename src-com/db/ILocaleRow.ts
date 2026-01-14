@@ -1,4 +1,4 @@
-import {themes} from "../api/ISettingsApi";
+import {themes} from "../api";
 
 const settingsPageKeys = [
 	'language', 'languageDesc', 'theme', 'themeDesc', 'pref',

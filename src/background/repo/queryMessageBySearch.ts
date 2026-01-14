@@ -3,7 +3,7 @@ import {IMessage, ISearchMessage} from "/src-com";
 import {Db} from "../db";
 import {Bool} from "gs-idb-basic";
 
-export async function queryMessageBySearch(results: IResult[]): Promise<ISearchMessage[]> {
+export async function queryMessageBySearch(results: IResult[], text: string): Promise<ISearchMessage[]> {
 	return await Db.message.batchRead(async store => {
 		const msgs: ISearchMessage[] = [];
 		for (const result of results) {
@@ -12,6 +12,7 @@ export async function queryMessageBySearch(results: IResult[]): Promise<ISearchM
 				msg
 				&& msg.deleted != Bool.True
 				&& result.tokens.some(t => msg.text.includes(t))
+				&& msg.text !== text
 			) {
 				delete msg.tokens
 				msgs.push({

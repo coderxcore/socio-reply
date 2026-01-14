@@ -1,11 +1,5 @@
-import './services/SettingsService'
-import './services/LocalService'
-import './services/MessageService'
-import './services/ImportService'
-import './services/SceneService'
-import './services/IndexService'
-import './services/SearchService'
-import './services/DataService'
+import './services'
+
 import {updateIndex} from "./search/updateIndex";
 
 export default defineBackground({

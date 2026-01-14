@@ -8,7 +8,7 @@ import {searchEmoji} from "../search/searchEmoji";
 
 setMsgMethod<ISearchService>({
 	async searchMsg(text: string): Promise<ISearchMessage[]> {
-		return await queryMessageBySearch(await searchMsg(text));
+		return await queryMessageBySearch(await searchMsg(text),text);
 	},
 	async searchTerm(text: string): Promise<ISearchTerm[]> {
 		const emoji = searchEmoji(text);

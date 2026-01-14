@@ -41,7 +41,9 @@ async function selectEmoji(e) {
   } else {
     message.input += e;
   }
-  await message.queryTerm(e);
+  const len = message.input.length;
+  const {start, end} = lastChange || {start: len, end: len};
+  await message.queryTerm(e, start, end);
 }
 
 async function onCursorChange(e: ICursorChangeEvent) {
@@ -52,7 +54,8 @@ async function onCursorChange(e: ICursorChangeEvent) {
     lastChange = undefined;
     return
   }
-  if (lastChange && lastChange.start === e.start && lastChange.end === e.end && lastChange.editText === editText) {
+  const {start, end} = e;
+  if (lastChange && lastChange.start === start && lastChange.end === end && lastChange.editText === editText) {
     return;
   }
   lastChange = e;
@@ -61,13 +64,14 @@ async function onCursorChange(e: ICursorChangeEvent) {
     message.terms.length = 0;
     return
   }
-  await message.queryTerm(editText);
+  await message.queryTerm(editText, start, end);
 }
 
 function fullTerm(term: ISearchTerm) {
   let text = message.input;
   const token = findLongest(term.tokens);
-  const index = text.lastIndexOf(token);
+  // todo 大小写优化
+  const {index} = text.match(new RegExp(`(${token})`, 'i'));
   if (index < 0) {
     text += term.text;
   } else {
