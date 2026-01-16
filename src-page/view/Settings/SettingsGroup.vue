@@ -1,5 +1,5 @@
 <template>
-  <div class="Settings-Group">
+  <div class="SettingsGroup">
     <h3 v-text="name"></h3>
     <ul><slot></slot></ul>
   </div>

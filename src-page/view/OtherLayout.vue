@@ -6,10 +6,10 @@
           <home/>
           <span>{{ locale.home }}</span>
         </router-link>
-        <router-link v-if="message.status.draftCount" to="/draft" :title="locale.draft" :class="{active: viewName === 'draft'}">
-          <file-text/>
-          <span>{{ locale.draft }}</span>
-        </router-link>
+<!--        <router-link v-if="message.status.draftCount" to="/draft" :title="locale.draft" :class="{active: viewName === 'draft'}">-->
+<!--          <file-text/>-->
+<!--          <span>{{ locale.draft }}</span>-->
+<!--        </router-link>-->
         <router-link v-if="message.status.historyCount" to="/history" :title="locale.history" :class="{active: viewName === 'history'}">
           <history/>
           <span>{{ locale.history }}</span>
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Home, Settings, FileText, History, BookOpen, Trash} from 'lucide-vue-next';
+import {BookOpen, History, Home, Settings, Trash} from 'lucide-vue-next';
 import {Store} from '../store'
 import {computed} from "vue";
 import {router} from "./index";

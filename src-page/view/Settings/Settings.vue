@@ -16,20 +16,34 @@
         </select>
       </settings-row>
     </settings-group>
+    <settings-group name="发言设置">
+      <settings-row title="保存设置" desc="在什么情况下保存">
+        <label>
+          最小保存长度
+          <input v-model.number="settings.minSaveLength" type="number">
+        </label>
+      </settings-row>
+      <settings-row title="是否对搜索生效" desc="是否在搜索框输入时启用发言助手">
+        <label>
+          生效
+          <input v-model="settings.applyToSearch" type="checkbox">
+        </label>
+      </settings-row>
+    </settings-group>
     <settings-group :name="locale.dataMgr">
       <settings-row :title="locale.importData" :desc="locale.importDataDesc">
         <icon-btn v-if="!init.isFullImported" @click="init.forceShow=true">
           <download :size="14"/>
           {{ locale.showImportBuiltIn }}
         </icon-btn>
-<!--        <icon-btn @click="importData">
-          <download :size="14"/>
-          {{ locale.importData }}
-        </icon-btn>
-        <icon-btn>
-          <upload :size="14"/>
-          {{ locale.exportData }}
-        </icon-btn>-->
+        <!--        <icon-btn @click="importData">
+                  <download :size="14"/>
+                  {{ locale.importData }}
+                </icon-btn>
+                <icon-btn>
+                  <upload :size="14"/>
+                  {{ locale.exportData }}
+                </icon-btn>-->
       </settings-row>
       <settings-row title="索引管理" desc="如果没有出现异常情况，请不要使用此功能">
         <icon-btn @click="updateIndex">
@@ -51,6 +65,7 @@ import {openFileHandler} from "grain-sand-web-fs";
 import {Locales, themes} from "/src-com";
 import {Api} from "../../api";
 import {wait} from "gs-base";
+import {watch} from "vue";
 
 const {settings, locale, front, init} = Store;
 
@@ -78,4 +93,11 @@ async function importData() {
   const buffer = await file.arrayBuffer()
   console.log(buffer)
 }
+
+watch(() => [settings.minSaveLength, settings.applyToSearch], async (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    await settings.saveSettings();
+  }
+})
+
 </script>

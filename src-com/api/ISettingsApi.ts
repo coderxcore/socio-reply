@@ -9,14 +9,14 @@ export interface ISettings {
 	language?: Locale
 	theme?: Theme
 	minSaveLength?: number
-	isSearchActive?: boolean
+	applyToSearch?: boolean
 }
 
 export const defaultSettings: Readonly<ISettings> = Object.freeze({
 	language: 'zh-CN',
 	theme: 'auto',
 	minSaveLength: 10,
-	isSearchActive: true
+	applyToSearch: true
 })
 
 interface ISettingsBase {

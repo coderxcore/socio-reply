@@ -4,7 +4,6 @@ import {localeStoreSchema} from "./localeStoreSchema";
 import {messageSchema, MessageStoreName} from "./messageSchema";
 import {termSchema, TermStoreName} from "./termSchema";
 import {sceneSchema} from "./sceneSchema";
-import {draftSchema, DraftStoreName} from "./draftSchema";
 
 const dbName = 'message-assistant'
 
@@ -13,12 +12,12 @@ let currentDb: IIDbPro | undefined;
 export class Db {
 
 	static locale: IDataWriter<ILocaleRow> = Db.db.store(localeStoreSchema, 'locale');
-	static draft: IDataWriter<IMessage> = Db.db.store(draftSchema);
+	// static draft: IDataWriter<IMessage> = Db.db.store(draftSchema);
 	static message: IDataWriter<IMessage> = Db.db.store(messageSchema);
 	static term: IDataWriter<ITerm> = Db.db.store(termSchema);
 	static scene: IDataWriter<IScene> = Db.db.store(sceneSchema);
 
-	static msgAndDraft: IDataOperators<ITerm, IMessage> = Db.db.stores([MessageStoreName, DraftStoreName])
+	// static msgAndDraft: IDataOperators<ITerm, IMessage> = Db.db.stores([MessageStoreName, DraftStoreName])
 
 	static termHashAndMsgHash: IDataOperators<ITerm, IMessage> = Db.db.stores([
 		{

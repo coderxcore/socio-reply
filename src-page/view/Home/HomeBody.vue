@@ -12,12 +12,22 @@
         {{ part.text }}
       </span>
     </li>
-    <li v-else-if="message.input" v-for="msg in message.searchMessages" :key="msg.id"
-        @click="message.toPreviewMessage(msg)">
-      {{ msg.text }}
+    <li
+        v-else-if="message.input" v-for="msg in message.searchMessages"
+        :key="msg.id"
+        @click="message.toPreviewMessage(msg)"
+        class="btn-row"
+    >
+      <span>{{ msg.text }}</span>
+      <button  @click.stop="message.remove('searchMessages',msg)">&times;</button>
     </li>
-    <li v-else v-for="msg in message.lastMessages" :key="msg.id" @click="message.toPreviewMessage(msg)">
-      {{ msg.text }}
+    <li
+        v-else v-for="msg in message.lastMessages" :key="msg.id"
+        @click="message.toPreviewMessage(msg)"
+        class="btn-row"
+    >
+      <span>{{ msg.text }}</span>
+      <button @click.stop="message.remove('lastMessages',msg)">&times;</button>
     </li>
   </list-panel>
 </template>

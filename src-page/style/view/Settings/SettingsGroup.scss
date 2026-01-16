@@ -1,0 +1,19 @@
+.SettingsGroup {
+  > h3 {
+	font-size: 13spx;
+	color: var(--color-text-secondary);
+	margin: 30px 0 10px;
+	font-weight: normal;
+  }
+
+  > ul {
+	background: var(--color-surface);
+	border-radius: 8px;
+	border: 1px solid var(--color-border);
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+  }
+
+}

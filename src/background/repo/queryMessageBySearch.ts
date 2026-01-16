@@ -4,6 +4,7 @@ import {Db} from "../db";
 import {Bool} from "gs-idb-basic";
 
 export async function queryMessageBySearch(results: IResult[], text: string): Promise<ISearchMessage[]> {
+	if (!results.length || !text) return [];
 	return await Db.message.batchRead(async store => {
 		const msgs: ISearchMessage[] = [];
 		for (const result of results) {

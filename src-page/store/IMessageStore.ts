@@ -24,6 +24,8 @@ export interface IMessageStore extends IMessageState {
 	loadMessage(): Promise<void>;
 
 	toPreviewMessage(msg: Partial<ISearchMessage>): void
+
+	remove(msgProp: keyof IMessageState, msg: Partial<ISearchMessage>): Promise<void>;
 }
 
 export const useMessageStore: () => IMessageStore = defineStore('message', {
@@ -69,6 +71,16 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 		},
 		toPreviewMessage(msg: Partial<ISearchMessage>) {
 			this.previewMessages = toPreviewMessage(msg, this.input);
+		},
+		async remove(msgProp: keyof IMessageState, msg: Partial<ISearchMessage>) {
+			console.log(msg)
+			const {id} = msg;
+			if (!id) return;
+			const msgs = this[msgProp] as (ISearchMessage | IMessage)[];
+			const index = msgs.findIndex(m => m.id === id);
+			if (index < 1) return;
+			msgs.splice(index, 1);
+			await Api.message.removeMessage(msg.id);
 		}
 	}
 }) as any;

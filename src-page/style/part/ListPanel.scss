@@ -49,6 +49,23 @@
 	  overflow: auto;
 	  font-size: 12px;
 	  line-height: 20px;
+	  &.btn-row{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-right: 4px;
+		> button {
+		  background: none;
+		  border: none;
+		  color: var(--color-text-main);
+		  cursor: pointer;
+		  font-size: 16px;
+		  margin: -8px 0;
+		  &:hover {
+			color: var(--color-primary);
+		  }
+		}
+	  }
 	}
   }
 

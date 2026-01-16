@@ -48,6 +48,11 @@
 		&:hover {
 		  background: var(--color-surface) !important;
 		}
+
+		&[disabled=true] {
+		  cursor: not-allowed;
+		  opacity: 0.8;
+		}
 	  }
 	}
   }
