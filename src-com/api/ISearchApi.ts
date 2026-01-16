@@ -1,6 +1,5 @@
 import {MsgMethods, RemoteMethods} from "gs-br-ext";
-import {ISearchTerm} from "../db/ITerm";
-import {ISearchMessage} from "../db/IMessage";
+import {ISearchMessage, ISearchTerm} from "../db";
 
 interface ISearchBase {
 

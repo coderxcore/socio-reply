@@ -5,6 +5,7 @@ import {Db} from "../db";
 import {isNumber} from "gs-base";
 import {IGetAllArgs} from "gs-idb-pro";
 import {Bool} from "gs-idb-basic";
+import {setTmpMessage} from "../input/InputStatus";
 
 const DefaultCount = 30;
 
@@ -39,5 +40,12 @@ setMsgMethod<IMessageService>({
 			return await Db.message.index('is_reference_deleted').all(param);
 		}
 		return await Db.message.all(param);
-	}
+	},
+	async sendMessageToContent(msg: string): Promise<void> {
+		try{
+			await setTmpMessage(msg);
+		} catch (e) {
+			console.warn(e)
+		}
+	},
 })

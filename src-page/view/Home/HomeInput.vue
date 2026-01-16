@@ -27,6 +27,8 @@ import {detectChar} from "gs-tokenizer/core";
 import {Lang} from "gs-tokenizer/type";
 import {findLongest} from "/src-com/lib/findLongest";
 import EmojiSelector from "../../part/emoji/EmojiSelector.vue";
+import {isSidePanel} from "../../lib/isSlidePanel";
+import {Api} from "../../api";
 
 const {message} = Store;
 
@@ -91,7 +93,13 @@ watch(() => message.input, async (input) => {
     return;
   }
   await msgTimer.reWait();
-  await message.queryMessage();
+  try{
+    await message.queryMessage();
+  } finally {
+    if(isSidePanel()) {
+      await Api.message.sendMessageToContent(input);
+    }
+  }
 })
 
 </script>

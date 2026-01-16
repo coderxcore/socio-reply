@@ -2,21 +2,21 @@ import {setMsgMethod, StorageSync} from "gs-br-ext";
 import {defaultSettings, ISettings, ISettingsService} from "/src-com";
 
 const SettingsKey = 'settings';
-let cache: ISettings | undefined;
+let settingsCache: ISettings | undefined;
 
 export const SettingsService: ISettingsService = Object.freeze({
 
 	async getSettings(): Promise<ISettings> {
-		return cache || (cache = {
+		return settingsCache || (settingsCache = {
 			...defaultSettings,
 			...await StorageSync.getValue(SettingsKey) as any
 		});
 	},
 
 	async setSettings(settings: Partial<ISettings>): Promise<ISettings> {
-		cache = {...cache, ...settings};
-		await StorageSync.setValue(SettingsKey, cache);
-		return cache;
+		settingsCache = {...settingsCache, ...settings};
+		await StorageSync.setValue(SettingsKey, settingsCache);
+		return settingsCache;
 	}
 })
 
