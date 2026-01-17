@@ -8,7 +8,10 @@
       <ul class="terms">
         <li v-for="term in message.terms" :key="term" @click="fullTerm(term)">{{ term.text }}</li>
       </ul>
-      <button class="btn-lg" :disabled="message.input.length<=settings.minSaveLength">
+      <button
+          class="btn-lg"
+          @click="notify.addNotification(`保存fdsafdsafdasfddafdas成功${i++}`)"
+      >
         <save/>
       </button>
     </footer>
@@ -30,7 +33,9 @@ import EmojiSelector from "../../part/emoji/EmojiSelector.vue";
 import {isSidePanel} from "../../lib/isSlidePanel";
 import {Api} from "../../api";
 
-const {message, settings} = Store;
+let i = 0;
+
+const {message, settings, notify} = Store;
 
 const termTimer = new Timer(200);
 const msgTimer = new Timer(500);

@@ -1,6 +1,7 @@
 <template>
   <router-view/>
   <front/>
+  <notify />
   <init v-if="Store.init.showInit"/>
 </template>
 
@@ -10,6 +11,7 @@ import {Store} from "./store";
 import Front from "./view/Front.vue";
 import Init from "./view/Init.vue";
 import {Api} from "./api";
+import Notify from "./part/Notify.vue";
 
 onMounted(async () => {
   await Store.init.loadInitData();

@@ -1,3 +1,59 @@
-.Notify{
+.Notify {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  padding-top: 12px;
 
+  >div {
+    cursor: pointer;
+    background-color: var(--color-surface);
+    color: var(--color-text-main);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    opacity: 0;
+    max-width: 300px;
+    word-wrap: break-word;
+    text-align: center;
+    position: relative;
+    will-change: transform, opacity;
+    /* 使用CSS变量控制动画时长 */
+    --animation-duration: 3.5s; /* 默认总时长：0.3s滑入 + 3s显示 + 0.2s淡出 */
+    /* 使用单个动画组合实现滑入和淡出效果 */
+    animation: notificationAnimation var(--animation-duration) ease-in-out forwards;
+    &:hover{
+      background-color: rgb(var(--color-surface) / 30%);
+      backdrop-filter: blur(1px);
+    }
+  }
+}
+
+@keyframes notificationAnimation {
+  /* 开始状态：隐藏在上方 */
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  /* 滑入结束：显示在正确位置（大约0.3秒） */
+  8.57% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* 保持显示状态（根据总时长动态调整） */
+  94.29% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* 淡出结束：隐藏但保持位置（大约0.2秒） */
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
 }
