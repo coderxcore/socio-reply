@@ -10,6 +10,6 @@ setMsgMethod<IDataService>({
 	},
 	async preload(): Promise<void> {
 		await searchTerm('笑')
-		await searchMsg('笑')
+		await searchMsg({text: '笑'})
 	},
 });

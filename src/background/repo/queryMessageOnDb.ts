@@ -6,22 +6,9 @@ import {isNumber} from "gs-base";
 
 const DefaultCount = 30;
 
-export async function loadMessage(query: IMessageQuery): Promise<IMessage[]> {
+export async function queryMessageOnDb(query: IMessageQuery): Promise<IMessage[]> {
 	const param: IGetAllArgs<any> = {count: DefaultCount, direction: 'prev'};
-	if (!query || Object.keys(query).length < 1) {
-		try {
-
-			return await Db.message.index('deleted').all({query: Bool.False, ...param});
-		} catch (e) {
-			console.warn(e);
-			return [];
-		}
-	}
 	if (isNumber(query.sceneId)) {
-		if (query.is_content && query.is_reference) {
-			return await Db.message.index('sceneId_deleted')
-				.all({query: [query.sceneId, Bool.False], ...param});
-		}
 		if (query.is_content) {
 			return await Db.message.index('sceneId_is_content_deleted')
 				.all({query: [query.sceneId, Bool.True, Bool.False], ...param});
@@ -30,6 +17,8 @@ export async function loadMessage(query: IMessageQuery): Promise<IMessage[]> {
 			return await Db.message.index('sceneId_reference_deleted')
 				.all({query: [query.sceneId, Bool.True, Bool.False], ...param});
 		}
+		return await Db.message.index('sceneId_deleted')
+			.all({query: [query.sceneId, Bool.False], ...param});
 	}
 	if (query.is_content) {
 		return await Db.message.index('is_content_deleted')

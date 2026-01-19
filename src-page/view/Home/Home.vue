@@ -3,7 +3,7 @@
     <header>
       <nav>
         <single-choice
-            :options="scene.scenes"
+            :options="scene.usableScenes"
             v-model="message.query.sceneId"
             :text-field="(item) => locale[item.name]"
             value-field="id"

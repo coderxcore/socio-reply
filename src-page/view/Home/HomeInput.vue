@@ -97,7 +97,7 @@ function fullTerm(term: ISearchTerm) {
 
 watch(() => message.query, async () => {
   message.terms.length = 0;
-  await message.loadMessage();
+  await message.loadMessage(500);
 }, {deep: true, immediate: true})
 
 

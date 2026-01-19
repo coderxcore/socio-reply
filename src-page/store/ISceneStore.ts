@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {IScene} from "/src-com";
+import {builtInSceneIds, IScene} from "/src-com";
 import {Api} from "../api";
 
 export interface ISceneState {
@@ -7,6 +7,7 @@ export interface ISceneState {
 }
 
 export interface ISceneGetters {
+	readonly usableScenes: IScene[]
 	readonly names: string[]
 	readonly idSceneMap: Map<number, IScene>
 	readonly urlSceneMap: Map<string, IScene>
@@ -26,6 +27,9 @@ export const useSceneStore: () => ISceneStore = defineStore('scene', {
 		};
 	},
 	getters: {
+		usableScenes({scenes}): IScene[] {
+			return scenes.filter(scene => scene.id !== builtInSceneIds.unresolvedScene);
+		},
 		names({scenes}): string[] {
 			return scenes.map(scene => scene.name);
 		},

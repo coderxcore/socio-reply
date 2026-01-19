@@ -4,7 +4,7 @@
       <label>
         <span>{{ locale.importAs }}</span>
         <single-choice
-            :options="scene.scenes"
+            :options="scene.usableScenes"
             v-model="ir.sceneId"
             :text-field="(item) => locale[item.name]"
             value-field="id"

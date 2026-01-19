@@ -38,7 +38,6 @@ export const useSettingsStore: () => ISettingsStore = defineStore('settings', {
 		async loadSettings() {
 			this.$patch(await Api.settings.getSettings());
 			this.setPageTheme();
-			console.log({...this.$state})
 		},
 		async saveSettings() {
 			await timer.reWait();

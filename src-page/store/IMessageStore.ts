@@ -21,7 +21,7 @@ export interface IMessageStore extends IMessageState, IMessageGetters {
 
 	loadStatus(): Promise<void>;
 
-	loadMessage(): Promise<void>;
+	loadMessage(delay?: number): Promise<void>;
 
 	toPreviewMessage(msg: Partial<ISearchMessage>): void
 
@@ -29,7 +29,7 @@ export interface IMessageStore extends IMessageState, IMessageGetters {
 }
 
 const termTimer = new Timer(200);
-const msgTimer = new Timer(500);
+const msgTimer = new Timer();
 
 export const useMessageStore: () => IMessageStore = defineStore('message', {
 	state: (): IMessageState => {
@@ -47,9 +47,9 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 	getters: {},
 	actions: <IMessageStore>{
 		async queryTerm(text, start, end) {
-			await termTimer.reWait();
 			this.terms.length = 0;
-			const {query:{text:input}} = this as IMessageStore;
+			await termTimer.reWait();
+			const {query: {text: input}} = this as IMessageStore;
 			this.terms = (await Api.search.searchTerm(text))
 				.filter(t => {
 					const len = t.text.length;
@@ -60,8 +60,13 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 		async loadStatus() {
 			this.status = await Api.message.messageStatus();
 		},
-		async loadMessage() {
-			await msgTimer.reWait();
+		async loadMessage(delay: number = 300) {
+			this.previewMessages.length = 0;
+			this.messages.length = 0;
+			if(!this.query.text.length) {
+				this.terms.length = 0;
+			}
+			await msgTimer.reWait(delay);
 			this.messages = await Api.message.loadMessage(this.query);
 		},
 		toPreviewMessage(msg: Partial<ISearchMessage>) {

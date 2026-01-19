@@ -1,5 +1,5 @@
 import {setMsgMethod} from "gs-br-ext";
-import {IMessage, IMessageService} from "/src-com";
+import {IMessage, IMessageQuery, IMessageService, ISearchMessage} from "/src-com";
 import {clearMessageStatusCache, messageStatus} from "../repo/messageStatus";
 import {Db} from "../db";
 import {Bool} from "gs-idb-basic";
@@ -8,12 +8,21 @@ import {updateIndex} from "../search/updateIndex";
 import {getSettings} from "./SettingsService";
 import {saveMessagePack} from "../repo/saveMessagePack";
 import {preprocessMessages} from "../pre/preprocessMessage";
-import {loadMessage} from "../repo/loadMessage";
+import {queryMessageOnDb} from "../repo/queryMessageOnDb";
+import {queryMessageBySearch} from "../repo/queryMessageBySearch";
+import {searchMsg} from "../search/searchMsg";
 
 setMsgMethod<IMessageService>({
 	clearMessageStatusCache,
 	messageStatus,
-	loadMessage,
+	async loadMessage(query: IMessageQuery): Promise<Partial<ISearchMessage>[]> {
+		if (query.text) {
+			const results = await searchMsg(query);
+			// console.log(results)
+			return await queryMessageBySearch(results, query);
+		}
+		return await queryMessageOnDb(query);
+	},
 	async sendMessageToContent(msg: string): Promise<void> {
 		try {
 			await setTmpMessage(msg);
