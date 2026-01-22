@@ -15,7 +15,7 @@ export class Db {
 	// static draft: IDataWriter<IMessage> = Db.db.store(draftSchema);
 	static message: IDataWriter<IMessage> = Db.db.store(messageSchema);
 
-	static msgDeleted: IDataReader<IMessage> = this.message.index('deleted')
+	static msgDeleted: IDataWriter<IMessage> = this.message.index('deleted',true)
 	static msgContentDeleted: IDataReader<IMessage> = this.message.index('is_content_deleted')
 	static msgReferenceDeleted: IDataReader<IMessage> = this.message.index('is_reference_deleted')
 

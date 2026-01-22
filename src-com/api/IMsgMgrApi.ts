@@ -15,11 +15,11 @@ interface IMsgMgrBase {
 
 	queryReferences(param?: IPageParam): Promise<IMessage[]>
 
-	clearTrash(): Promise<IMessage>
+	clearTrash(): Promise<void>
 
 	nativeRemove(id: number): Promise<IMessage>
 
-	saveChange(msg: IMessage): Promise<IMessage>
+	saveChange(msg: Partial<IMessage>): Promise<IMessage>
 
 }
 

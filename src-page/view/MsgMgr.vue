@@ -2,7 +2,7 @@
   <list-panel class="MsgMgr" header-sticky footer-sticky>
     <template #header>
       <template v-if="route==='trash'">
-        <icon-btn :disabled="!message.status.trashCount">
+        <icon-btn :disabled="!message.status.trashCount" @click="msgMgr.removeAllTrash()">
           <brush-cleaning style="color: brown" :size="14"/>
           清空
         </icon-btn>
@@ -21,34 +21,30 @@
     <li v-for="msg in msgMgr.filtered" :key="msg.id">
       <section v-html="formatText(msg.text)"></section>
       <footer v-if="route==='trash'">
-        <button>
-          <undo size="14"/>
-        </button>
-        <button>
+        <button @click="msgMgr.remove(msg.id,'native')">
           &times;
+        </button>
+        <button @click="msgMgr.remove(msg.id,'recover')">
+          <undo size="14"/>
         </button>
       </footer>
       <footer v-else-if="route==='references'">
-        <button>
+        <button @click="msgMgr.remove(msg.id)">
           &times;
         </button>
       </footer>
     </li>
     <template #footer>
-      <div class="space"></div>
-      <a v-if="msgMgr.param.page>1" @click="msgMgr.param.page--">上一页</a>
-      <div class="space"></div>
-      <div>{{ msgMgr.param.page }}/{{ msgMgr.totalPage }}</div>
-      <div class="space"></div>
-      <a v-if="msgMgr.param.page<msgMgr.totalPage" @click="msgMgr.param.page++">下一页</a>
-      <div class="space"></div>
+      <a :style="{visibility: msgMgr.pageNo>1?'':'hidden'}" @click="msgMgr.pageNo--">上一页</a>
+      <div>{{ msgMgr.pageNo }}/{{ msgMgr.totalPage }} ( {{ msgMgr.total }} )</div>
+      <a :style="{visibility: msgMgr.pageNo<msgMgr.totalPage?'':'hidden'}" @click="msgMgr.pageNo++">下一页</a>
     </template>
   </list-panel>
 </template>
 
 <script lang="ts" setup>
 import IconBtn from "../part/IconBtn.vue";
-import {FileDown, SearchAlert, BrushCleaning,Undo} from 'lucide-vue-next'
+import {FileDown, SearchAlert, BrushCleaning, Undo} from 'lucide-vue-next'
 import {Store} from "../store";
 import {computed, onUnmounted, watch} from "vue";
 import {router} from "./index";
@@ -63,10 +59,11 @@ onUnmounted(() => msgMgr.clear())
 
 watch(route, async (r: string) => {
   msgMgr.route = r;
+  msgMgr.pageNo = 1;
   await msgMgr.loadData()
 }, {immediate: true})
 
-watch(msgMgr.param, async () => {
+watch(() => [msgMgr.pageNo, msgMgr.pageSize], async () => {
   await msgMgr.loadData();
 }, {deep: true})
 

@@ -3,7 +3,9 @@ import {IMessage, IMsgMgrService, IPageParam} from "/src-com";
 import {Db} from "../db";
 import {Bool} from "gs-idb-basic";
 import {strToRegex} from "/src-com/lib/strToRegex";
-import {FindFn} from "gs-idb-pro";
+import {Delete, FindFn} from "gs-idb-pro";
+import {clearMessageStatusCache} from "../repo/messageStatus";
+import {Search} from "../search/Search";
 
 const DefaultPageParam: IPageParam = Object.freeze({
 	page: 1,
@@ -19,11 +21,26 @@ function createFn(regex?: string): FindFn<IMessage> | undefined {
 }
 
 setMsgMethod<IMsgMgrService>({
-	clearTrash(): Promise<IMessage> {
-		return Promise.resolve(undefined);
+	async clearTrash(): Promise<void> {
+		try {
+			await Db.msgDeleted.cursor({
+				query: Bool.True,
+				fn: () => ({modify: Delete})
+			})
+		} finally {
+			clearMessageStatusCache();
+		}
 	},
-	nativeRemove(id: number): Promise<IMessage> {
-		return Promise.resolve(undefined);
+	async nativeRemove(id: number): Promise<IMessage> {
+		try {
+			const [msg] = await Db.message.delete(id, {physical: true, returns: true}) || []
+			if (msg) {
+				await Search.message.removeDocument(msg.id)
+			}
+			return msg;
+		} finally {
+			clearMessageStatusCache();
+		}
 	},
 	queryHistory(param?: IPageParam): Promise<IMessage[]> {
 		const {page, size, regex}: IPageParam = {...DefaultPageParam, ...param};
@@ -48,7 +65,11 @@ setMsgMethod<IMsgMgrService>({
 			fn: createFn(regex)
 		});
 	},
-	saveChange(msg: IMessage): Promise<IMessage> {
-		return Promise.resolve(undefined);
+	async saveChange(msg: IMessage): Promise<IMessage> {
+		try {
+			return Db.message.change(msg);
+		} finally {
+			clearMessageStatusCache();
+		}
 	}
 })

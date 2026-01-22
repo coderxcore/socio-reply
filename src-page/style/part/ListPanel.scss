@@ -2,9 +2,7 @@
 
 .ListPanel {
   > header, > footer {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	@include m.flex();
 	padding-bottom: 6px;
 	padding-top: 6px;
 	background: var(--color-bg);
@@ -12,6 +10,7 @@
 
   > header {
 	margin-bottom: 8px;
+	justify-content: space-between;
 
 	h2 {
 	  font-size: 14px;
@@ -91,6 +90,7 @@
 	position: sticky;
 	bottom: 0;
 	padding: 6px;
+	justify-content: space-around;
 
 	> a {
 	  cursor: pointer;
