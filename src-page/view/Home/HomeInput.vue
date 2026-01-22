@@ -8,13 +8,20 @@
       <ul class="terms">
         <li v-for="term in message.terms" :key="term" @click="fullTerm(term)">{{ term.text }}</li>
       </ul>
-      <button
-          class="btn-lg"
-          :disabled="!showSaveBtn"
-          @click="savReference"
-      >
-        <plus/>
-      </button>
+      <div class="menu-wrapper">
+        <button
+            class="btn-lg"
+            :disabled="!showSaveBtn"
+            @click="showSaveMenu=!showSaveMenu"
+        >
+          <plus/>
+        </button>
+        <ul v-show="showSaveMenu">
+          <li>保存为：</li>
+          <li v-for="s of scene.usableScenes">{{ locale[s.name] }}</li>
+          <li @click="showSaveMenu=false">取消</li>
+        </ul>
+      </div>
     </footer>
   </div>
 </template>
@@ -25,7 +32,7 @@ import SmartInput from "../../part/SmartInput.vue";
 import {Store} from "../../store";
 import {isNumber, Timer} from "gs-base";
 import {ICursorChangeEvent} from "../../type";
-import {computed, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import {ISearchTerm} from "/src-com";
 import {detectChar} from "gs-tokenizer/core";
 import {Lang} from "gs-tokenizer/type";
@@ -37,13 +44,15 @@ import {countLines} from "/src-com/other/countLines";
 
 let i = 0;
 
-const {message, settings, notify} = Store;
+const {message, settings, scene, locale} = Store;
 
 const rows = computed(() => countLines(message.query.text, {min: 2, max: 10}))
 
 let lastChange: ICursorChangeEvent;
 
 const showSaveBtn = computed(() => message.query.text.length >= settings.minSaveLength && !isSidePanel())
+
+const showSaveMenu = ref(false)
 
 async function savReference() {
 
@@ -62,7 +71,6 @@ async function selectEmoji(e) {
 
 async function onCursorChange(e: ICursorChangeEvent) {
   const {editText} = e;
-  console.log(e)
   if (!editText) {
     message.terms.length = 0;
     lastChange = undefined;
@@ -74,7 +82,7 @@ async function onCursorChange(e: ICursorChangeEvent) {
   }
   lastChange = e;
   const lang = detectChar(editText.charCodeAt(editText.length - 1));
-  if (lang === Lang.WHITESPACE ) {
+  if (lang === Lang.WHITESPACE) {
     message.terms.length = 0;
     return
   }
