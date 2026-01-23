@@ -16,18 +16,21 @@
         >
           <plus/>
         </button>
-        <ul v-show="showSaveMenu">
+        <ul v-show="showSaveMenu&&!message.textInSet">
           <li>保存为：</li>
-          <li v-for="s of scene.usableScenes">{{ locale[s.name] }}</li>
+          <li v-for="s of scene.usableScenes" @click="addMessage(s.id)">{{ locale[s.name] }}</li>
           <li @click="showSaveMenu=false">取消</li>
         </ul>
       </div>
+      <button @click="copyToBord" :disabled="!message.query.text.length">
+        <files/>
+      </button>
     </footer>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {Plus} from 'lucide-vue-next';
+import {Plus, Files} from 'lucide-vue-next';
 import SmartInput from "../../part/SmartInput.vue";
 import {Store} from "../../store";
 import {isNumber, Timer} from "gs-base";
@@ -44,18 +47,25 @@ import {countLines} from "/src-com/other/countLines";
 
 let i = 0;
 
-const {message, settings, scene, locale} = Store;
+const {message, settings, scene, locale, notify} = Store;
 
 const rows = computed(() => countLines(message.query.text, {min: 2, max: 10}))
 
 let lastChange: ICursorChangeEvent;
 
-const showSaveBtn = computed(() => message.query.text.length >= settings.minSaveLength && !isSidePanel())
+const showSaveBtn = computed(() => message.query.text.length >= settings.minSaveLength && !message.textInSet)
 
 const showSaveMenu = ref(false)
 
-async function savReference() {
+async function addMessage(sceneId: number) {
+  showSaveMenu.value = false
+  await message.addMessage(sceneId);
+  notify.addNotification('已经保存参考')
+}
 
+async function copyToBord() {
+  await navigator.clipboard.writeText(message.query.text);
+  notify.addNotification('已经将内容写入剪贴板')
 }
 
 async function selectEmoji(e) {

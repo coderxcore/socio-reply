@@ -14,6 +14,9 @@ export interface IMessageState {
 }
 
 export interface IMessageGetters {
+	readonly textSet: Set<string>;
+	readonly textInSet: boolean
+	readonly candidates: ISearchMessage[]
 }
 
 export interface IMessageStore extends IMessageState, IMessageGetters {
@@ -26,6 +29,8 @@ export interface IMessageStore extends IMessageState, IMessageGetters {
 	toPreviewMessage(msg: Partial<ISearchMessage>): void
 
 	remove(msg: Partial<ISearchMessage>): Promise<void>;
+
+	addMessage(sceneId: number): Promise<void>
 }
 
 const termTimer = new Timer(200);
@@ -44,7 +49,17 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 			previewMessages: [],
 		};
 	},
-	getters: {},
+	getters: {
+		textSet({messages}: IMessageState) {
+			return new Set(messages.map(message => message.text));
+		},
+		candidates({messages, query: {text}}: IMessageState) {
+			return messages.filter(m => m.text !== text);
+		},
+		textInSet({textSet, query: {text}}: IMessageStore) {
+			return textSet.has(text)
+		},
+	},
 	actions: <IMessageStore>{
 		async queryTerm(text, start, end) {
 			this.terms.length = 0;
@@ -63,7 +78,7 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 		async loadMessage(delay: number = 300) {
 			this.previewMessages.length = 0;
 			this.messages.length = 0;
-			if(!this.query.text.length) {
+			if (!this.query.text.length) {
 				this.terms.length = 0;
 			}
 			await msgTimer.reWait(delay);
@@ -81,6 +96,15 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 			msgs.splice(index, 1);
 			await Api.message.removeMessage(msg.id);
 			await this.loadStatus();
+		},
+		async addMessage(sceneId: number): Promise<void> {
+			const {query}: IMessageStore = this;
+			await Api.message.addMessage({
+				text: query.text,
+				sceneId
+			})
+			await this.loadStatus();
+			query.text = '';
 		}
 	}
 }) as any;

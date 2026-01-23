@@ -17,7 +17,7 @@ export class Api {
 	static #proxy?: any;
 
 	static get msgMgr(): IMsgMgrApi {
-		return this.#proxy;
+		return this.#api;
 	}
 
 	static get data(): IDataApi {

@@ -90,7 +90,6 @@ export const useMsgMgrStore: () => IMsgMgrStore = defineStore('msg-mgr-store', {
 			this.filtered = this.msgs.filter(m => reg.test(m.text));
 		},
 		async remove(id: number, action?: 'native' | 'recover'): Promise<void> {
-			console.log(id, action)
 			const {msgs}: IMsgMgrState = this;
 			const i = msgs.findIndex(m => m.id === id);
 			if (i >= 0) {

@@ -16,12 +16,16 @@ setMsgMethod<IMessageService>({
 	clearMessageStatusCache,
 	messageStatus,
 	async loadMessage(query: IMessageQuery): Promise<Partial<ISearchMessage>[]> {
-		if (query.text) {
-			const results = await searchMsg(query);
-			// console.log(results)
-			return await queryMessageBySearch(results, query);
+		try{
+			if (query.text) {
+				const results = await searchMsg(query);
+				// console.log(results)
+				return await queryMessageBySearch(results, query);
+			}
+			return await queryMessageOnDb(query);
+		} catch (e) {
+			console.log(e)
 		}
-		return await queryMessageOnDb(query);
 	},
 	async sendMessageToContent(msg: string): Promise<void> {
 		try {

@@ -16,7 +16,7 @@
       </section>
     </li>
     <li
-        v-else v-for="msg in message.messages" :key="msg.id"
+        v-else v-for="msg in message.candidates" :key="msg.id"
         @click="message.toPreviewMessage(msg)"
     >
       <section v-html="formatText(msg.text)"></section>
