@@ -4,7 +4,7 @@ import {FileData} from "../data";
 let lastCharMap: Map<number, string[]> | undefined;
 let descEmojiMap: Map<string, string[]> | undefined;
 
-export function searchEmoji(query: string): ISearchTerm[] {
+export function searchSymbol(query: string): ISearchTerm[] {
 	if (!query || !query.length) {
 		return [];
 	}
@@ -19,9 +19,6 @@ export function searchEmoji(query: string): ISearchTerm[] {
 		return [];
 	}
 	return descEmojiMap.get(result)!.map(text => ({text,tokens: [result], termType:'emoji'}));
-	// const result = descArr.filter(desc => query.endsWith(desc));
-	// return result.map(desc => [desc,descEmojiMap.get(desc)!])
-	// 	.map(([desc,emojis]:[string,string[]]) => emojis.map(text => ({text,tokens: [desc], isEmoji: true}))).flat();
 }
 
 function checkAndInitMap() {

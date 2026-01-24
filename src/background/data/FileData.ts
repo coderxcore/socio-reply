@@ -1,10 +1,10 @@
 import {getLexicon, LexiconItem} from "./getLexicon";
-import {getEmoji, getEmojiCategories} from "./getEmoji";
+import {getSymbols, getEmojiCategories} from "./getSymbols";
 
 
 export class FileData {
 
-	static emojisDict = getEmoji
+	static emojisDict = getSymbols
 	static #lexicon?: LexiconItem[];
 	static #emojiCategories?: Record<string, string[]>
 

@@ -1,0 +1,116 @@
+· 点乘 点积 ドット積 ドット積 내적 dot product
+% 百分号 百分 百分比 比例 割合 割合 比率 백분율 percentage
+‰ 千分号 千分比 千分率 千分 千分比 千分率 천분율 permille
+‱ 万分号 万分比 万分率 万分 万分比 万分率 만분율 permyriad
+′ 分 分 分 分 분 minute
+″ 秒 秒 秒 秒 초 second
+° 度 度 度 度 도 degree
+⇐ 逆推出 逆蕴含 被推出 導入 導入 導入되다 implied by
+⇒ 推出 蕴含 得出 導出 導く 推出하다 implies
+⇔ 等价 等价 当且仅当 等価 等価 同値하다 equivalent
+∀ 所有 全体 全部 すべて 全て 모두 for all
+∂ 偏导数 偏微分 偏微分 偏微分 편미분 partial derivative
+∄ 不存在 不存在 没有 存在しない 存在しない 없다 does not exist
+∃ 存在 存在 有 存在 存在 있다 exists
+∅ 空集 空集 空集合 空集合 空集合 공집합 empty set
+∆ 三角形 三角形 三角 三角形 삼각形 triangle
+∆ 增量 变化量 差分 差分 差分 차분 increment
+∇ 三角形 三角形 三角 三角形 삼각形 triangle
+∇ 梯度 散度 旋度 勾配 勾配 기울기 gradient nabla
+∇· 散度 散度 発散 発散 발산 divergence
+∇× 旋度 旋度 回転 回転 회전 curl
+∇² 拉普拉斯算子 ラプラシアン ラプラシアン 라플라시안 laplacian
+∉ 不属于 不属于 不包含于 属さない 所属しない 包含しない 소속되지 않다 not element of
+∈ 属于 属于 包含于 属する 所属 包含 소속하다 element of
+∋ 包含 包含 含有 含む 含む 포함하다 contains
+∌ 不包含 不包含 不含有 含まない 含まない 포함하지 않다 not contains
+∏ 求积 乘积 累乘 積 積 곱 product
+∑ 求和 总和 累加 総和 合計 합계 summation sigma
+± 正负 正负号 误差范围 プラスマイナス 範囲 오차 범위 plus minus
+× 叉乘 叉积 クロス積 クロス積 외적 cross product
+< 小于 小于 比...小 小なり より小さい 작다 less than
+≠ 不等于 不等于 不同 不等号 不等 等しくない 異なる 같지 않다 not equal
+= 等于 等于 相同 等号 等号 同じ 等しい 같다 equals
+> 大于 大于 比...大 大なり より大きい 크다 greater than
+¬ 非 非 否定 否定 否定 否定하다 not
+∓ 负正 负正号 减加号 マイナスプラス 範囲 마이너스 플러스 minus plus
+∖ 差集 差集 差分 差集合 差集合 차집합 set difference
+∘ 复合函数 复合 合成 合成関数 合成 함수 composition
+√ 根号 平方根 开方 平方根 平方根 根 제곱근 square root
+∛ 立方根 立方根 三次根 立方根 立方根 삼차근 cube root
+∜ 四次根 四次根 四次方根 四次根 四次根 사차근 fourth root
+∝ 正比 正比 成比例 比例 比例する 比例비례 proportional
+∞ 无限 无限 无穷 無限 無限 无穷大 무한대 infinity
+∟ 直角 直角 直角 直角 직각 right angle
+∠ 角 角度 角 角度 각도 angle
+∥ 平行 平行 並行 並行 평행하다 parallel
+∧ 与 和 并且 論理積 かつ 그리고 and
+∨ 或 或 或者 論理和 または 또는 or
+∩ 交集 交集 交叉 共通集合 交集合 교집합 intersection
+∪ 并集 并集 联合 合併集合 和集合 합집합 union
+∫ 积分 积分 微积分 積分 積分 적분 integral
+∬ 二重积分 二重积分 二重積分 二重積分 이중 적분 double integral
+∭ 三重积分 三重积分 三重積分 三重積分 삼중 적분 triple integral
+∮ 曲线积分 环路积分 曲線積分 曲線積分 곡선 적분 contour integral
+∯ 曲面积分 曲面积分 曲面積分 曲面積分 곡면 적분 surface integral
+∰ 体积积分 体积积分 体積積分 体積積分 체적 적분 volume integral
+∷ 比例 比例 成比例 比例する 比例 비례 proportional
+∼ 相似 等价 相似 相似する 相似 유사하다 similar
+≃ 渐近等于 渐近等于 近似等于 漸近的に等しい 近似相等 점근적으로 같다 asymptotic to
+≅ 同构 同构 全等 同型 同型하다 동형 isomorphic
+≈ 约等于 大约 近似 約等于 近似する 近似하다 approximately equal
+≍ 渐近相等 渐近相等 漸近的に等しい 漸近的に等しい 점근적으로 같다 asymptotically equal
+≜ 定义为 定义为 定義する 定義する 정의하다 defined as
+≡ 恒等 恒等 恒等于 恒等 恒等하다 항등하다 identical
+≡ 同余 同余 剩余 合同 合同 同余하다 congruent
+≤ 小于等于 小于等于 不大于 以下 以下 以上 보다 작거나 같다 less than or equal
+≥ 大于等于 大于等于 不小于 以上 以上 以下 보다 크거나 같다 greater than or equal
+≪ 远小于 远小于 遥かに小さい 遙かに小さい 훨씬 작다 much less than
+≫ 远大于 远大于 遥かに大きい 遙かに大きい 훨씬 크다 much greater than
+⊂ 子集 子集 真子集 部分集合 部分集合 부분집합 subset of
+⊃ 超集 超集 真超集 超集合 超集合 초집합 superset of
+⊆ 子集或相等 子集或等于 部分集合または等しい 部分集合または等しい 부분집합 또는 같다 subset or equal
+⊇ 超集或相等 超集或等于 超集合または等しい 超集合または等しい 초집합 또는 같다 superset or equal
+⊊ 真子集 真子集 真部分集合 真部分集合 진 부분집합 proper subset
+⊋ 真超集 真超集 真超集合 真超集合 진 초집합 proper superset
+⊕ 异或 异或 排他的或 排他的論理和 排他的論理和 배타적 or xor
+⊕ 直和 直和 直和 直和 직접 합 direct sum
+⊖ 对称差 对称差集 対称差 対称差 대칭 차 symmetric difference
+⊗ 外积 外积 外積 外積 외적 outer product
+⊗ 张量积 张量积 テンソル積 テンソル積 텐서 곱 tensor product
+⊙ 圆 圆心 円心 円心 원심 circle
+⊢ 可证明 可证明 証明可能 証明可能 증명 가능하다 proves
+⊥ 垂直 垂直 正交 垂直 垂直 직각하다 perpendicular
+⊨ 满足 满足 滿足 充足する 充足하다 만족하다 satisfies
+⊿ 三角形 三角形 三角 三角形 삼각形 triangle
+⊿ 三角形 三角形 增量 三角形 三角 変化량 삼각形 triangle
+⏜ 弧 弧 弧 弧 호 arc
+□ 正方形 正方形 四角形 四角形 사각형 square
+△ 三角形 三角形 三角 三角形 삼각形 triangle
+○ 圆 圆形 円 円 원 circle
+◯ 圆 圆形 円 円 원 circle
+✖️ 乘号 乘 相乘 交叉 交叉 乗算 掛ける 交叉 곱하기 multiplication x
+➕ 加号 加 阳性 正号 プラス 陽性 正数 正数 더하기 양수 plus
+➖ 减号 减 阴性 负号 マイナス 陰性 负数 负数 빼기 음수 minus
+➗ 除号 除 除以 分割 割り算 割る 分割 나누기 division
+² 平方 平方 二次方 二乗 二乗 제곱 squared
+³ 立方 立方 三次方 三乗 三乗 세제곱 cubed
+ℂ 复数集 复数 複數 複素数 複素数 복소수 complex numbers
+ℂ⁺ 正复数集 正复数 正複數 正複素数 正複素数 양의 복소수 positive complex
+ℂ⁻ 负复数集 负复数 負複數 负複素数 负複素数 음의 복소수 negative complex
+ⁿ 次方 n次方 指数 累乗 累乗 지수 power
+ℕ 自然数集 自然数 自然數 自然数 自然数 자연수 natural numbers
+ℕ₀ 自然数集（含0） 自然数（含0） 自然數(含0) 自然数(0を含む) 자연수(0 포함)
+ℚ 有理数集 有理数 有理數 有理数 有理数 유리수 rational numbers
+ℚ⁺ 正有理数集 正有理数 正有理數 正有理数 正有理数 양의 유리수 positive rationals
+ℚ⁻ 负有理数集 负有理数 負有理數 负有理数 负有理数 음의 유리수 negative rationals
+ℝ 实数集 实数 實數 実数 実数 실수 real numbers
+ℝ⁺ 正实数集 正实数 正實數 正実数 正実数 양의 실수 positive reals
+ℝ⁻ 负实数集 负实数 負實數 负実数 负実数 음의 실수 negative reals
+ℤ 整数集 整数 整数 整数 整数 정수 integers
+ℤ⁺ 正整数集 正整数 正整數 正整数 正整数 양의 정수 positive integers
+ℤ⁻ 负整数集 负整数 負整數 负整数 负整数 음의 정수 negative integers
+Δ 三角形 三角形 增量 三角形 三角 変化량 삼각形 delta
+π 圆周率 派 圆周率 円周率 円周率 원주율 pi
+τ 周长率 周长率 2π タウ 円周率 tau
+φ 黄金比例 黄金分割 黄金比 黄金比 黄金比 황금비 golden ratio phi

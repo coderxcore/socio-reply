@@ -1,12 +1,13 @@
-import face from './emoji/face.txt?raw'
-import hand from './emoji/hand.txt?raw'
-import food from './emoji/food.txt?raw'
-import sport from './emoji/sport.txt?raw'
-import transport from './emoji/transport.txt?raw'
-import device from './emoji/device.txt?raw'
-import flag from './emoji/flag.txt?raw'
+import face from './symbol/face.txt?raw'
+import hand from './symbol/hand.txt?raw'
+import food from './symbol/food.txt?raw'
+import sport from './symbol/sport.txt?raw'
+import transport from './symbol/transport.txt?raw'
+import device from './symbol/device.txt?raw'
+import flag from './symbol/flag.txt?raw'
+import math from './symbol/math.txt?raw'
+import special from './symbol/special.txt?raw'
 
-// 定义 emoji 分类映射
 const emojiCategories = {
   face,
   hand,
@@ -14,10 +15,15 @@ const emojiCategories = {
   sport,
   transport,
   device,
-  flag
+  flag,
 } as const
 
-// 解析单行 emoji 数据
+const symbolCategories = {
+  ...emojiCategories,
+  math,
+  special,
+} as const
+
 function parseEmojiLine(line: string): [string, string[]] {
   const parts = line.trim().split(/\s+/)
   if (parts.length === 0) {
@@ -28,14 +34,10 @@ function parseEmojiLine(line: string): [string, string[]] {
   return [emoji, descriptions]
 }
 
-/**
- * 获取所有的emoji
- * @returns [emoji, 描述[]]
- */
-export function getEmoji(): [string, string[]][] {
+export function getSymbols(): [string, string[]][] {
   const allEmojis: [string, string[]][] = []
 
-  for (const content of Object.values(emojiCategories)) {
+  for (const content of Object.values(symbolCategories)) {
     const lines = (content as string).split(/\s*\n\s*/).filter(Boolean)
     for (const line of lines) {
       allEmojis.push(parseEmojiLine(line))
@@ -51,11 +53,9 @@ export function getEmoji(): [string, string[]][] {
  */
 export function getEmojiCategories(): Record<string, string[]> {
   const categories: Record<string, string[]> = {}
-
   for (const [category, content] of Object.entries(emojiCategories)) {
     const lines = (content as string).split(/\s*\n\s*/).filter(Boolean)
     categories[category] = lines.map(line => parseEmojiLine(line)[0])
   }
-
   return categories
 }
