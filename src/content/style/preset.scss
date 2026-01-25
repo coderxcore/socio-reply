@@ -1,0 +1,4 @@
+@use "/src-page/style/mixin/index.scss" as m;
+
+@include m.vars(host);
+@include m.reset(host);

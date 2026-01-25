@@ -15,6 +15,9 @@ export default {
 	action: {
 		default_title: "打开"
 	},
+	"web_accessible_resources": [
+		{"resources": ["content-scripts/content.css"], "matches": ["<all_urls>"]}
+	],
 	side_panel: {
 		"default_title": "",
 		"default_icon": {"16": "icons/16.png", "48": "icons/48.png"},

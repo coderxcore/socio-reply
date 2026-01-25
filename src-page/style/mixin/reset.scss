@@ -1,0 +1,45 @@
+@mixin reset($selector:'root') {
+  :#{$selector} {
+	&, body, #app, #app > div {
+	  height: 100%;
+	}
+
+	#app {
+	  overflow: hidden;
+
+	  > div {
+		overflow: auto;
+	  }
+	}
+
+	&, body {
+	  margin: 0;
+	  padding: 0;
+	}
+
+	&, & * {
+	  box-sizing: border-box;
+	  -moz-text-size-adjust: none;
+	  -ms-text-size-adjust: none;
+	  text-size-adjust: none;
+	}
+
+	ul, ul > li, dl, dt, dd, figure, figcaption, h1, h2, h3, h4, h5, h6, pre {
+	  margin: 0;
+	  padding: 0;
+	}
+
+	ul {
+	  list-style: none;
+	}
+
+	ul > li > a, dt > a, dd > a, .menu-a {
+	  text-decoration: none;
+	  display: block;
+	}
+
+	img {
+	  max-width: 100%;
+	}
+  }
+}

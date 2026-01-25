@@ -1,0 +1,4 @@
+@use "mixin/index" as m;
+
+@include m.vars();
+@include m.reset();
