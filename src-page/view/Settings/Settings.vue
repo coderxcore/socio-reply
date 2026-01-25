@@ -26,7 +26,7 @@
       <settings-row title="是否对搜索生效" desc="是否在搜索框输入时启用发言助手">
         <label>
           生效
-          <input v-model="settings.applyToSearch" type="checkbox">
+          <switch-input v-model="settings.applyToSearch"/>
         </label>
       </settings-row>
     </settings-group>
@@ -70,6 +70,7 @@ import {Locales, themes} from "/src-com";
 import {Api} from "../../api";
 import {wait} from "gs-base";
 import {watch} from "vue";
+import SwitchInput from "../../part/SwitchInput.vue";
 
 const {settings, locale, front, init} = Store;
 
