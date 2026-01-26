@@ -1,5 +1,13 @@
+const searchRegex = /search/i;
+
 export function isEditable(el) {
 	if (!el) return false;
+
+	for (const attr of ['role', 'type', 'name', 'id']) {
+		if (searchRegex.test(el.getAttribute(attr))) {
+			return false;
+		}
+	}
 
 	const tag = el.tagName?.toLowerCase();
 

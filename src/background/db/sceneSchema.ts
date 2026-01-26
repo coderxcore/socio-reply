@@ -28,28 +28,32 @@ export const sceneSchema: IStoreSchema = {
 			sites: [
 				{
 					title: 'chatgpt',
-					urlPrefix: 'chatgpt.com',
+					urlPart: 'chatgpt.com',
 				},
 				{
 					title: 'google bard',
-					urlPrefix: 'bard.google.com',
+					urlPart: 'bard.google.com',
 				},
 				{
 					title: 'gemini',
-					urlPrefix: 'gemini.google.com',
+					urlPart: 'gemini.google.com',
 				},
 				{
 					title: 'claude',
-					urlPrefix: 'claude.ai',
+					urlPart: 'claude.ai',
 				},
 				{
-					title: '文心一言',
-					urlPrefix: 'yiyan.baidu.com',
+					title: 'yiyan',
+					urlPart: 'yiyan.baidu.com',
 				},
 				{
-					title: '通义千问',
-					urlPrefix: 'tongyi.aliyun.com',
-				}
+					title: 'tongyi',
+					urlPart: 'tongyi.aliyun.com',
+				},
+				{
+					title: 'doubao',
+					urlPart: 'doubao.com/chat',
+				},
 			]
 		},
 		{
@@ -60,27 +64,27 @@ export const sceneSchema: IStoreSchema = {
 			sites: [
 				{
 					title: 'facebook',
-					urlPrefix: 'facebook.com',
+					urlPart: 'facebook.com',
 				},
 				{
 					title: 'x',
-					urlPrefix: 'x.com',
+					urlPart: 'x.com',
 				},
 				{
 					title: 'instagram',
-					urlPrefix: 'instagram.com',
+					urlPart: 'instagram.com',
 				},
 				{
 					title: 'linkedin',
-					urlPrefix: 'linkedin.com',
+					urlPart: 'linkedin.com',
 				},
 				{
 					title: 'wechat',
-					urlPrefix: 'wechat.com',
+					urlPart: 'wechat.com',
 				},
 				{
 					title: 'weibo',
-					urlPrefix: 'weibo.com',
+					urlPart: 'weibo.com',
 				}
 			]
 		},
@@ -92,23 +96,23 @@ export const sceneSchema: IStoreSchema = {
 			sites: [
 				{
 					title: 'youtube',
-					urlPrefix: 'youtube.com',
+					urlPart: 'youtube.com',
 				},
 				{
 					title: 'netflix',
-					urlPrefix: 'netflix.com',
+					urlPart: 'netflix.com',
 				},
 				{
 					title: 'twitch',
-					urlPrefix: 'twitch.tv',
+					urlPart: 'twitch.tv',
 				},
 				{
 					title: 'bilibili',
-					urlPrefix: 'bilibili.com',
+					urlPart: 'bilibili.com',
 				},
 				{
 					title: 'douyin',
-					urlPrefix: 'douyin.com',
+					urlPart: 'douyin.com',
 				}
 			]
 		},
@@ -120,43 +124,43 @@ export const sceneSchema: IStoreSchema = {
 			sites: [
 				{
 					title: 'taobao',
-					urlPrefix: 'taobao.com',
+					urlPart: 'taobao.com',
 				},
 				{
 					title: 'jd',
-					urlPrefix: 'jd.com',
+					urlPart: 'jd.com',
 				},
 				{
 					title: 'amazon',
-					urlPrefix: 'amazon.com',
+					urlPart: 'amazon.com',
 				},
 				{
 					title: 'ebay',
-					urlPrefix: 'ebay.com',
+					urlPart: 'ebay.com',
 				},
 				{
 					title: 'aliExpress',
-					urlPrefix: 'aliexpress.com',
+					urlPart: 'aliexpress.com',
 				},
 				{
 					title: 'tmall',
-					urlPrefix: 'tmall.com',
+					urlPart: 'tmall.com',
 				},
 				{
 					title: 'pinduoduo',
-					urlPrefix: 'pinduoduo.com',
+					urlPart: 'pinduoduo.com',
 				},
 				{
 					title: 'walmart',
-					urlPrefix: 'walmart.com',
+					urlPart: 'walmart.com',
 				},
 				{
 					title: 'bestbuy',
-					urlPrefix: 'bestbuy.com',
+					urlPart: 'bestbuy.com',
 				},
 				{
 					title: 'target',
-					urlPrefix: 'target.com',
+					urlPart: 'target.com',
 				}
 			]
 		}

@@ -1,6 +1,5 @@
 import {builtInSceneIds, IScene} from "/src-com";
 import {Db} from "../db";
-import {getPureUrl} from "/src-com/lib/getPureUrl";
 
 export class Scene {
 
@@ -25,9 +24,8 @@ export class Scene {
 	}
 
 	static getSceneByUrl(url: string): IScene | undefined {
-		url = getPureUrl(url);
 		const map = this.#getSiteMap();
-		const prefix = Array.from(map.keys()).find(p => url.startsWith(p));
+		const prefix = Array.from(map.keys()).find(p => url.includes(p));
 		if (prefix && map.has(prefix)) {
 			return map.get(prefix);
 		}

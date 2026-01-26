@@ -4,6 +4,7 @@ import {builtInSceneIds, IMessage, IMessageQuery, IMessageStatus, ISearchMessage
 import {IMessagePreview} from "../type";
 import {toPreviewMessage} from "../lib/toPreviewMessage";
 import {Timer} from "gs-base";
+import {queryTerm} from "../lib/queryTerm";
 
 export interface IMessageState {
 	terms: ISearchTerm[]
@@ -61,16 +62,11 @@ export const useMessageStore: () => IMessageStore = defineStore('message', {
 		},
 	},
 	actions: <IMessageStore>{
-		async queryTerm(text, start, end) {
+		async queryTerm(search, start, end) {
 			this.terms.length = 0;
 			await termTimer.reWait();
-			const {query: {text: input}} = this as IMessageStore;
-			this.terms = (await Api.search.searchTerm(text))
-				.filter(t => {
-					const len = t.text.length;
-					const txt = input.slice(Math.max(0, start - len), Math.max(end + len, t.text.length));
-					return !txt.includes(t.text);
-				});
+			const {query: {text: fullText}} = this as IMessageStore;
+			this.terms = await queryTerm(search, fullText, start, end);
 		},
 		async loadStatus() {
 			this.status = await Api.message.messageStatus();

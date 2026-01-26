@@ -7,11 +7,10 @@ export interface ISceneState {
 }
 
 export interface ISceneGetters {
-	readonly usableScenes: IScene[]
 	readonly names: string[]
 	readonly idSceneMap: Map<number, IScene>
 	readonly urlSceneMap: Map<string, IScene>
-	readonly urlPrefixes: string[]
+	readonly urlParts: string[]
 	readonly defaultScene: IScene
 }
 
@@ -28,42 +27,34 @@ export const useSceneStore: () => ISceneStore = defineStore('scene', {
 		};
 	},
 	getters: {
-		usableScenes({scenes}): IScene[] {
-			return scenes;
-		},
 		names({scenes}): string[] {
 			return scenes.map(scene => scene.name);
 		},
 		urlSceneMap({scenes}): Map<string, IScene> {
-			return new Map(scenes.flatMap(scene => scene.sites.map(site => [site.urlPrefix, scene])));
+			return new Map(scenes.flatMap(scene => scene.sites.map(site => [site.urlPart, scene])));
 		},
-		urlPrefixes({scenes}): string[] {
+		urlParts({scenes}): string[] {
 			return scenes
-				.flatMap(scene => scene.sites.map(site => site.urlPrefix))
+				.flatMap(scene => scene.sites.map(site => site.urlPart))
 				.sort((a, b) => b.length - a.length);
 		},
 		idSceneMap({scenes}): Map<number, IScene> {
 			return new Map(scenes.map(scene => [scene.id!, scene]));
 		},
-		defaultScene({idSceneMap}:ISceneGetters): IScene {
+		defaultScene({idSceneMap}: ISceneGetters): IScene {
 			return idSceneMap.get(builtInSceneIds.unspecifiedScene);
 		},
 	},
 	actions: {
 		findScenes(url: string): IScene {
-			const {urlPrefixes, urlSceneMap} = this as ISceneGetters;
-			url = url.replace(/^https?:\/\//, '');
-			for(let i=0; i<2; i++) {
-				for (const prefix of urlPrefixes) {
-					if (url.startsWith(prefix)) {
-						const scene = urlSceneMap.get(prefix);
-						if (scene) {
-							return scene;
-						}
+			const {urlParts, urlSceneMap} = this as ISceneGetters;
+			for (const prefix of urlParts) {
+				if (url.includes(prefix)) {
+					const scene = urlSceneMap.get(prefix);
+					if (scene) {
+						return scene;
 					}
 				}
-				url = url.replace(/^[^.]+\.((?:[^.]+\.)+[^.]+)/, '$1');
-				console.log(url)
 			}
 			return this.defaultScene;
 		},

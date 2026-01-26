@@ -4,7 +4,7 @@ export type BuiltInSceneKey = typeof BuiltInSceneKeys[number];
 
 export interface ISite {
 	title: string
-	urlPrefix: string
+	urlPart: string
 }
 
 export interface IScene {

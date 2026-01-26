@@ -1,26 +1,38 @@
 <template>
   <link rel="stylesheet" :href="cssHref">
-  <div id="message-assistant-app">
-    <button>测试按钮</button>
+  <div id="message-assistant-app" :class="{'dark': settings.theme === 'dark'}">
+    <button @click="test">{{ cs.pageContext.scene.name }}</button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import {onMounted} from "vue";
-import {ContentStore as Cs} from "../store";
+import {ContentStore as cs} from "../store";
 import {Api} from "/src-page/api";
+import {registerRootListener} from "../context/registerRootListener";
+
+const {settings} = cs;
 
 const cssHref = chrome.runtime.getURL('content-scripts/content.css')
 onMounted(async () => {
-  await Cs.settings.loadSettings();
-  await Cs.init.loadInitData();
-  await Cs.locale.loadLocaleTexts()
-  await Cs.scene.loadScenes();
+  try {
+    await settings.loadSettings();
+    await cs.init.loadInitData();
+    await cs.locale.loadLocaleTexts()
+    await cs.scene.loadScenes();
+    cs.pageContext.scene = cs.scene.findScenes(location.href);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    registerRootListener();
+  }
   await Api.data.preload();
-
-  console.log(Cs.scene.findScenes(location.href))
-
 })
+
+function test() {
+  // console.log(cs.pageContext.inputEl?.getBoundingClientRect())
+}
+
 </script>
 
 

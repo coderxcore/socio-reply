@@ -16,7 +16,7 @@ export const defaultSettings: Readonly<ISettings> = Object.freeze({
 	language: 'zh-CN',
 	theme: 'auto',
 	minSaveLength: 10,
-	applyToSearch: true
+	applyToSearch: false
 })
 
 interface ISettingsBase {

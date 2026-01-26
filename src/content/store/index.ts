@@ -4,6 +4,7 @@ import {IFrontStore, useFrontStore} from "/src-page/store/IFrontStore";
 import {ISceneStore, useSceneStore} from "/src-page/store/ISceneStore";
 import {IInitStore, useInitStore} from "/src-page/store/IInitStore";
 import {INotifyStore, useNotifyStore} from "/src-page/store/INotifyStore";
+import {IPageContextStore, usePageContextStore} from "./IPageContextStore";
 
 export class ContentStore {
 
@@ -13,6 +14,11 @@ export class ContentStore {
 	static #sceneStore?: ISceneStore;
 	static #initStore?: IInitStore;
 	static #notifyStore?: INotifyStore;
+	static #pageContextStore?: IPageContextStore;
+
+	static get pageContext(): IPageContextStore {
+		return this.#pageContextStore || (this.#pageContextStore = usePageContextStore());
+	}
 
 	static get notify(): INotifyStore {
 		return this.#notifyStore || (this.#notifyStore = useNotifyStore());

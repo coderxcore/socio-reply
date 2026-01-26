@@ -18,7 +18,7 @@
         </button>
         <ul v-show="showSaveMenu&&!message.textInSet">
           <li>保存为：</li>
-          <li v-for="s of scene.usableScenes" @click="addMessage(s.id)">{{ locale[s.name] }}</li>
+          <li v-for="s of scene.scenes" @click="addMessage(s.id)">{{ locale[s.name] }}</li>
           <li @click="showSaveMenu=false">取消</li>
         </ul>
       </div>
