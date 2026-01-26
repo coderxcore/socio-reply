@@ -1,7 +1,7 @@
-import {isEditable} from "../util/isEditable";
-import {getInputValue} from "../util/getInputValue";
+import {isEditable} from "./isEditable";
+import {getInputValue} from "./getInputValue";
 import {Timer} from "gs-base";
-import {Hub} from "../util/Hub";
+import {Hub} from "./Hub";
 
 const timer = new Timer(300);
 
@@ -35,11 +35,11 @@ function removeInputListeners() {
 }
 
 function compositionstart() {
-	composing = true;   // 输入法开始
+	composing = true;
 }
 
 async function compositionend() {
-	composing = false;  // 输入法结束
+	composing = false;
 	await read();
 }
 

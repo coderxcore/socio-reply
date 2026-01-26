@@ -7,16 +7,19 @@
 
 <script lang="ts" setup>
 import {onMounted} from "vue";
-import {Store} from "/src-page/store";
+import {ContentStore as Cs} from "../store";
 import {Api} from "/src-page/api";
 
 const cssHref = chrome.runtime.getURL('content-scripts/content.css')
 onMounted(async () => {
-  await Store.init.loadInitData();
-  await Store.settings.loadSettings();
-  await Store.locale.loadMessages();
-  await Store.scene.loadScenes();
+  await Cs.settings.loadSettings();
+  await Cs.init.loadInitData();
+  await Cs.locale.loadLocaleTexts()
+  await Cs.scene.loadScenes();
   await Api.data.preload();
+
+  console.log(Cs.scene.findScenes(location.href))
+
 })
 </script>
 

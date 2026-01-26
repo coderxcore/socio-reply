@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {IScene} from "/src-com";
+import {builtInSceneIds, IScene} from "/src-com";
 import {Api} from "../api";
 
 export interface ISceneState {
@@ -12,10 +12,11 @@ export interface ISceneGetters {
 	readonly idSceneMap: Map<number, IScene>
 	readonly urlSceneMap: Map<string, IScene>
 	readonly urlPrefixes: string[]
+	readonly defaultScene: IScene
 }
 
 export interface ISceneStore extends ISceneState, ISceneGetters {
-	findScenes(url: string): IScene[]
+	findScenes(url: string): IScene
 
 	loadScenes(): Promise<void>
 }
@@ -43,22 +44,28 @@ export const useSceneStore: () => ISceneStore = defineStore('scene', {
 		},
 		idSceneMap({scenes}): Map<number, IScene> {
 			return new Map(scenes.map(scene => [scene.id!, scene]));
-		}
+		},
+		defaultScene({idSceneMap}:ISceneGetters): IScene {
+			return idSceneMap.get(builtInSceneIds.unspecifiedScene);
+		},
 	},
 	actions: {
-		findScenes(url: string): IScene[] {
+		findScenes(url: string): IScene {
 			const {urlPrefixes, urlSceneMap} = this as ISceneGetters;
 			url = url.replace(/^https?:\/\//, '');
-			const scenes: IScene[] = [];
-			for (const prefix of urlPrefixes) {
-				if (url.startsWith(prefix)) {
-					const scene = urlSceneMap.get(prefix);
-					if (scene) {
-						scenes.push(scene);
+			for(let i=0; i<2; i++) {
+				for (const prefix of urlPrefixes) {
+					if (url.startsWith(prefix)) {
+						const scene = urlSceneMap.get(prefix);
+						if (scene) {
+							return scene;
+						}
 					}
 				}
+				url = url.replace(/^[^.]+\.((?:[^.]+\.)+[^.]+)/, '$1');
+				console.log(url)
 			}
-			return scenes;
+			return this.defaultScene;
 		},
 		async loadScenes(): Promise<void> {
 			this.scenes = await Api.scene.queryScenes();

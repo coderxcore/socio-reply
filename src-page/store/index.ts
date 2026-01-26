@@ -1,5 +1,5 @@
 import {ILocaleStore, useLocaleStore} from "./ILocaleStore";
-import {ISettingsStore, useSettingsStore} from "./ISettringsStore";
+import {ISettingsStore, useSettingsStore} from "./ISettingsStore";
 import {IMessageStore, useMessageStore} from "./IMessageStore";
 import {IImportReferencesStore, useImportReferencesStore} from "./IImportReferencesStore";
 import {IFrontStore, useFrontStore} from "./IFrontStore";

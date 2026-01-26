@@ -16,7 +16,7 @@ import Notify from "./part/Notify.vue";
 onMounted(async () => {
   await Store.init.loadInitData();
   await Store.settings.loadSettings();
-  await Store.locale.loadMessages(true);
+  await Store.locale.loadLocaleTexts(true);
   await Store.message.loadStatus();
   await Store.scene.loadScenes();
   await Api.data.preload();

@@ -5,24 +5,29 @@ import {LocaleObject, LocaleRecord} from "/src-com";
 export interface ILocaleState extends LocaleRecord {
 }
 
-export interface ILocaleStore extends ILocaleState {
-	loadMessages(setTitle?: boolean): Promise<void>;
+export interface ILocaleActions {
 
-	reLoadMessages(setTitle?: boolean): Promise<void>;
+	loadLocaleTexts(setTitle?: boolean): Promise<void>;
+
+	reLoadLocaleTexts(setTitle?: boolean): Promise<void>;
 
 	setPageTitle(): void;
+
+}
+
+export interface ILocaleStore extends ILocaleState, ILocaleActions {
 }
 
 export const useLocaleStore: () => ILocaleStore = () => new Proxy(defineStore('locale', {
 	state: (): ILocaleState => {
 		return {...LocaleObject};
 	},
-	actions: {
-		async loadMessages(setTitle?: boolean) {
+	actions: <ILocaleActions>{
+		async loadLocaleTexts(setTitle?: boolean) {
 			this.$patch(await Api.locale.getMessages());
 			setTitle && this.setPageTitle();
 		},
-		async reLoadMessages(setTitle?: boolean) {
+		async reLoadLocaleTexts(setTitle?: boolean) {
 			await Api.locale.clearMessageCache();
 			await this.loadMessages(setTitle);
 		},
@@ -32,7 +37,7 @@ export const useLocaleStore: () => ILocaleStore = () => new Proxy(defineStore('l
 	}
 })(), {
 	get(target, p, obj) {
-		if(p in obj||p==='__v_isRef') {
+		if (p in obj || p === '__v_isRef') {
 			return Reflect.get(target, p, obj);
 		}
 		return p;

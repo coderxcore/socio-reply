@@ -1,11 +1,11 @@
 <template>
   <div class="EmojiPicker" @click.stop>
     <div class="emoji-content">
-      <template v-if="emoji.recentEmojis.length">
+      <template v-if="emojiStore.recentEmojis.length">
         <div class="section-title">最近使用</div>
         <div class="recent-grid">
           <button
-              v-for="(emj, idx) in emoji.recentEmojis"
+              v-for="(emj, idx) in emojiStore.recentEmojis"
               :key="'rec-'+idx"
               class="emoji-btn"
               @click="selectEmoji(emj)"
@@ -20,7 +20,7 @@
         <div class="section-title">{{ categoryNames[activeTab] }}</div>
         <div class="emoji-grid">
           <button
-              v-for="(emj, idx) in emoji.emojiCategories[activeTab]"
+              v-for="(emj, idx) in emojiStore.emojiCategories[activeTab]"
               :key="activeTab+'-'+idx"
               class="emoji-btn"
               @click="selectEmoji(emj)"
@@ -43,22 +43,24 @@
         </button>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
 import {Coffee, Hand, Lightbulb, Plane, Smile, Spotlight, Flag} from 'lucide-vue-next';
-import {Store} from '../../store';
+import {useEmojiStore} from "../../store/IEmojiStore";
+import {useLocaleStore} from "../../store/ILocaleStore";
 
-const {emoji, locale} = Store;
+const emojiStore = useEmojiStore();
+const localeStore = useLocaleStore();
 
 const emit = defineEmits(['select']);
 
 const activeTab = ref<string>('face');
 
 onMounted(() => {
-  emoji.loadEmojiCategories();
+  emojiStore.loadEmojiCategories();
 });
 
 const tabIcons: any = {
@@ -84,6 +86,6 @@ const categoryNames: any = {
 
 const selectEmoji = (emj: string) => {
   emit('select', emj);
-  emoji.addRecentEmoji(emj);
+  emojiStore.addRecentEmoji(emj);
 };
 </script>

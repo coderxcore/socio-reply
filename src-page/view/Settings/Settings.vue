@@ -104,7 +104,7 @@ async function changeTheme() {
 
 async function changeLanguage() {
   await settings.saveSettings();
-  await locale.reLoadMessages(true);
+  await locale.reLoadLocaleTexts(true);
 }
 
 async function importData() {

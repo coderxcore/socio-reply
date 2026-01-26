@@ -1,4 +1,4 @@
-@use "/src-page/style/mixin/index.scss" as m;
+@use "/src-page/style/mixin/index" as m;
 
 @include m.vars(#message-assistant-app);
 @include m.reset(#message-assistant-app);
