@@ -7,10 +7,19 @@
   > ul {
 	@include m.flex(row, wrap);
 	gap: 6px;
-	padding: 0 8px;
+	padding: 0 10px;
 	border-radius: var(--radius-md);
 	background: var(--color-surface);
 	box-shadow: var(--shadow-md);
+	border: solid 1px transparent;
+	outline: none;
+	&:focus {
+	  border-color: var(--color-border-active);
+	}
+	//
+	//&:focus-within {
+	//  border-color: var(--color-border);
+	//}
 
 	> li {
 	  border-radius: var(--radius-md);
@@ -22,6 +31,11 @@
 	  font-size: 12px;
 	  line-height: 20px;
 	  cursor: pointer;
+	  outline: none;
+	  padding: 0 2px;
+	  //&:focus {
+		//border-color: var(--color-border-active);
+	  //}
 	}
   }
 }

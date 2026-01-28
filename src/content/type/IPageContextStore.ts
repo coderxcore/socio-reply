@@ -7,6 +7,8 @@ export interface IPageContextState {
 	inputItem?: IInputItem
 	terms: ISearchTerm[]
 	inputPoint?: IPoint
+	tabStatus?: 1 | 2
+	tabTime?: number
 }
 
 export interface IPageContextGetters {
@@ -20,7 +22,7 @@ export interface IPageContextActions {
 
 	changeText(text: string): Promise<void>
 
-	fullTerm(term: ISearchTerm):Promise<void>
+	fullTerm(term: ISearchTerm): Promise<void>
 }
 
 export interface IPageContextStore extends IPageContextState, IPageContextGetters, IPageContextActions {

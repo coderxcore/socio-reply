@@ -5,7 +5,7 @@ import {queryTerm} from "/src-page/lib/queryTerm";
 import {getCaretPoint} from "../../lib/getCaretPoint";
 import {getSafeLineHeight} from "../../lib/getSafeLineHeight";
 import {writeInput} from "../../lib/writeInput";
-import {getTermText} from "../../../../src-com/lib/getTermText";
+import {getTermText} from "/src-com/lib/getTermText";
 
 
 export const usePageContextStore: () => IPageContextStore = defineStore('page-context-store', {
@@ -14,7 +14,9 @@ export const usePageContextStore: () => IPageContextStore = defineStore('page-co
 			scene: {id: builtInSceneIds.unspecifiedScene} as IScene,
 			inputItem: undefined,
 			terms: [],
-			inputPoint: undefined
+			inputPoint: undefined,
+			tabStatus: undefined,
+			tabTime: undefined
 		};
 	},
 	getters: {

@@ -1,7 +1,10 @@
 <template>
-  <div class="TermList" v-if="visible" ref="termList" :style="position">
-    <ul>
-      <li v-for="term in cxt.terms" :key="term.id" @click="cxt.fullTerm(term)">{{ term.text }}</li>
+  <div class="TermList" v-if="visible" ref="termListRef" :style="position">
+    <ul tabindex="0" ref="ulRef">
+      <li v-for="(term,i) in cxt.terms" :key="term.id" @click="cxt.fullTerm(term)">
+        {{ cxt.tabStatus === 1 ? `${i + 1}. ` : '' }}
+        {{ term.text }}
+      </li>
     </ul>
   </div>
 </template>
@@ -14,6 +17,7 @@ import {IPosition} from "/src-page/type";
 import {Timer} from "gs-base";
 
 const termListRef = ref<HTMLDivElement>(null);
+const ulRef = ref<HTMLUListElement>(null);
 
 const {pageContext: cxt} = cs
 
@@ -27,6 +31,12 @@ watch(() => cxt.inputPoint, async () => {
   await timer.reWait();
   position.value = calcPosition();
 }, {immediate: true})
+
+watch(() => cxt.tabTime,  async () => {
+  console.log(cxt.tabStatus)
+  if (cxt.tabStatus !== 1 || !visible) return;
+  ulRef.value?.focus();
+})
 
 function calcPosition(): IPosition {
   const {inputPoint: p, lineHeight: lh} = cxt

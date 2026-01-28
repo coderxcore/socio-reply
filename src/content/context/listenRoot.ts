@@ -6,7 +6,9 @@ let lastInputEl: HTMLElement | undefined, lastEl: HTMLElement | undefined;
 
 const timer = new Timer(20);
 
-export function registerRootListener() {
+export const rootEl = document.createElement('message-assistant');
+
+export function listenRoot() {
 	check().then(console.warn)
 	document.body.addEventListener("focusin", check, true);
 }
@@ -15,6 +17,10 @@ async function check() {
 	await timer.reWait()
 	const el = document.activeElement as HTMLElement;
 	if (el === lastEl) {
+		return;
+	}
+	console.log(el)
+	if(el===rootEl){
 		return;
 	}
 	lastEl = el;

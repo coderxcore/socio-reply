@@ -3,15 +3,15 @@ import {createApp} from 'vue';
 import App from './App.vue';
 import {createPinia} from 'pinia'
 import {Api} from "/src-page/api";
+import {rootEl} from "../context/listenRoot";
 
 const app = createApp(App)
 	.use(createPinia());
 
-const rootContainer = document.createElement('message-assistant');
-document.documentElement.appendChild(rootContainer);
+document.documentElement.appendChild(rootEl);
 
 const rootDiv = document.createElement('div');
-rootContainer.attachShadow({mode: 'open'}).appendChild(rootDiv);
+rootEl.attachShadow({mode: 'open'}).appendChild(rootDiv);
 
 app.mount(rootDiv);
 

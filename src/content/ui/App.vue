@@ -7,13 +7,15 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import {ContentStore as cs} from "./store";
 import {Api} from "/src-page/api";
-import {registerRootListener} from "../context/registerRootListener";
+import {listenRoot} from "../context/listenRoot";
 import TermList from "./view/TermList.vue";
 
 const {settings, pageContext: cxt} = cs;
+
+const appEl = ref<HTMLDivElement>(null);
 
 const cssHref = chrome.runtime.getURL('content-scripts/content.css')
 onMounted(async () => {
@@ -26,13 +28,15 @@ onMounted(async () => {
   } catch (e) {
     console.error(e);
   } finally {
-    registerRootListener();
+    listenRoot();
   }
   await Api.data.preload();
 })
 
 function test() {
+  console.log(document.activeElement)
   // console.log(cs.pageContext.inputEl?.getBoundingClientRect())
+
 }
 
 </script>
