@@ -1,18 +1,22 @@
-const searchRegex = /search|password/i;
+// const searchRegex = /search|password/i;
+const notTypeRegex = /button|checkbox|file|hidden|image|radio|reset|submit/i;
 
 export function isEditable(el) {
 	if (!el) return false;
-
-	for (const attr of ['role', 'type', 'name', 'id']) {
-		if (searchRegex.test(el.getAttribute(attr))) {
-			return false;
-		}
-	}
+	//
+	// for (const attr of ['role', 'type', 'name', 'id']) {
+	// 	if (searchRegex.test(el.getAttribute(attr))) {
+	// 		return false;
+	// 	}
+	// }
 
 	const tag = el.tagName?.toLowerCase();
 
-	// 原生表单
-	if (tag === "input" || tag === "textarea") return true;
+	if (tag === "textarea") return true;
+
+	if (tag === "input") {
+		return !notTypeRegex.test(el.type);
+	}
 
 	// 可编辑元素
 	if (el.isContentEditable) return true;

@@ -1,9 +1,9 @@
 import {IPoint} from "../type";
 
-export function getCaretPoint(el: HTMLElement):IPoint {
+export function getCaretPoint(el: HTMLElement): IPoint {
 	if (!("selectionStart" in el)) {
 		const sel = window.getSelection();
-		if (!sel || !sel.rangeCount) return { x: 0, y: 0 };
+		if (!sel || !sel.rangeCount) return {x: 0, y: 0};
 
 		const range = sel.getRangeAt(0).cloneRange();
 		range.collapse(true);
@@ -23,7 +23,6 @@ export function getCaretPoint(el: HTMLElement):IPoint {
 		};
 	}
 
-	// input / textarea
 	const input = el as HTMLInputElement | HTMLTextAreaElement;
 	const pos = input.selectionStart ?? 0;
 
@@ -80,5 +79,5 @@ export function getCaretPoint(el: HTMLElement):IPoint {
 
 	div.remove();
 
-	return { x, y };
+	return {x, y};
 }

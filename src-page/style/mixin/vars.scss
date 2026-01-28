@@ -1,5 +1,9 @@
 @mixin vars($selector:':root') {
   #{$selector} {
+
+	--radius-md: 6px;
+	--radius-lg: 16px;
+
 	&:not(.dark) {
 	  --color-bg: #f8f9fb;
 	  --color-bottom-bg: #f8f9fb;
@@ -12,8 +16,6 @@
 	  --color-danger: #ef4444;
 	  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 	  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
-	  --radius-md: 6px;
-	  --radius-lg: 16px;
 	  --color-card-hover: #f9fafb;
 	  --color-overlay: rgba(0, 0, 0, 0.5);
 	}

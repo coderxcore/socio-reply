@@ -1,7 +1,7 @@
 <template>
   <div class="TermList" v-if="visible" ref="termList" :style="position">
     <ul>
-      <li v-for="term in cxt.terms" :key="term.id">{{ term.text }}</li>
+      <li v-for="term in cxt.terms" :key="term.id" @click="cxt.fullTerm(term)">{{ term.text }}</li>
     </ul>
   </div>
 </template>
@@ -23,18 +23,18 @@ const position = ref<IPosition>()
 
 const timer = new Timer(10);
 
-watch(() => cxt.terms.length, async (len) => {
+watch(() => cxt.inputPoint, async () => {
   await timer.reWait();
-  position.value = calcPosition(len);
+  position.value = calcPosition();
 }, {immediate: true})
 
-function calcPosition(len: number): IPosition {
+function calcPosition(): IPosition {
   const {inputPoint: p, lineHeight: lh} = cxt
   if (!p) {
     return {top: `0px`, left: `0px`}
   }
   let {x, y} = p
-  if (!len || !termListRef.value) {
+  if (!termListRef.value) {
     return {top: `${y + lh}px`, left: `${x}px`}
   }
   const {innerWidth: ww, innerHeight: wh} = window;

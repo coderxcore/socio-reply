@@ -1,3 +1,5 @@
+const Regex = /placeholder/i
+
 export function getInputValue(el: HTMLElement & any) {
 	if (!el) return null;
 	if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
@@ -12,9 +14,13 @@ export function getInputValue(el: HTMLElement & any) {
 	return '';
 }
 
-function getContentEditableValue(el) {
-	// 保留用户可见文本
+function getContentEditableValue(el: HTMLElement & any) {
+	el = el.cloneNode(true);
+	for (const c of el.querySelectorAll('*') as HTMLElement[]) {
+		if (Regex.test(c.className) || c.getAttributeNames().some(n => Regex.test(n))) {
+			c.remove();
+			console.log(c)
+		}
+	}
 	return el.innerText;
-	// 如果你要原始结构：
-	// return el.innerHTML;
 }

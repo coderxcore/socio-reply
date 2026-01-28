@@ -15,7 +15,12 @@ export interface IPageContextGetters {
 }
 
 export interface IPageContextActions {
+
 	queryTerm(search: string, start: number, end: number): Promise<void>;
+
+	changeText(text: string): Promise<void>
+
+	fullTerm(term: ISearchTerm):Promise<void>
 }
 
 export interface IPageContextStore extends IPageContextState, IPageContextGetters, IPageContextActions {

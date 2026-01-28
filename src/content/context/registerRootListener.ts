@@ -7,7 +7,8 @@ let lastInputEl: HTMLElement | undefined, lastEl: HTMLElement | undefined;
 const timer = new Timer(20);
 
 export function registerRootListener() {
-	document.addEventListener("focusin", check, true);
+	check().then(console.warn)
+	document.body.addEventListener("focusin", check, true);
 }
 
 async function check() {

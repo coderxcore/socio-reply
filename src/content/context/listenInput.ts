@@ -1,13 +1,11 @@
-import {Timer} from "gs-base";
-
 import {ContentStore as cs} from "../ui/store";
 import {getInputValue} from "../lib/getInputValue";
-import {getSelectionRange} from "/src-page/lib/getSelectionRange";
+import {readInput} from "./readInput";
 
-const arrowReg = /^Arrow/
-const timer = new Timer(200);
+const arrowReg = /^(Arrow|Backspace)/i
 let composing = false;
 let eventAdded = false;
+let lastValue: string
 
 const idMap = new WeakMap<Element, number>()
 
@@ -29,21 +27,23 @@ export function listenInput(inputEl?: HTMLElement) {
 function addInputListeners() {
 	if (eventAdded) return;
 	eventAdded = true;
-	document.addEventListener("compositionstart", compositionstart);
-	document.addEventListener("compositionend", compositionend);
-	document.addEventListener("input", onInput);
-	document.addEventListener("click", onInput);
-	document.addEventListener("keyup", onkeyup);
+	document.body.addEventListener("compositionstart", compositionstart, true);
+	document.body.addEventListener("compositionend", compositionend, true);
+	document.body.addEventListener("input", onInput, true);
+	document.body.addEventListener("click", onInput, true);
+	document.body.addEventListener("keyup", onkeyup, true);
+	window.addEventListener('resize', onInput, true);
 }
 
 function removeInputListeners() {
 	if (!eventAdded) return;
 	eventAdded = false;
-	document.removeEventListener("compositionstart", compositionstart);
-	document.removeEventListener("compositionend", compositionend);
-	document.removeEventListener("input", onInput);
-	document.removeEventListener("click", onInput);
-	document.removeEventListener("keyup", onkeyup);
+	document.body.removeEventListener("compositionstart", compositionstart);
+	document.body.removeEventListener("compositionend", compositionend);
+	document.body.removeEventListener("input", onInput);
+	document.body.removeEventListener("click", onInput);
+	document.body.removeEventListener("keyup", onkeyup);
+	window.removeEventListener('resize', onInput);
 }
 
 function compositionstart() {
@@ -53,37 +53,21 @@ function compositionstart() {
 
 async function compositionend() {
 	composing = false;
-	await read();
+	lastValue = await readInput();
 }
 
-function onInput() {
-	if (!composing) read().catch(console.warn);
+async function onInput() {
+	if (!composing) lastValue = await readInput()
 }
 
 function onkeyup(e: KeyboardEvent) {
-	if(arrowReg.test(e.code)) {
-		onInput();
+	if (e.code === 'Tab') {
+		console.log('完成')
+		setTimeout(() => console.log(cs.pageContext.el), 100);
+	} else if (!lastValue || lastValue.length < 3 || arrowReg.test(e.code)) {
+		onInput().catch(console.warn);
 	}
-}
-
-let lastStart: number, lastEnd: number, lastValue: string;
-
-async function read() {
-	await timer.reWait();
-	const {pageContext: cxt} = cs
-	const el = cxt.el;
-	if (!el) return;
-	const value = cxt.inputItem.text = getInputValue(el);
-	const {start, end} = getSelectionRange(el);
-	if (lastStart != start || lastEnd != end) {
-		lastStart = start
-		lastEnd = end
-		const search = start === end ? value.slice(0, start) : value.slice(start, end)
-		await cxt.queryTerm(search, start, end)
-	}
-	if (value != null && value !== lastValue) {
-		await timer.reWait(100);
-		lastValue = value;
-		console.log("当前输入值:", value);
-	}
+	// else {
+	// 	console.log(lastValue, e.code)
+	// }
 }
