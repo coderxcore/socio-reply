@@ -1,6 +1,6 @@
-import {isEditable} from "../util/isEditable";
+import {isEditable} from "../lib/isEditable";
 import {Timer} from "gs-base";
-import {startListenerInput} from "./startListenerInput";
+import {listenInput} from "./listenInput";
 
 let lastInputEl: HTMLElement | undefined, lastEl: HTMLElement | undefined;
 
@@ -22,5 +22,5 @@ async function check() {
 	} else {
 		lastInputEl = undefined;
 	}
-	startListenerInput(lastInputEl);
+	listenInput(lastInputEl);
 }

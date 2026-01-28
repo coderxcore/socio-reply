@@ -1,0 +1,27 @@
+@use "/src-page/style/mixin/index" as m;
+
+#message-assistant-app > .TermList {
+  position: absolute;
+  @include m.flex();
+
+  > ul {
+	@include m.flex(row, wrap);
+	gap: 3px;
+	padding: 0 6px;
+	border-radius: var(--radius-md);
+	background: var(--color-surface);
+	box-shadow: var(--shadow-md);
+
+	> li {
+	  border-radius: var(--radius-md);
+	  border: 1px solid transparent;
+	  transition: all 0.2s ease;
+	  word-wrap: break-word;
+	  word-break: break-word;
+	  overflow: auto;
+	  font-size: 12px;
+	  line-height: 20px;
+	  cursor: pointer;
+	}
+  }
+}

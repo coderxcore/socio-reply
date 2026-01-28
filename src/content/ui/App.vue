@@ -1,17 +1,19 @@
 <template>
   <link rel="stylesheet" :href="cssHref">
   <div id="message-assistant-app" :class="{'dark': settings.theme === 'dark'}">
-    <button @click="test">{{ cs.pageContext.scene.name }}</button>
+    <button @click="test" v-if="cxt.el">{{ cxt.inputPoint }}</button>
+    <term-list/>
   </div>
 </template>
 
 <script lang="ts" setup>
 import {onMounted} from "vue";
-import {ContentStore as cs} from "../store";
+import {ContentStore as cs} from "./store";
 import {Api} from "/src-page/api";
 import {registerRootListener} from "../context/registerRootListener";
+import TermList from "./view/TermList.vue";
 
-const {settings} = cs;
+const {settings, pageContext: cxt} = cs;
 
 const cssHref = chrome.runtime.getURL('content-scripts/content.css')
 onMounted(async () => {
@@ -20,7 +22,7 @@ onMounted(async () => {
     await cs.init.loadInitData();
     await cs.locale.loadLocaleTexts()
     await cs.scene.loadScenes();
-    cs.pageContext.scene = cs.scene.findScenes(location.href);
+    cxt.scene = cs.scene.findScenes(location.href);
   } catch (e) {
     console.error(e);
   } finally {

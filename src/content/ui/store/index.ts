@@ -4,7 +4,8 @@ import {IFrontStore, useFrontStore} from "/src-page/store/IFrontStore";
 import {ISceneStore, useSceneStore} from "/src-page/store/ISceneStore";
 import {IInitStore, useInitStore} from "/src-page/store/IInitStore";
 import {INotifyStore, useNotifyStore} from "/src-page/store/INotifyStore";
-import {IPageContextStore, usePageContextStore} from "./IPageContextStore";
+import {usePageContextStore} from "./usePageContextStore";
+import {IPageContextStore} from "../../type";
 
 export class ContentStore {
 

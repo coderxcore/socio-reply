@@ -1,4 +1,4 @@
-const searchRegex = /search/i;
+const searchRegex = /search|password/i;
 
 export function isEditable(el) {
 	if (!el) return false;

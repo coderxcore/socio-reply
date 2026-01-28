@@ -47,8 +47,8 @@ export const sceneSchema: IStoreSchema = {
 					urlPart: 'yiyan.baidu.com',
 				},
 				{
-					title: 'tongyi',
-					urlPart: 'tongyi.aliyun.com',
+					title: 'qianwen',
+					urlPart: 'qianwen.com',
 				},
 				{
 					title: 'doubao',
@@ -77,10 +77,6 @@ export const sceneSchema: IStoreSchema = {
 				{
 					title: 'linkedin',
 					urlPart: 'linkedin.com',
-				},
-				{
-					title: 'wechat',
-					urlPart: 'wechat.com',
 				},
 				{
 					title: 'weibo',
