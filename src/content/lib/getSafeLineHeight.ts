@@ -2,15 +2,20 @@
  * 安全获取元素真实 line-height（px）
  * 处理 line-height = normal 的情况
  */
-export function getSafeLineHeight(el) {
+export function getSafeLineHeight(el: HTMLElement) {
 	const style = getComputedStyle(el);
-	const lh = style.lineHeight;
+	if (/input/i.test(el.tagName)) {
+		let h = parseFloat(style.height);
+		if (isNaN(h)) {
+			h = el.getBoundingClientRect().height;
+		}
+		return h;
+	}
 
-	// 已经是确定值（如 "20px"）
+	const lh = style.lineHeight;
 	if (lh !== 'normal') {
 		return parseFloat(lh);
 	}
-
 	// normal：通过真实 DOM 测量
 	const clone = document.createElement(el.tagName);
 	clone.textContent = 'A';

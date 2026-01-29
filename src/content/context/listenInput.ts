@@ -1,15 +1,17 @@
 import {ContentStore as cs} from "../ui/store";
 import {getInputValue} from "../lib/getInputValue";
 import {readInput} from "./readInput";
+import {ContextVars} from "./contextVars";
+import {AutoMode} from "../type";
 
 const arrowReg = /^(Arrow|Backspace)/i
-let composing = false, eventAdded = false, lastValue: string, lastCode: string, lastTime: number;
+let eventAdded = false, lastCode: string, lastTime: number;
 
 const idMap = new WeakMap<Element, number>()
 
 export function listenInput(inputEl?: HTMLElement) {
 	if (!inputEl) {
-		if (lastCode !== 'Tab' || cs.pageContext.tabStatus === 2) {
+		if (lastCode !== 'Tab' || cs.pageContext.autoMode === 2) {
 			removeInputListeners();
 		}
 		return;
@@ -35,6 +37,7 @@ function addInputListeners() {
 	document.body.addEventListener("click", onInput, true);
 	document.body.addEventListener("keyup", onkeyup, true);
 	document.body.addEventListener("keydown", onkeydown, true);
+	document.body.addEventListener("blur", onBlur, true);
 	window.addEventListener('resize', onInput, true);
 }
 
@@ -47,41 +50,48 @@ function removeInputListeners() {
 	document.body.removeEventListener("click", onInput, true);
 	document.body.removeEventListener("keyup", onkeyup, true);
 	document.body.removeEventListener("onkeydown", onkeydown, true);
+	document.body.removeEventListener("blur", onBlur, true);
+
 	window.removeEventListener('resize', onInput, true);
 }
 
+function onBlur(e: FocusEvent) {
+	// if(e.relatedTarget!==cs.pageContext.r)
+	console.log(e)
+}
+
 function compositionstart() {
-	composing = true;
+	ContextVars.composing = true;
 }
 
 
 async function compositionend() {
-	composing = false;
-	lastValue = await readInput();
+	ContextVars.composing = false;
+	await readInput();
 }
 
 async function onInput() {
-	if (!composing) lastValue = await readInput()
+	if (!ContextVars.composing) await readInput()
 }
 
 function onkeydown(e: KeyboardEvent) {
-	if (e.code === 'Tab' && (cs.settings.lockTab || cs.pageContext.tabStatus != 2)) {
+	if (e.code === 'Tab' && (cs.settings.lockAutoKey || cs.pageContext.autoMode != 2)) {
 		e.stopPropagation();
 		e.preventDefault();
 	}
 }
 
 function onkeyup(e: KeyboardEvent) {
+	const {pageContext: cxt} = cs;
 	if (e.code === 'Tab') {
-		if (lastCode === 'Tab' && Date.now() - lastTime <= cs.settings.tabDoubleDelay) {
-			cs.pageContext.tabStatus = 2;
+		if (lastCode === 'Tab' && Date.now() - lastTime <= cs.settings.keyDoubleDelay) {
+			cxt.changeAutoMode(AutoMode.Msg);
 		} else {
-			cs.pageContext.tabStatus = 1;
+			cxt.changeAutoMode(AutoMode.Term);
 		}
-		cs.pageContext.tabTime = Date.now();
 	} else {
-		cs.pageContext.tabStatus = undefined;
-		if (!lastValue || lastValue.length < 3 || arrowReg.test(e.code)) {
+		cxt.changeAutoMode(AutoMode.Off);
+		if (!ContextVars.lastValue || ContextVars.lastValue.length < 3 || arrowReg.test(e.code)) {
 			onInput().catch(console.warn);
 		}
 	}

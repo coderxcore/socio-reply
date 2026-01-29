@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {builtInSceneIds, IScene, ISearchTerm} from "/src-com";
-import {IPageContextActions, IPageContextState, IPageContextStore} from "../../type";
+import {AutoMode, IPageContextActions, IPageContextState, IPageContextStore} from "../../type";
 import {queryTerm} from "/src-page/lib/queryTerm";
 import {getCaretPoint} from "../../lib/getCaretPoint";
 import {getSafeLineHeight} from "../../lib/getSafeLineHeight";
@@ -12,11 +12,12 @@ export const usePageContextStore: () => IPageContextStore = defineStore('page-co
 	state: (): IPageContextState => {
 		return {
 			scene: {id: builtInSceneIds.unspecifiedScene} as IScene,
-			inputItem: undefined,
 			terms: [],
+			inputItem: undefined,
 			inputPoint: undefined,
-			tabStatus: undefined,
-			tabTime: undefined
+			autoMode: AutoMode.Off,
+			changeAutoModeTime: undefined,
+			termListEl: undefined
 		};
 	},
 	getters: {
@@ -39,12 +40,21 @@ export const usePageContextStore: () => IPageContextStore = defineStore('page-co
 		},
 		async changeText(text: string): Promise<void> {
 			await writeInput(this.el, text);
-			setTimeout(()=>this.queryTerm(text,text.length,text.length),10)
+			setTimeout(() => this.queryTerm(text, text.length, text.length), 10)
 		},
-		async fullTerm(term: ISearchTerm):Promise<void> {
-			const text = this.inputItem.text = getTermText(this.inputItem.text,term);
+		async fullTerm(term: ISearchTerm): Promise<void> {
+			const text = this.inputItem.text = getTermText(this.inputItem.text, term);
 			this.terms.length = 0;
 			await this.changeText(text);
+		},
+		changeAutoMode(autoMode: AutoMode): void {
+			if(autoMode===AutoMode.Term && this.terms.length) {
+				this.autoMode = AutoMode.Term;
+			} else {
+				this.autoMode =  AutoMode.Off;
+			}
+			this.changeAutoModeTime = Date.now();
 		}
+
 	}
 }) as any;

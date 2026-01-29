@@ -1,12 +1,11 @@
 import {isEditable} from "../lib/isEditable";
 import {Timer} from "gs-base";
 import {listenInput} from "./listenInput";
+import {rootEl} from "./contextVars";
 
 let lastInputEl: HTMLElement | undefined, lastEl: HTMLElement | undefined;
 
 const timer = new Timer(20);
-
-export const rootEl = document.createElement('message-assistant');
 
 export function listenRoot() {
 	check().then(console.warn)
@@ -19,8 +18,8 @@ async function check() {
 	if (el === lastEl) {
 		return;
 	}
-	console.log(el)
-	if(el===rootEl){
+	// console.log(el)
+	if (el === rootEl) {
 		return;
 	}
 	lastEl = el;

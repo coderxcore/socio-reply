@@ -10,10 +10,10 @@ export interface ISettings {
 	theme?: Theme
 	minSaveLength?: number
 	applyToSearch?: boolean
-	tabDoubleDelay?: number
-	enableTabDefaultInput?: boolean
-	tabDefaultDelay?: number
-	lockTab?: boolean
+	keyDoubleDelay?: number
+	enableAutoFirstInput?: boolean
+	autoFirstDelay?: number
+	lockAutoKey?: boolean
 }
 
 export const defaultSettings: Readonly<ISettings> = Object.freeze({
@@ -21,9 +21,9 @@ export const defaultSettings: Readonly<ISettings> = Object.freeze({
 	theme: 'auto',
 	minSaveLength: 10,
 	applyToSearch: false,
-	tabDoubleDelay: 300,
-	enableTabDefaultInput: false,
-	tabDefaultDelay: 800
+	keyDoubleDelay: 300,
+	enableAutoFirstInput: false,
+	autoFirstDelay: 800
 })
 
 interface ISettingsBase {

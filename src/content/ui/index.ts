@@ -3,7 +3,7 @@ import {createApp} from 'vue';
 import App from './App.vue';
 import {createPinia} from 'pinia'
 import {Api} from "/src-page/api";
-import {rootEl} from "../context/listenRoot";
+import {rootEl} from "../context/contextVars";
 
 const app = createApp(App)
 	.use(createPinia());

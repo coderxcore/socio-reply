@@ -24,7 +24,7 @@ const {pageContext: cxt} = cs
 const position = ref<IPosition>()
 const focus = ref(false)
 
-const showNum = computed(() => cxt.tabStatus === 1 && focus.value);
+const showNum = computed(() => cxt.autoMode === 1 && focus.value);
 const visible = computed(() => !!(cxt.el && cxt.terms.length));
 
 const timer = new Timer(10);
@@ -34,13 +34,17 @@ watch(() => cxt.inputPoint, async () => {
   position.value = calcPosition();
 }, {immediate: true})
 
-watch(() => cxt.tabTime, async () => {
-  if (cxt.tabStatus !== 1 || !visible) {
+watch(() => cxt.changeAutoModeTime, async () => {
+  if (cxt.autoMode !== 1 || !visible) {
     focus.value = false;
   } else {
     focus.value = true;
     ulRef.value?.focus();
   }
+})
+
+watch(termListRef,(el)=>{
+  console.log(el)
 })
 
 function calcPosition(): IPosition {
