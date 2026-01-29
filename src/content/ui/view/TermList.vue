@@ -1,8 +1,8 @@
 <template>
-  <div class="TermList" v-if="visible" ref="termListRef" :style="position">
-    <ul tabindex="0" ref="ulRef">
+  <div class="TermList" v-show="visible" ref="termListRef" :style="position">
+    <ul tabindex="0" ref="ulRef" @blur="focus=false">
       <li v-for="(term,i) in cxt.terms" :key="term.id" @click="cxt.fullTerm(term)">
-        {{ cxt.tabStatus === 1 ? `${i + 1}. ` : '' }}
+        {{ showNum ? `${i + 1}. ` : '' }}
         {{ term.text }}
       </li>
     </ul>
@@ -21,9 +21,11 @@ const ulRef = ref<HTMLUListElement>(null);
 
 const {pageContext: cxt} = cs
 
-const visible = computed(() => !!(cxt.el && cxt.terms.length));
-
 const position = ref<IPosition>()
+const focus = ref(false)
+
+const showNum = computed(() => cxt.tabStatus === 1 && focus.value);
+const visible = computed(() => !!(cxt.el && cxt.terms.length));
 
 const timer = new Timer(10);
 
@@ -32,10 +34,13 @@ watch(() => cxt.inputPoint, async () => {
   position.value = calcPosition();
 }, {immediate: true})
 
-watch(() => cxt.tabTime,  async () => {
-  console.log(cxt.tabStatus)
-  if (cxt.tabStatus !== 1 || !visible) return;
-  ulRef.value?.focus();
+watch(() => cxt.tabTime, async () => {
+  if (cxt.tabStatus !== 1 || !visible) {
+    focus.value = false;
+  } else {
+    focus.value = true;
+    ulRef.value?.focus();
+  }
 })
 
 function calcPosition(): IPosition {
