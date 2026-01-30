@@ -1,7 +1,7 @@
 <template>
   <div class="TermList" v-show="visible" ref="termListRef" :style="position">
     <ul tabindex="0" ref="ulRef" @blur="focus=false" @keyup="keyup">
-      <li v-if="!showNum" class="term-header">Tab:</li>
+      <li v-if="!showNum" class="term-header">{{ settings.selectBeginKey}}:</li>
       <li v-for="(term,i) in cxt.terms" :key="term.id" @click="cxt.fullTerm(term)">
         {{ showNum ? `${i + 1}. ` : '' }}
         {{ term.text }}
@@ -22,7 +22,7 @@ const numRegex = /^[1-9]$/
 const termListRef = ref<HTMLDivElement>(null);
 const ulRef = ref<HTMLUListElement>(null);
 
-const {pageContext: cxt} = cs
+const {pageContext: cxt, settings} = cs
 
 const position = ref<IPosition>()
 const focus = ref(false)
