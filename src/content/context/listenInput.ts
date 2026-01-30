@@ -3,17 +3,16 @@ import {getInputValue} from "../lib/getInputValue";
 import {readInput} from "./readInput";
 import {ContextVars, rootEl} from "./contextVars";
 import {AutoMode} from "../type";
+import {matchShortcut} from "/src-page/lib/matchShortcut";
 
 const arrowReg = /^(Arrow|Backspace)/i
-let eventAdded = false, lastCode: string, lastTime: number;
+let eventAdded = false, lastCode: string
 
 const idMap = new WeakMap<Element, number>()
 
 export async function listenInput(inputEl?: HTMLElement) {
 	if (!inputEl) {
-		if (lastCode !== cs.settings.selectBeginKey || cs.pageContext.autoMode === 2) {
-			removeInputListeners();
-		}
+		removeInputListeners();
 		return;
 	}
 	const {pageContext: cxt} = cs;
@@ -84,9 +83,14 @@ async function onInput(e: Event) {
 }
 
 export function onSelectBeginKeydown(e: KeyboardEvent) {
+	if (!cs.pageContext.hasWork) {
+		return;
+	}
+	const s = cs.settings;
 	if (
-		e.code === cs.settings.selectBeginKey
-		&& (cs.settings.lockAutoKey || cs.pageContext.hasWork)
+		matchShortcut(e, s.selectBeginKey)
+		|| matchShortcut(e, s.selectBeginKey2)
+		|| matchShortcut(e, s.deactivateKey)
 	) {
 		e.stopPropagation();
 		e.preventDefault();
@@ -94,14 +98,13 @@ export function onSelectBeginKeydown(e: KeyboardEvent) {
 }
 
 function onkeyup(e: KeyboardEvent) {
+	const s = cs.settings;
 	const {pageContext: cxt} = cs;
-	if (e.code === cs.settings.selectBeginKey) {
-		if (lastCode === cs.settings.selectBeginKey && Date.now() - lastTime <= cs.settings.keyDoubleDelay) {
-			cxt.changeAutoMode(AutoMode.Msg);
-		} else {
-			cxt.changeAutoMode(AutoMode.Term);
-		}
-	} else if (e.code === cs.settings.deactivateKey) {
+	if (matchShortcut(e, s.selectBeginKey)) {
+		cxt.changeAutoMode(AutoMode.Term);
+	} else if (matchShortcut(e, s.selectBeginKey2)) {
+		cxt.changeAutoMode(AutoMode.Msg);
+	} else if (matchShortcut(e, s.deactivateKey)) {
 		cxt.active = false;
 	} else {
 		// console.log(e.code)
@@ -111,5 +114,4 @@ function onkeyup(e: KeyboardEvent) {
 		}
 	}
 	lastCode = e.code;
-	lastTime = Date.now();
 }

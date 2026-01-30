@@ -10,12 +10,12 @@ export interface ISettings {
 	theme?: Theme
 	minSaveLength?: number
 	applyToSearch?: boolean
-	keyDoubleDelay?: number
 	enableAutoFirstInput?: boolean
 	autoFirstDelay?: number
-	lockAutoKey?: boolean
 	deactivateKey?: string
+	deactivateKey2?: string
 	selectBeginKey?: string
+	selectBeginKey2?: string
 	pagePrevKey?: string
 	pageNextKey?: string
 }
@@ -25,11 +25,12 @@ export const defaultSettings: Readonly<ISettings> = Object.freeze({
 	theme: 'auto',
 	minSaveLength: 10,
 	applyToSearch: false,
-	keyDoubleDelay: 300,
 	enableAutoFirstInput: false,
 	autoFirstDelay: 800,
 	deactivateKey: 'Escape',
+	deactivateKey2: 'Backspace',
 	selectBeginKey: 'Tab',
+	selectBeginKey2: 'Shift+Tab',
 	pagePrevKey: '-',
 	pageNextKey: '=',
 })

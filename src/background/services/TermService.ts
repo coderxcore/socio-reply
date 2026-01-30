@@ -18,6 +18,6 @@ setMsgMethod<ITermService>({
 			}
 			return r;
 		});
-		return mergeWithMaxLength(texts, emoji, maxTermNum);
+		return mergeWithMaxLength([texts, emoji], maxTermNum);
 	}
 });

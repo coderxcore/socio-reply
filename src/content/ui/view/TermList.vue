@@ -31,6 +31,8 @@ import {onSelectBeginKeydown} from "../../context/listenInput";
 import {ContextVars} from "../../context/contextVars";
 import {getCaretPoint} from "../../lib/getCaretPoint";
 import {getSafeLineHeight} from "../../lib/getSafeLineHeight";
+import {AutoMode} from "../../type";
+import {matchShortcut} from "/src-page/lib/matchShortcut";
 
 const defaultStyle = {top: `50%`, left: `50%`, maxWidth: `100%`, maxHeight: `50%`};
 
@@ -48,7 +50,7 @@ const visible = computed(() => cxt.active && cxt.terms.length > 0);
 const timer = new Timer(10);
 
 function keyup(e: KeyboardEvent) {
-  if (e.code === cs.settings.deactivateKey) {
+  if (matchShortcut(e, cs.settings.deactivateKey) || matchShortcut(e, cs.settings.deactivateKey2)) {
     cxt.active = false;
     cxt.el?.focus();
     return;
@@ -76,6 +78,12 @@ watch(() => cxt.changeAutoModeTime, async () => {
     focus.value = true;
     ulRef.value?.focus();
   }
+})
+watch(() => cxt.autoMode, async (mode) => {
+  if (mode !== AutoMode.Term || cxt.terms.length != 1) {
+    return;
+  }
+  await cxt.fullTerm(cxt.terms[0]);
 })
 
 watch(ulRef, (el) => cxt.termListEl = el)
