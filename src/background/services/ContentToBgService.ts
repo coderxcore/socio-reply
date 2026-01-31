@@ -5,5 +5,4 @@ setMsgMethod<IContentToBgService>({
 	async saveCurrMsgs(data: any, sender: chrome.runtime.MessageSender): Promise<void> {
 		console.log(sender)
 	}
-
 })

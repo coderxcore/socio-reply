@@ -3,7 +3,6 @@ import {IMessage, IMessageQuery, IMessageService, ISearchMessage} from "/src-com
 import {clearMessageStatusCache, messageStatus} from "../repo/messageStatus";
 import {Db} from "../db";
 import {Bool} from "gs-idb-basic";
-import {setTmpMessage} from "../input/InputStatus";
 import {updateIndex} from "../search/updateIndex";
 import {getSettings} from "./SettingsService";
 import {saveMessagePack} from "../repo/saveMessagePack";
@@ -25,13 +24,6 @@ setMsgMethod<IMessageService>({
 			return await queryMessageOnDb(query);
 		} catch (e) {
 			console.log(e)
-		}
-	},
-	async sendMessageToContent(msg: string): Promise<void> {
-		try {
-			await setTmpMessage(msg);
-		} catch (e) {
-			console.warn(e)
 		}
 	},
 	removeMessage(id: number): Promise<void> {

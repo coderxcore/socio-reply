@@ -9,7 +9,8 @@ export default {
 	permissions: [
 		"tabs",
 		"sidePanel",
-		"storage"
+		"storage",
+		"debugger"
 	],
 	host_permissions: ["<all_urls>"],
 	action: {

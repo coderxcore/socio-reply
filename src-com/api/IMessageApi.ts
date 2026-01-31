@@ -16,8 +16,6 @@ interface IMessageBase {
 
 	loadMessage(query: IMessageQuery): Promise<Partial<ISearchMessage>[]>;
 
-	sendMessageToContent(msg: string): void | Promise<void>;
-
 	removeMessage(id: number): Promise<void>;
 
 	addMessage(msg: IMessage): Promise<any>;

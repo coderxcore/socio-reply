@@ -30,10 +30,10 @@
 </template>
 
 <script lang="ts" setup>
-import {Plus, Files} from 'lucide-vue-next';
+import {Files, Plus} from 'lucide-vue-next';
 import SmartInput from "../../part/SmartInput.vue";
 import {Store} from "../../store";
-import {isNumber, Timer} from "gs-base";
+import {isNumber} from "gs-base";
 import {ICursorChangeEvent} from "../../type";
 import {computed, ref, watch} from "vue";
 import {ISearchTerm} from "/src-com";
@@ -41,8 +41,6 @@ import {detectChar} from "gs-tokenizer/core";
 import {Lang} from "gs-tokenizer/type";
 import {findLongest} from "/src-com/lib/findLongest";
 import EmojiSelector from "../../part/emoji/EmojiSelector.vue";
-import {isSidePanel} from "../../lib/isSlidePanel";
-import {Api} from "../../api";
 import {countLines} from "/src-com/other/countLines";
 
 let i = 0;
@@ -123,12 +121,11 @@ watch(() => message.query, async () => {
 }, {deep: true, immediate: true})
 
 
-if (isSidePanel()) {
-  const timer = new Timer(500);
-  watch(() => message.query.text, async (text: string) => {
-    await timer.reWait();
-    await Api.message.sendMessageToContent(text);
-  }, {deep: true, immediate: true})
-}
+// if (isSidePanel()) {
+//   const timer = new Timer(500);
+//   watch(() => message.query.text, async (text: string) => {
+//     await timer.reWait();
+//   }, {deep: true, immediate: true})
+// }
 
 </script>

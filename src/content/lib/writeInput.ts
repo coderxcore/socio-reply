@@ -1,16 +1,15 @@
+import {getInputValue} from "./getInputValue";
 import {selectElText} from "./selectElText";
 import {wait} from "gs-base";
-import {getInputValue} from "./getInputValue";
 
 const InputRegex = /input|textarea/i
 
 export async function writeInput(el: HTMLElement, text: string) {
 	el.focus();
-	console.log("writeInput", el, text)
 	if (InputRegex.test(el.tagName)) {
 		console.log(text)
 		inputWriteText(el as HTMLInputElement | HTMLTextAreaElement, text);
-		if(getInputValue(el) === text) {
+		if (getInputValue(el) === text) {
 			return
 		}
 	}
@@ -24,9 +23,41 @@ function inputWriteText(el: HTMLInputElement | HTMLTextAreaElement, text: string
 }
 
 async function editableWrite(el: HTMLElement, text: string) {
+	el.focus();
 	selectElText(el)
-	await wait(10);
-	document.execCommand("delete");
-	await wait(10);
-	document.execCommand("insertText", false, text);
+	document.execCommand('delete')
+
+
+	el.dispatchEvent(
+		new CompositionEvent('compositionstart', {
+			bubbles: true,
+			data: '',
+		})
+	);
+
+	await wait(10)
+	el.dispatchEvent(
+		new CompositionEvent('compositionupdate', {
+			bubbles: true,
+			data: text,
+		})
+	);
+	document.execCommand('insertText', false, text);
+
+	await wait(10)
+	el.dispatchEvent(
+		new CompositionEvent('compositionend', {
+			bubbles: true,
+			data: text,
+		})
+	);
+
+	el.dispatchEvent(
+		new InputEvent('input', {
+			bubbles: true,
+			data: text,
+			inputType: 'insertCompositionText',
+		})
+	);
 }
+
