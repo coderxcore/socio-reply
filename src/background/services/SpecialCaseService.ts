@@ -5,7 +5,6 @@ import {deleteDb} from "gs-idb-basic";
 import {Db} from "../db";
 import {updateIndex} from "../search/updateIndex";
 import {IndexUpdatePayload} from "../search/IndexUpdatePayload";
-import {clearInputStatusAndTmpMsg} from "../input/InputStatus";
 import {clearMessageCache} from "./LocalService";
 
 async function clearAllIndex() {
@@ -34,7 +33,6 @@ setMsgMethod<ISpecialCaseService>({
 	},
 	async clearAllData(): Promise<any> {
 		await clearAllIndex();
-		await clearInputStatusAndTmpMsg();
 		await clearMessageCache();
 		try {
 			await StorageLocal.raw.remove(InitStorageKey);

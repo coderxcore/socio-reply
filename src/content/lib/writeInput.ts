@@ -6,6 +6,7 @@ const InputRegex = /input|textarea/i
 
 export async function writeInput(el: HTMLElement, text: string) {
 	el.focus();
+	console.log("writeInput", el, text)
 	if (InputRegex.test(el.tagName)) {
 		console.log(text)
 		inputWriteText(el as HTMLInputElement | HTMLTextAreaElement, text);
