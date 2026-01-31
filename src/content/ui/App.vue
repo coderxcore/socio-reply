@@ -2,6 +2,7 @@
   <link rel="stylesheet" :href="cssHref">
   <div id="message-assistant-app" :class="{'dark': settings.theme === 'dark'}">
     <term-list/>
+    <buttons/>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import {ContentStore as cs} from "../store";
 import {Api} from "/src-page/api";
 import {listenRoot} from "../context/listenRoot";
 import TermList from "./view/TermList.vue";
+import Buttons from "./view/Buttons.vue";
 
 const {settings, pageContext: cxt} = cs;
 

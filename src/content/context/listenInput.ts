@@ -105,7 +105,7 @@ export async function onKeyup(e: KeyboardEvent) {
 		cxt.changeAutoMode(AutoMode.Term);
 	} else if (matchShortcut(e, s.selectBeginKey2)) {
 		cxt.changeAutoMode(AutoMode.Msg);
-	} else if (matchShortcut(e, s.deactivateKey) || matchShortcut(e, s.deactivateKey2)) {
+	} else if (matchShortcut(e, s.deactivateKey) || cxt.autoMode && matchShortcut(e, s.deactivateKey2)) {
 		cxt.active = false;
 		cxt.el?.focus();
 	} else if (cxt.autoMode && cxt.hasWork && numRegex.test(e.key)) {
